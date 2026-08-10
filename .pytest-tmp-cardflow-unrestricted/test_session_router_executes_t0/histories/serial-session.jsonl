@@ -1,0 +1,3 @@
+{"role": "system", "content": ""}
+{"role": "user", "content": "solve it", "kind": "chat"}
+{"role": "assistant", "content": "combined", "kind": "chat"}

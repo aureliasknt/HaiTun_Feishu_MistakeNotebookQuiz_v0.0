@@ -1,0 +1,264 @@
+user: 8d3ce6ccb657a1a76a5bf6c6210351fa868c2f2a7a322ab3b4d48296fea3b4dc
+domain: corporate-law
+question_count: 25
+visited_nodes:
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+- corporate-law-core
+nodes:
+  corporate-law-core:
+    count: 25
+    heat: 1.0
+repeated_surface_questions: 12
+cognitive_history:
+- '0.5'
+- '0.5'
+- '0.5'
+- '0.5'
+- '0.5'
+- '0.5'
+- '0.5'
+- '0.5'
+- '0.8'
+- '0.8'
+- '0.8'
+- '0.8'
+- '0.8'
+- '0.8'
+- '0.2'
+- '0.2'
+- '0.2'
+- '0.2'
+- '0.8'
+- '0.8'
+- '0.8'
+- '0.8'
+- '0.8'
+- '0.8'
+- '0.8'
+intent_history:
+- explain
+- compare
+- decide
+- execute
+- plan
+- explain
+- compare
+- decide
+- execute
+- plan
+- explain
+- compare
+- decide
+- execute
+- plan
+- explain
+- compare
+- decide
+- execute
+- plan
+- explain
+- compare
+- decide
+- execute
+- plan
+history:
+- timestamp: '2026-08-07T10:18:00.402454+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: balanced
+  cognitive_level: '0.5'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-07T10:18:00.431205+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: balanced
+  cognitive_level: '0.5'
+  intent: compare
+  transition: steady
+  surface: true
+- timestamp: '2026-08-07T10:18:00.453777+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: balanced
+  cognitive_level: '0.5'
+  intent: decide
+  transition: steady
+  surface: true
+- timestamp: '2026-08-07T10:18:00.481343+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: balanced
+  cognitive_level: '0.5'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-07T10:18:00.507162+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: balanced
+  cognitive_level: '0.5'
+  intent: plan
+  transition: steady
+  surface: true
+- timestamp: '2026-08-07T10:18:00.532277+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: balanced
+  cognitive_level: '0.5'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-07T10:18:00.558446+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: balanced
+  cognitive_level: '0.5'
+  intent: compare
+  transition: steady
+  surface: true
+- timestamp: '2026-08-07T10:18:00.584181+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: balanced
+  cognitive_level: '0.5'
+  intent: decide
+  transition: steady
+  surface: true
+- timestamp: '2026-08-07T10:18:00.613228+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: deep
+  cognitive_level: '0.8'
+  intent: execute
+  transition: steady
+  surface: false
+- timestamp: '2026-08-07T10:18:00.643652+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: deep
+  cognitive_level: '0.8'
+  intent: plan
+  transition: steady
+  surface: false
+- timestamp: '2026-08-07T10:18:00.673461+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: deep
+  cognitive_level: '0.8'
+  intent: explain
+  transition: steady
+  surface: false
+- timestamp: '2026-08-07T10:18:00.705276+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: deep
+  cognitive_level: '0.8'
+  intent: compare
+  transition: steady
+  surface: false
+- timestamp: '2026-08-07T10:18:00.738582+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: deep
+  cognitive_level: '0.8'
+  intent: decide
+  transition: steady
+  surface: false
+- timestamp: '2026-08-07T10:18:00.769773+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: deep
+  cognitive_level: '0.8'
+  intent: execute
+  transition: steady
+  surface: false
+- timestamp: '2026-08-07T10:18:00.801572+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: simple
+  cognitive_level: '0.2'
+  intent: plan
+  transition: rollback
+  surface: true
+- timestamp: '2026-08-07T10:18:00.831988+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: simple
+  cognitive_level: '0.2'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-07T10:18:00.866556+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: simple
+  cognitive_level: '0.2'
+  intent: compare
+  transition: steady
+  surface: true
+- timestamp: '2026-08-07T10:18:00.898888+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: simple
+  cognitive_level: '0.2'
+  intent: decide
+  transition: steady
+  surface: true
+- timestamp: '2026-08-07T10:18:00.937058+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: deep
+  cognitive_level: '0.8'
+  intent: execute
+  transition: advance
+  surface: false
+- timestamp: '2026-08-07T10:18:00.975231+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: deep
+  cognitive_level: '0.8'
+  intent: plan
+  transition: steady
+  surface: false
+- timestamp: '2026-08-07T10:18:01.009168+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: deep
+  cognitive_level: '0.8'
+  intent: explain
+  transition: steady
+  surface: false
+- timestamp: '2026-08-07T10:18:01.044525+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: deep
+  cognitive_level: '0.8'
+  intent: compare
+  transition: steady
+  surface: false
+- timestamp: '2026-08-07T10:18:01.077651+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: deep
+  cognitive_level: '0.8'
+  intent: decide
+  transition: steady
+  surface: false
+- timestamp: '2026-08-07T10:18:01.114682+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: deep
+  cognitive_level: '0.8'
+  intent: execute
+  transition: steady
+  surface: false
+- timestamp: '2026-08-07T10:18:01.149546+00:00'
+  branch_id: corporate-law/corporate-law-core
+  requested_depth: deep
+  cognitive_level: '0.8'
+  intent: plan
+  transition: steady
+  surface: false
+active_branches:
+  corporate-law/corporate-law-core:
+    active_depth: deep
+    last_seen: '2026-08-07T10:18:01.149546+00:00'
+    rolled_back_from: deep
+    rollback_count: 1
+last_seen: '2026-08-07T10:18:01.149546+00:00'

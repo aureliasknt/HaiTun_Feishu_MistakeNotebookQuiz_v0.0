@@ -1,0 +1,32 @@
+{
+  "ais": [
+    {
+      "id": "a1",
+      "provider": "openai",
+      "model": "gpt-4o",
+      "api_key": "sk-abc",
+      "base_url": "",
+      "max_context_tokens": 150000
+    },
+    {
+      "id": "a2",
+      "provider": "openai",
+      "model": "gpt-4o",
+      "api_key": "sk-xyz",
+      "base_url": "",
+      "max_context_tokens": 0
+    },
+    {
+      "id": "a3",
+      "provider": "openai",
+      "model": "gpt-4o",
+      "api_key": "k",
+      "base_url": "",
+      "max_context_tokens": -1
+    }
+  ],
+  "routers": [],
+  "sessions": [],
+  "titles": [],
+  "summaries": []
+}

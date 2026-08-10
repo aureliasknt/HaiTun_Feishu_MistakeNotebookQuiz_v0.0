@@ -1,0 +1,34 @@
+{
+  "processed_turns": 25,
+  "profile_turns": 25,
+  "domains": 1,
+  "heatmap_events": 25,
+  "faults": 0,
+  "recoveries": 0,
+  "parse_failures": 0,
+  "invariant_failures": [],
+  "median_elapsed_ms": 31.236299997544847,
+  "max_elapsed_ms": 39.27629999816418,
+  "registration": {
+    "user_id": "stability-user-001",
+    "profile_id": "cross-domain-professional",
+    "age_range": "30-39",
+    "occupation": "科技公司法务与管理人员",
+    "decision_role": "中高层决策支持",
+    "strong_domains": [
+      "corporate-law",
+      "startup-finance"
+    ],
+    "new_domains": [
+      "agent-systems",
+      "software-engineering",
+      "machine-learning"
+    ],
+    "response_preferences": [
+      "结论和框架优先",
+      "突出风险和行动项",
+      "技术术语需要解释"
+    ],
+    "priority": "conversation_over_registration"
+  }
+}

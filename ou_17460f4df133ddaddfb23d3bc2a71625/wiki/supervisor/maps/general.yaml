@@ -1,0 +1,14 @@
+map_revision: 3
+schema_version: '2.0'
+domain_id: general
+first_seen: '2026-08-04T17:20:11.330742+00:00'
+last_seen: '2026-08-04T17:27:23.868236+00:00'
+nodes:
+- id: feishu-quiz-card-grading-output
+  label: Feishu quiz card grading output
+  aliases: []
+  confidence: 0.5
+  source_count: 1
+  first_seen: '2026-08-04T17:20:11.330742+00:00'
+  last_seen: '2026-08-04T17:20:11.330742+00:00'
+edges: []

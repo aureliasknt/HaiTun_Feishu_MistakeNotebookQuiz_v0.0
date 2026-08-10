@@ -1,0 +1,36 @@
+{
+  "ais": [
+    {
+      "id": "a1",
+      "provider": "openai",
+      "model": "gpt-4o",
+      "api_key": "sk-abc",
+      "base_url": "https://api.oai.com",
+      "max_context_tokens": -1
+    },
+    {
+      "id": "a2",
+      "provider": "anthropic",
+      "model": "claude-3",
+      "api_key": "sk-xyz",
+      "base_url": "",
+      "max_context_tokens": -1
+    }
+  ],
+  "routers": [],
+  "sessions": [
+    {
+      "id": "s1",
+      "backend_type": "ai",
+      "backend_id": "a1",
+      "workspace": "/tmp/ws"
+    }
+  ],
+  "titles": [
+    {
+      "id": "s1",
+      "title": "Hello Chat"
+    }
+  ],
+  "summaries": []
+}

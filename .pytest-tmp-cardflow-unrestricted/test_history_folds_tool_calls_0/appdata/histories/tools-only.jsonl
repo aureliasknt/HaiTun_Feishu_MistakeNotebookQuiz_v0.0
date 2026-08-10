@@ -1,0 +1,4 @@
+{"role": "user", "content": "go", "kind": "chat"}
+{"role": "assistant", "tool_calls": [{"id": "1", "type": "function", "function": {"name": "bash", "arguments": "{\"command\": \"ls\"}"}}], "kind": "chat"}
+{"role": "tool", "content": "ok", "tool_call_id": "1"}
+{"role": "assistant", "content": "done", "kind": "chat"}

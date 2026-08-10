@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "advice_id": "adv-0012-ba821e78",
+  "user_id_hash": "ba821e78df91855e937eb15561439b4e1a862548d76f6009fbbe04299e223210",
+  "profile_id": "",
+  "turn_index": 0,
+  "classification": {
+    "is_learning": false,
+    "domain": "feishu_quiz_ops",
+    "topic": "quiz_card_write_back",
+    "confidence": 0.95
+  },
+  "user_state": {
+    "depth": 0.0,
+    "goal": 0.1,
+    "familiarity": 0.5,
+    "evidence": [
+      "连续同类操作型任务，流程固定，均要求先写入再输出简短判分话术",
+      "用户未表达学习、比较或深层理解意图",
+      "最终回复要求保持简洁"
+    ]
+  },
+  "breakout": {
+    "needed": false,
+    "type": "none",
+    "score": 0.05,
+    "reason": "任务为固定流程的 Feishu 答题卡片写入与判分，需严格按约束执行并输出简短用户话术；不应引入学习扩展或打断操作流程。",
+    "directions": [],
+    "evidence": [
+      "用户提供完整精确的指令和格式约束",
+      "Grading rule 明确要求最终回复简洁",
+      "已有地图仅覆盖同一写入流程节点，无新分支需求"
+    ]
+  },
+  "latent_need": {
+    "detected": false,
+    "need": "",
+    "missing_dimensions": [],
+    "confidence": 0.0
+  },
+  "profile_shift": {
+    "detected": false,
+    "from": "",
+    "to": "",
+    "evidence": [
+      "认知层级与意图历史均为 execute 且未变化",
+      "没有连续两回合的认知层级或意图转变"
+    ],
+    "confidence": 0.0
+  },
+  "response_strategy": {
+    "answer_depth": "concise",
+    "answer_scope": "local",
+    "goal_mode": "execute",
+    "terminology": "professional",
+    "breakout_integration": "none",
+    "instructions": []
+  },
+  "map_updates": {
+    "proposed_map": null,
+    "visited_nodes": [
+      "quiz-card-write-back"
+    ],
+    "branch_additions": []
+  },
+  "diagnostics": {
+    "source": "live",
+    "evidence": [
+      "连续同类操作任务",
+      "无证据表明用户期望扩展或深层学习",
+      "已有地图未出现新领域或新节点"
+    ],
+    "created_at": "2026-08-06T10:29:42.113175+00:00"
+  }
+}

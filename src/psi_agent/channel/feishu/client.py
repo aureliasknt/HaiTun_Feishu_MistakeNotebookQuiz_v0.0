@@ -35,6 +35,13 @@ from ._card_action import handle_card_action
 _EMOJI_PROCESSING = "Typing"
 _EMOJI_FAILED = "CrossMark"
 _SILENT_REPLY_TOKEN = "NO_REPLY"
+_SEND_ACK_RE = re.compile(r"第[一二三四五六七八九十0-9]+题已发出\s*✅?")
+_PROCESS_LEAK_MARKERS = (
+    "callback_context_saved",
+    "dispatch.matched",
+    "按 skill",
+    "NO_REPLY",
+)
 
 
 class ResolveCore(Protocol):
@@ -102,9 +109,18 @@ class _GatewayRouteProvider:
     会重试 Gateway。
     """
 
-    def __init__(self, base_url: str, http: aiohttp.ClientSession) -> None:
+    def __init__(
+        self,
+        base_url: str,
+        http: aiohttp.ClientSession,
+        *,
+        app_id: str = "",
+        app_secret: str = "",
+    ) -> None:
         self._base = base_url.rstrip("/")
         self._http = http
+        self._app_id = app_id
+        self._app_secret = app_secret
         self._sockets: dict[str, str] = {}  # 路由键 -> channel_socket
         self._lock = anyio.Lock()
 
@@ -119,6 +135,7 @@ class _GatewayRouteProvider:
         return open_id
 
     async def ensure(self, open_id: str, *, chat_id: str = "", chat_type: str = "") -> str:
+        await self._sync_runtime_config()
         key = self._cache_key(open_id, chat_id, chat_type)
         hit = self._sockets.get(key)  # 快路径
         if hit is not None:
@@ -131,6 +148,25 @@ class _GatewayRouteProvider:
             self._sockets[key] = socket
             logger.debug(f"routed {key!r} -> socket={socket!r}")
             return socket
+
+    async def _sync_runtime_config(self) -> None:
+        """Rehydrate a restarted Gateway without persisting Feishu secrets."""
+        if not self._app_id or not self._app_secret:
+            return
+        async with self._http.post(
+            f"{self._base}/feishu/runtime-config",
+            json={"app_id": self._app_id, "app_secret": self._app_secret},
+            timeout=_GATEWAY_TIMEOUT,
+        ) as resp:
+            if resp.status == 200:
+                return
+            # Compatibility with an older Gateway during rolling upgrades: it
+            # can still route messages, but tools retain the old env behavior.
+            if resp.status == 404:
+                logger.warning("Gateway does not support Feishu runtime credential refresh")
+                return
+            body = await resp.text()
+            raise RuntimeError(f"Gateway POST /feishu/runtime-config failed (status={resp.status}): {body}")
 
     async def _route(self, open_id: str, chat_id: str, chat_type: str) -> str:
         """POST /feishu/route 拿回该会话的 channel_socket (Gateway 幂等 spawn/复用)。"""
@@ -208,6 +244,17 @@ def _context_header(ctx: Any) -> str:
     sender_name = getattr(ctx, "sender_name", None)
     if sender_name:
         lines.append(f"sender_name: {sender_name}")
+    create_time = getattr(ctx, "create_time", None)
+    if isinstance(create_time, int) and create_time > 0:
+        lines.append(f"message_create_time_ms: {create_time}")
+    mentioned_users = []
+    for mention in getattr(ctx, "mentions", None) or []:
+        open_id = getattr(mention, "open_id", None)
+        if not open_id or getattr(mention, "is_bot", False):
+            continue
+        mentioned_users.append({"open_id": open_id, "name": getattr(mention, "name", None) or ""})
+    if mentioned_users:
+        lines.append(f"mentioned_users_json: {json.dumps(mentioned_users, ensure_ascii=False)}")
     thread_id = getattr(ctx, "thread_id", None) or getattr(ctx, "reply_to_message_id", None)
     if thread_id:
         lines.append(f"thread_id: {thread_id}")
@@ -248,7 +295,8 @@ async def _build_chunks(channel: Any, ctx: Any) -> list[InputChunk]:
     chunks.append(TextChunk(_context_header(ctx)))
     header_only = len(chunks)
 
-    text = ctx.content_text or ""
+    body_text = getattr(ctx, "body_text", None)
+    text = body_text if isinstance(body_text, str) else ctx.content_text or ""
     for m in re.finditer(r'<audio\s+key="([^"]+)"', text):
         audio_key = m.group(1)
         logger.debug(f"audio key={audio_key}")
@@ -311,9 +359,15 @@ async def _stream_reply(
 ) -> None:
     """Stream agent text and files into one Feishu chat."""
 
+    outbound_text = ""
+
     async def _produce(stream: Any) -> None:
+        nonlocal outbound_text
         silent_candidate = ""
-        checking_silent_reply = suppress_silent_reply
+        text_parts: list[str] = []
+        # Always check the stream prefix for the standalone NO_REPLY token.
+        # This gives workspace skills a deterministic way to request "card only" output.
+        checking_silent_reply = True
 
         async def flush_silent_candidate() -> None:
             nonlocal silent_candidate
@@ -327,8 +381,7 @@ async def _stream_reply(
             elif normalized == _SILENT_REPLY_TOKEN:
                 logger.debug("suppressed standalone NO_REPLY from Feishu card action")
             else:
-                await stream.append(candidate)
-                logger.debug(f"stream.append ({len(candidate)} chars)")
+                text_parts.append(candidate)
 
         try:
             async with aclosing(core.post(chunks)) as gen:
@@ -342,8 +395,7 @@ async def _stream_reply(
                             await flush_silent_candidate()
                             checking_silent_reply = False
                         else:
-                            await stream.append(chunk.text)
-                            logger.debug(f"stream.append ({len(chunk.text)} chars)")
+                            text_parts.append(chunk.text)
                     elif isinstance(chunk, ReasoningChunk):
                         if suppress_silent_reply and chunk.kind == "tool_result":
                             await flush_silent_candidate()
@@ -356,8 +408,39 @@ async def _stream_reply(
             raise
         await flush_silent_candidate()
 
+        full_text = "".join(text_parts)
+        if any(marker in full_text for marker in _PROCESS_LEAK_MARKERS):
+            # Keep at most one short human-facing ack on send-question turns.
+            matched_ack = _SEND_ACK_RE.search(full_text)
+            if matched_ack is not None:
+                ack_text = matched_ack.group(0)
+                outbound_text = ack_text
+                await stream.append(ack_text)
+                logger.debug(f"stream.append filtered ack ({len(ack_text)} chars)")
+            else:
+                # Some channel transports fail if the markdown producer emits nothing.
+                # Emit an invisible fallback to keep the stream well-formed.
+                outbound_text = "\u200b"
+                await stream.append("\u200b")
+                logger.debug("suppressed Feishu reply via invisible fallback due to process markers")
+            return
+        if full_text.strip():
+            outbound_text = full_text
+            await stream.append(full_text)
+            logger.debug(f"stream.append ({len(full_text)} chars)")
+
     options = {"reply_to": reply_to} if reply_to else {}
-    await channel.stream(chat_id, {"markdown": _produce}, options)
+    try:
+        await channel.stream(chat_id, {"markdown": _produce}, options)
+    except Exception as e:
+        # Some Feishu contexts reject reply delivery with 404.
+        # Do not re-run generation; fallback once with the already-generated text.
+        if "404" in str(e):
+            logger.warning(f"Feishu stream reply failed with 404, sending plain-text fallback: {e!r}")
+            if outbound_text and outbound_text != "\u200b":
+                await channel.send(chat_id, {"text": outbound_text})
+            return
+        raise
 
 
 async def _handle_and_stream(
@@ -786,7 +869,12 @@ async def run_feishu(
         provider: _GatewayRouteProvider | None = None
         if gateway_url:
             http = await stack.enter_async_context(aiohttp.ClientSession())
-            provider = _GatewayRouteProvider(gateway_url, http)
+            provider = _GatewayRouteProvider(
+                gateway_url,
+                http,
+                app_id=app_id,
+                app_secret=app_secret,
+            )
 
         async def resolve_core(open_id: str | None, *, chat_id: str = "", chat_type: str = "") -> ChannelCore:
             socket = session_socket  # 默认兜底 (无路由键、无 gateway、或路由失败都走这)
@@ -809,10 +897,8 @@ async def run_feishu(
             portal.start_task_soon(
                 handle_card_action,
                 channel,
-                resolve_core,
                 allowed_user_ids,
                 card_action_seen.add_if_new,
-                _stream_reply,
                 event,
                 appdata,
             )

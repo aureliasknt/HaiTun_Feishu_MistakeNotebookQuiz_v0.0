@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
 from typing import Any
@@ -59,6 +60,11 @@ class AIManager:
         id: str = "",
         max_context_tokens: int = -1,
     ) -> AiInfo:
+        provider = provider.strip() or os.environ.get("PSI_AI_PROVIDER", "")
+        model = model.strip() or os.environ.get("PSI_AI_MODEL", "")
+        api_key = api_key.strip() or os.environ.get("PSI_AI_API_KEY", "")
+        base_url = base_url.strip() or os.environ.get("PSI_AI_BASE_URL", "")
+
         want_key = self._config_key(provider, model, api_key, base_url)
         explicit_id = id.strip()
         ai_id = explicit_id or _new_uuid()
@@ -66,6 +72,10 @@ class AIManager:
             logger.debug(f"AIManager: acquired lock for create {ai_id!r}")
             if ai_id in self._entries:
                 raise ValueError(f"AI {ai_id!r} already exists")
+            logger.debug(
+                f"AIManager resolved config for {ai_id!r}: provider={provider!r}, model={model!r}, "
+                f"base_url={base_url!r}, api_key={'*' * 8 if api_key else '(empty)'}"
+            )
             # No explicit id: reuse an already-running identical config (dedupe).
             # Explicit id (Session revive) may still create a second instance with
             # the same provider/model/key so the Session keeps its backend_id.

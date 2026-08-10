@@ -1,0 +1,63 @@
+18:19:12.984 | INFO     | psi_agent.channel.feishu:run:78 - Starting Feishu bot, connecting to http://127.0.0.1:8766
+18:19:16.854 | INFO     | psi_agent.channel.feishu.client:run_feishu:843 - Feishu bot started (session=http://127.0.0.1:8766 interval=1.0)
+18:19:16.855 | INFO     | psi_agent.channel.feishu.client:_ensure_bot_identity:745 - Feishu bot identity resolved — open_id=ou_1a319eecf679bf61940cd384d6cdf19b name=佳芬的海豚
+18:19:16.859 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/attendance_review_needed: name='haitun.finance.attendance_review_needed' kind='synthetic' platform_event=''
+18:19:16.861 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/blocker_raised: name='haitun.blocker.raised' kind='synthetic' platform_event=''
+18:19:16.863 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/deliverable_ready: name='haitun.deliverable.ready' kind='synthetic' platform_event=''
+18:19:16.864 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/demo_tick: name='feishu.synthetic.demo_tick' kind='synthetic' platform_event=''
+18:19:16.866 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/expense_submitted: name='haitun.finance.expense_submitted' kind='synthetic' platform_event=''
+18:19:16.867 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/finance_report_ready: name='haitun.finance.report_ready' kind='synthetic' platform_event=''
+18:19:16.869 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/goal_progress: name='haitun.goal.progress' kind='synthetic' platform_event=''
+18:19:16.870 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/handbook_ack_required: name='haitun.hr.handbook_ack_required' kind='synthetic' platform_event=''
+18:19:16.872 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/handbook_confirmed: name='haitun.hr.handbook_confirmed' kind='synthetic' platform_event=''
+18:19:16.874 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/handoff_activated: name='haitun.handoff.activated' kind='synthetic' platform_event=''
+18:19:16.876 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/handoff_needed: name='haitun.handoff.needed' kind='synthetic' platform_event=''
+18:19:16.878 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/identity_changed: name='feishu.hr.identity_changed' kind='platform_map' platform_event='contact.user.updated_v3'
+18:19:16.880 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/member_added: name='feishu.chat.member_added' kind='platform_map' platform_event='im.chat.member.user.added_v1'
+18:19:16.882 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/resume_received: name='haitun.hr.resume_received' kind='synthetic' platform_event=''
+18:19:16.883 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/review_requested: name='haitun.review.requested' kind='synthetic' platform_event=''
+18:19:16.885 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/stage_changed: name='haitun.hr.stage_changed' kind='synthetic' platform_event=''
+18:19:16.886 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/task_completed: name='haitun.task.completed' kind='synthetic' platform_event=''
+18:19:16.888 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/task_overdue: name='haitun.task.overdue' kind='synthetic' platform_event=''
+18:19:16.890 | INFO     | psi_agent.channel._event_defs:load_channel_event_defs:123 - channel_events/feishu/user_created: name='feishu.hr.user_created' kind='platform_map' platform_event='contact.user.created_v3'
+18:19:16.891 | INFO     | psi_agent.channel.feishu._agent_events:_register_platform_map:126 - Registered channel event 'feishu.chat.member_added' → p1.im.chat.member.user.added_v1
+18:19:16.891 | INFO     | psi_agent.channel.feishu._agent_events:_register_platform_map:126 - Registered channel event 'feishu.chat.member_added' → p2.im.chat.member.user.added_v1
+18:19:16.891 | INFO     | psi_agent.channel.feishu._agent_events:_register_platform_map:126 - Registered channel event 'feishu.hr.identity_changed' → p1.contact.user.updated_v3
+18:19:16.891 | INFO     | psi_agent.channel.feishu._agent_events:_register_platform_map:126 - Registered channel event 'feishu.hr.identity_changed' → p2.contact.user.updated_v3
+18:19:16.891 | INFO     | psi_agent.channel.feishu._agent_events:_register_platform_map:126 - Registered channel event 'feishu.hr.user_created' → p1.contact.user.created_v3
+18:19:16.891 | INFO     | psi_agent.channel.feishu._agent_events:_register_platform_map:126 - Registered channel event 'feishu.hr.user_created' → p2.contact.user.created_v3
+18:19:16.891 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'feishu.synthetic.demo_tick' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\demo_tick
+18:19:16.892 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'haitun.blocker.raised' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\blocker_raised
+18:19:16.892 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'haitun.deliverable.ready' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\deliverable_ready
+18:19:16.892 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'haitun.finance.attendance_review_needed' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\attendance_review_needed
+18:19:16.892 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'haitun.finance.expense_submitted' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\expense_submitted
+18:19:16.892 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'haitun.finance.report_ready' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\finance_report_ready
+18:19:16.892 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'haitun.goal.progress' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\goal_progress
+18:19:16.893 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'haitun.handoff.activated' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\handoff_activated
+18:19:16.893 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'haitun.handoff.needed' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\handoff_needed
+18:19:16.893 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'haitun.hr.handbook_ack_required' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\handbook_ack_required
+18:19:16.893 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'haitun.hr.handbook_confirmed' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\handbook_confirmed
+18:19:16.893 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'haitun.hr.resume_received' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\resume_received
+18:19:16.893 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'haitun.hr.stage_changed' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\stage_changed
+18:19:16.893 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'haitun.review.requested' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\review_requested
+18:19:16.894 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'haitun.task.completed' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\task_completed
+18:19:16.894 | INFO     | psi_agent.channel._synthetic:start_synthetic_producers:69 - Started synthetic producer 'haitun.task.overdue' path=D:\haitun agent\psi-agent\examples\haitun-workspace\channel_events\feishu\task_overdue
+18:19:16.894 | INFO     | psi_agent.channel.feishu.client:run_feishu:863 - Feishu agent channel_events root=D:\haitun agent\psi-agent\examples\haitun-workspace platform_processors=6 synthetic_producers=16
+18:24:03.111 | INFO     | psi_agent.channel._core:post:92 - HTTP 200
+18:24:05.344 | WARNING  | psi_agent.channel._stream:iter_sse_events:70 - finish_reason=error: '[Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]'
+18:24:06.446 | ERROR    | psi_agent.channel.feishu.client:_handle_and_stream:403 - Message handling error — ChannelError('[Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]')
+18:32:20.461 | INFO     | psi_agent.channel._core:post:92 - HTTP 200
+18:32:22.703 | WARNING  | psi_agent.channel._stream:iter_sse_events:70 - finish_reason=error: '[Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]'
+18:32:23.713 | ERROR    | psi_agent.channel.feishu.client:_handle_and_stream:403 - Message handling error — ChannelError('[Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]')
+18:34:55.864 | INFO     | psi_agent.channel._core:post:92 - HTTP 200
+18:34:58.086 | WARNING  | psi_agent.channel._stream:iter_sse_events:70 - finish_reason=error: '[Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]'
+18:34:58.795 | ERROR    | psi_agent.channel.feishu.client:_handle_and_stream:403 - Message handling error — ChannelError('[Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]')
+18:48:18.660 | INFO     | psi_agent.channel._core:post:92 - HTTP 200
+18:48:20.861 | WARNING  | psi_agent.channel._stream:iter_sse_events:70 - finish_reason=error: '[Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]'
+18:48:21.569 | ERROR    | psi_agent.channel.feishu.client:_handle_and_stream:403 - Message handling error — ChannelError('[Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]')
+19:14:02.449 | INFO     | psi_agent.channel._core:post:92 - HTTP 200
+19:14:04.653 | WARNING  | psi_agent.channel._stream:iter_sse_events:70 - finish_reason=error: '[Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]'
+19:14:05.845 | ERROR    | psi_agent.channel.feishu.client:_handle_and_stream:403 - Message handling error — ChannelError('[Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]')
+19:42:18.295 | INFO     | psi_agent.channel._core:post:92 - HTTP 200
+19:42:20.565 | WARNING  | psi_agent.channel._stream:iter_sse_events:70 - finish_reason=error: '[Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]'
+19:42:21.604 | ERROR    | psi_agent.channel.feishu.client:_handle_and_stream:403 - Message handling error — ChannelError('[Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]')

@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "advice_id": "sup_adv_06cca8bd8d2f9f8ab79d794e2cb0023f92ad0d46b26c05066599bb7b5af05189_t0",
+  "user_id_hash": "06cca8bd8d2f9f8ab79d794e2cb0023f92ad0d46b26c05066599bb7b5af05189",
+  "profile_id": "",
+  "turn_index": 0,
+  "classification": {
+    "is_learning": false,
+    "domain": "feishu_quiz_ops",
+    "topic": "quiz_answer_grading_and_logging",
+    "confidence": 0.8
+  },
+  "user_state": {
+    "depth": 0.0,
+    "goal": 0.0,
+    "familiarity": 0.0,
+    "evidence": [
+      "turn_index=0 first turn",
+      "explicit tool execution request",
+      "no prior learning history"
+    ]
+  },
+  "breakout": {
+    "needed": false,
+    "type": "none",
+    "score": 0.0,
+    "reason": "用户正在执行明确的工具操作和成绩记录任务，有硬性可执行要求，任何扩展都会干扰完成当前操作。",
+    "directions": [],
+    "evidence": [
+      "complete tool call instructions provided",
+      "exact field values and constraints specified",
+      "final output format fixed"
+    ]
+  },
+  "latent_need": {
+    "detected": false,
+    "need": "",
+    "missing_dimensions": [],
+    "confidence": 0.0
+  },
+  "profile_shift": {
+    "detected": false,
+    "from": "",
+    "to": "",
+    "evidence": [],
+    "confidence": 0.0
+  },
+  "response_strategy": {
+    "answer_depth": "concise",
+    "answer_scope": "local",
+    "goal_mode": "execute",
+    "terminology": "professional",
+    "breakout_integration": "none",
+    "instructions": []
+  },
+  "map_updates": {
+    "proposed_map": null,
+    "visited_nodes": [],
+    "branch_additions": []
+  },
+  "diagnostics": {
+    "source": "repaired",
+    "evidence": [
+      "turn_index=0",
+      "explicit operational task",
+      "stage_profile all zero"
+    ],
+    "created_at": "2026-08-05T01:54:46.523589+00:00"
+  }
+}

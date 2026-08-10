@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from base64 import b64encode
 from collections.abc import AsyncGenerator
 from contextlib import aclosing, suppress
@@ -226,6 +227,7 @@ async def create_app(
     app.router.add_delete("/routers/{router_id}", _delete_router)
     app.router.add_get("/routers", _list_routers)
     app.router.add_post("/sessions", _create_session)
+    app.router.add_post("/schedulers/ensure", _ensure_scheduler)
     app.router.add_delete("/sessions/{session_id}", _delete_session)
     app.router.add_get("/sessions", _list_sessions)
     app.router.add_get("/titles", _list_titles)
@@ -247,6 +249,9 @@ async def create_app(
     app.router.add_get("/sessions/{session_id}/todo-segments/{segment_id}", _get_todo_segment)
     app.router.add_post("/sessions/{session_id}/todo-segments/{segment_id}", _set_todo_segment_label)
     app.router.add_post("/sessions/{session_id}/chat", _handle_chat)
+    # Internal loopback-only credential relay. Intentionally omitted from
+    # OpenAPI: it is process bootstrap plumbing, not a public Gateway API.
+    app.router.add_post("/feishu/runtime-config", _configure_feishu_runtime)
     app.router.add_post("/feishu/route", _feishu_route)
     app.router.add_get("/feishu/routes", _list_feishu_routes)
     app.router.add_get("/oauth/callback", _oauth_callback)
@@ -365,6 +370,63 @@ async def _create_session(request: web.Request) -> web.Response:
     except Exception as e:
         logger.error(f"Unexpected error creating session: {e!r}")
         return _error(str(e), status=500)
+
+
+async def _ensure_scheduler(request: web.Request) -> web.Response:
+    """Wake the dedicated scheduler after a Session tool creates its first task."""
+    sm: SessionManager = request.app["sm"]
+    schedm: SchedulerManager = request.app["schedm"]
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            return _error("Request body must be a JSON object", status=400)
+        session_id = body.get("session_id")
+        if not isinstance(session_id, str) or not session_id.strip():
+            return _error("session_id must be a non-empty string", status=400)
+        workspace = sm.get_workspace(session_id)
+        scheduler_id = await schedm.ensure(
+            workspace,
+            ai_id=sm.get_backend_id(session_id),
+            agent=sm.get_agent(session_id),
+        )
+        if not scheduler_id:
+            return _error(f"Scheduler could not be started for workspace {workspace!r}", status=503)
+        return _json({"scheduler_id": scheduler_id, "workspace": workspace})
+    except LookupError as e:
+        return _error(str(e), status=404)
+    except (TypeError, ValueError) as e:
+        return _error(str(e), status=400)
+    except Exception as e:
+        logger.error(f"Unexpected error ensuring scheduler: {e!r}")
+        return _error(str(e), status=500)
+
+
+async def _configure_feishu_runtime(request: web.Request) -> web.Response:
+    """Refresh Gateway-only Feishu tool credentials from a local Channel.
+
+    Feishu Channel and Gateway are separate processes. The Channel may receive
+    credentials via CLI arguments while workspace tools run inside Gateway and
+    read ``PSI_FEISHU_*``. Relaying on every routed message makes a freshly
+    restarted Gateway usable without persisting the secret anywhere.
+    """
+    if request.remote not in {"127.0.0.1", "::1"}:
+        return _error("Feishu runtime configuration is loopback-only", status=403)
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            return _error("Request body must be a JSON object", status=400)
+        app_id = body.get("app_id")
+        app_secret = body.get("app_secret")
+        if not isinstance(app_id, str) or not app_id.strip():
+            return _error("app_id must be a non-empty string", status=400)
+        if not isinstance(app_secret, str) or not app_secret.strip():
+            return _error("app_secret must be a non-empty string", status=400)
+        os.environ["PSI_FEISHU_APP_ID"] = app_id.strip()
+        os.environ["PSI_FEISHU_APP_SECRET"] = app_secret.strip()
+        logger.info("Refreshed Feishu runtime credentials from loopback Channel")
+        return _json({"ok": True})
+    except (TypeError, ValueError) as e:
+        return _error(str(e), status=400)
 
 
 async def _delete_session(request: web.Request) -> web.Response:

@@ -1,0 +1,15 @@
+map_revision: 25
+schema_version: '2.0'
+domain_id: corporate-law
+first_seen: '2026-08-07T10:18:00.399785+00:00'
+last_seen: '2026-08-07T10:18:01.132408+00:00'
+nodes:
+- id: corporate-law-core
+  label: 股东协议与公司治理
+  aliases:
+  - 股东协议与公司治理
+  confidence: 1.0
+  source_count: 25
+  first_seen: '2026-08-07T10:18:00.399785+00:00'
+  last_seen: '2026-08-07T10:18:01.132408+00:00'
+edges: []

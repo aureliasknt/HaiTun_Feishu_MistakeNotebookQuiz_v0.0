@@ -1,0 +1,36 @@
+- generic [ref=f12e2]:
+  - banner [ref=f12e4]:
+    - generic [ref=f12e6]:
+      - generic [ref=f12e7]:
+        - button "导视" [ref=f12e9] [cursor=pointer]
+        - link "YouTube 首页" [ref=f12e14] [cursor=pointer]:
+          - /url: /
+        - button "跳过导航" [ref=f12e23] [cursor=pointer]
+      - generic [ref=f12e27]:
+        - search [ref=f12e28]:
+          - generic [ref=f12e30]:
+            - combobox "搜索" [expanded] [ref=f12e33]
+            - button "Search" [ref=f12e34] [cursor=pointer]
+        - generic [ref=f12e39]:
+          - button "通过语音搜索内容" [ref=f12e41] [cursor=pointer]
+          - tooltip "tooltip"
+      - generic [ref=f12e46]:
+        - button "设置" [ref=f12e51] [cursor=pointer]
+        - link "登录" [ref=f12e57] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?service=youtube&uilel=3&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Dzh-CN%26next%3Dhttps%253A%252F%252Fwww.youtube.com%252F&hl=zh-CN&ec=65620
+  - navigation [ref=f12e61]:
+    - generic [ref=f12e62]:
+      - link "首页" [ref=f12e64] [cursor=pointer]:
+        - /url: /
+      - link "Shorts" [ref=f12e70] [cursor=pointer]:
+        - /url: /shorts/
+      - link "订阅" [ref=f12e76] [cursor=pointer]:
+        - /url: /feed/subscriptions
+      - link "我" [ref=f12e82] [cursor=pointer]:
+        - /url: /feed/you
+  - generic [ref=f12e87]:
+    - main [ref=f12e88]:
+      - generic [ref=f12e98]:
+        - heading "搜索视频，开启 YouTube 之旅" [level=2] [ref=f12e99]
+        - generic [ref=f12e100]: 开始观看视频吧，帮助我们为你推荐更多你可能会喜欢的内容！
+    - text: •

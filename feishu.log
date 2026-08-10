@@ -1,0 +1,3 @@
+[Lark] [2026-08-05 15:16:48,211] [INFO] FeishuChannel: bot identity resolved ¡ª open_id=ou_1a319eecf679bf61940cd384d6cdf19b name=¼Ñ·ÒµÄº£ëà
+[Lark] [2026-08-05 15:16:55,535] [INFO] connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7670443056528723214&access_key=4c873b9419bf1569b1335d88bf99dc43&service_id=33554678&ticket=7f36f26d-99eb-4cb0-bc24-ec1f70dc3033 [conn_id=7670443056528723214]
+[Lark] [2026-08-05 15:17:03,320] [WARNING] markdown-stream: producer raised: 404: Not Found

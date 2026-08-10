@@ -1,0 +1,27 @@
+user: 06cca8bd8d2f9f8ab79d794e2cb0023f92ad0d46b26c05066599bb7b5af05189
+domain: general
+question_count: 1
+visited_nodes:
+- quiz-answer-grading-and-logging
+nodes:
+  quiz-answer-grading-and-logging:
+    count: 1
+    heat: 0.2
+repeated_surface_questions: 1
+cognitive_history:
+- '0.0'
+intent_history:
+- execute
+history:
+- timestamp: '2026-08-05T01:54:46.527814+00:00'
+  branch_id: general/quiz_answer_grading_and_logging
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+active_branches:
+  general/quiz_answer_grading_and_logging:
+    active_depth: concise
+    last_seen: '2026-08-05T01:54:46.527814+00:00'
+last_seen: '2026-08-05T01:54:46.527814+00:00'

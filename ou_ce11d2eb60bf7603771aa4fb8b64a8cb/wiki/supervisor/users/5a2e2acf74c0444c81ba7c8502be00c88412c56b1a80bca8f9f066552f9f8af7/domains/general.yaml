@@ -1,0 +1,80 @@
+user: 5a2e2acf74c0444c81ba7c8502be00c88412c56b1a80bca8f9f066552f9f8af7
+domain: general
+question_count: 6
+visited_nodes:
+- quiz-card-click-grading-and-record-write
+- quiz-card-click-grading-and-record-write
+- quiz-card-click-grading-and-record-write
+- quiz-card-click-grading-and-record-write
+- quiz-card-click-grading-and-record-write
+- quiz-card-click-grading-and-record-write
+nodes:
+  quiz-card-click-grading-and-record-write:
+    count: 6
+    heat: 1.0
+repeated_surface_questions: 6
+cognitive_history:
+- '0.0'
+- '0.0'
+- '0.0'
+- '0.0'
+- '0.0'
+- '0.0'
+intent_history:
+- execute
+- execute
+- execute
+- execute
+- execute
+- execute
+history:
+- timestamp: '2026-08-05T01:58:11.634736+00:00'
+  branch_id: general/quiz card click grading and record write
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T07:09:02.780708+00:00'
+  branch_id: general/quiz card click grading and record write
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T08:13:53.143547+00:00'
+  branch_id: general/quiz card click grading and record write
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T08:34:25.017512+00:00'
+  branch_id: general/quiz card click grading and record write
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T09:43:44.256055+00:00'
+  branch_id: general/quiz card click grading and record write
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-08T12:07:11.043740+00:00'
+  branch_id: general/quiz answer persistence write and verify
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+active_branches:
+  general/quiz card click grading and record write:
+    active_depth: concise
+    last_seen: '2026-08-06T09:43:44.256055+00:00'
+  general/quiz answer persistence write and verify:
+    active_depth: concise
+    last_seen: '2026-08-08T12:07:11.043740+00:00'
+last_seen: '2026-08-08T12:07:11.043740+00:00'

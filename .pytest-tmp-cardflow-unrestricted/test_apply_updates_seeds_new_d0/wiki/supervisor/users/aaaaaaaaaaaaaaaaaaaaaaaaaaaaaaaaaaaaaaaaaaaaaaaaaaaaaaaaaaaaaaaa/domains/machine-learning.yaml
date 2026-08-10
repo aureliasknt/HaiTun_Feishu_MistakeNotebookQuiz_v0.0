@@ -1,0 +1,27 @@
+user: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+domain: machine-learning
+question_count: 1
+visited_nodes:
+- model-evaluation
+nodes:
+  model-evaluation:
+    count: 1
+    heat: 0.2
+repeated_surface_questions: 0
+cognitive_history:
+- '0.0'
+intent_history:
+- explain
+history:
+- timestamp: '2026-08-07T10:18:03.906704+00:00'
+  branch_id: machine-learning/model-evaluation
+  requested_depth: deep
+  cognitive_level: '0.0'
+  intent: explain
+  transition: steady
+  surface: false
+active_branches:
+  machine-learning/model-evaluation:
+    active_depth: deep
+    last_seen: '2026-08-07T10:18:03.906704+00:00'
+last_seen: '2026-08-07T10:18:03.906704+00:00'

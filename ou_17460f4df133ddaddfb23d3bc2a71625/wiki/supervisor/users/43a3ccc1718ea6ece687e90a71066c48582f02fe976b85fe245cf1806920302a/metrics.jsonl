@@ -1,0 +1,25 @@
+{"turn_index": 1, "first_turn": true, "supervisor_required": false, "source": "warmup-requested", "elapsed_ms": 0}
+{"turn_index": 1, "first_turn": true, "supervisor_required": false, "source": "warmup", "warmup_status": "completed", "elapsed_ms": 27973}
+{"turn_index": 2, "first_turn": false, "supervisor_required": true, "source": "live", "elapsed_ms": 18031}
+{"turn_index": 3, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 19404}
+{"turn_index": 4, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 28383}
+{"turn_index": 5, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 16333}
+{"turn_index": 6, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 15963}
+{"turn_index": 7, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 15953}
+{"turn_index": 8, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 15770}
+{"turn_index": 9, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 17336}
+{"turn_index": 10, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 16012}
+{"turn_index": 11, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 28655}
+{"turn_index": 12, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 15999}
+{"turn_index": 13, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 6076}
+{"turn_index": 14, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 6068}
+{"turn_index": 15, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 6047}
+{"turn_index": 16, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 6035}
+{"turn_index": 17, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 20915}
+{"turn_index": 18, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 9278}
+{"turn_index": 19, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 9511}
+{"turn_index": 20, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 15397}
+{"turn_index": 21, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 12368}
+{"turn_index": 22, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 9863}
+{"turn_index": 23, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 9660}
+{"turn_index": 25, "first_turn": false, "supervisor_required": true, "source": "unavailable", "elapsed_ms": 18041}

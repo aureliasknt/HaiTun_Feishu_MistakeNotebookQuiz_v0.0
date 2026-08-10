@@ -351,6 +351,13 @@ Gateway：``list_segments`` / ``get_segment`` 只读；``set_segment_label`` 允
 
 **内存态自愈（有意为之）**：`_routes` 不持久化。因 session_id 由路由键确定性派生，Gateway 重启后 Session 经 state 恢复，下次 `route()` 走 adopt 分支自愈，无需额外持久化。
 
+**Feishu 工具凭据也必须内存态自愈**：Channel 与 Gateway 是不同进程，Channel 的
+`--app-id` / `--app-secret` 不会出现在 Gateway 环境，而 workspace Feishu tools 从
+`PSI_FEISHU_APP_ID` / `PSI_FEISHU_APP_SECRET` 读取。启用 `gateway_url` 后，Channel 在每次
+路由（包括本地 socket 缓存命中）前调用 loopback-only `POST /feishu/runtime-config`；Gateway
+只更新本进程环境且绝不落盘。端点拒绝非 loopback 来源，也刻意不进入 OpenAPI（内部启动续接，
+不是公共 API）。因此单独重启 Gateway 后，下一条飞书消息会先恢复凭据，再执行 agent/tool。
+
 **list_routes() → list[FeishuRoute]**：`[{open_id, chat_id, session_id}]`，供观测（`GET /feishu/routes`）。群聊记录填 `chat_id` 而 `open_id` 留空，私聊反之——一条记录只有一个键有值。
 
 **未定义（已知留白）**：群 Session 的 workspace 只有一份，而 `user_access_token`（UAT）按发送者 `open_id` 存。群里多人时「以谁的身份写文档」由 workspace 侧工具按每条消息的 `sender_open_id` 决定（见 `examples/haitun-workspace/TOOLS.md`），Gateway 不做约定。

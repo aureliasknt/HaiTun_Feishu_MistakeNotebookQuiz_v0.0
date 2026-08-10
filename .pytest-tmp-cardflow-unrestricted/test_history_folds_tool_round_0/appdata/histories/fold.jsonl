@@ -1,0 +1,4 @@
+{"role": "user", "content": "做任务", "kind": "chat"}
+{"role": "assistant", "tool_calls": [{"id": "1", "type": "function", "function": {"name": "read", "arguments": "{\"path\": \"a.py\"}"}}], "reasoning": "先读文件", "kind": "chat"}
+{"role": "tool", "content": "ok", "tool_call_id": "1"}
+{"role": "assistant", "content": "完成", "reasoning": "再总结", "kind": "chat"}

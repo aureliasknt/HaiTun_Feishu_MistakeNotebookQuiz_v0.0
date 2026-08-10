@@ -1,0 +1,36 @@
+{
+  "processes": {
+    "supervisor-5a2e2acf74c0444c-ai": {
+      "process_id": "supervisor-5a2e2acf74c0444c-ai",
+      "pid": 5396,
+      "command": "& 'D:\\haitun agent\\psi-agent\\.venv\\Scripts\\psi-agent.exe' 'ai' '--provider' 'deepseek' '--session-socket' 'http://127.0.0.1:60472' '--model' 'deepseek-v4-flash' '--api-key' 'sk-51e803ad2cd84f1f80e0c3f9a9c95c2d' '--base-url' 'https://api.deepseek.com/v1'",
+      "cwd": "D:\\haitun agent\\psi-agent\\ou_ce11d2eb60bf7603771aa4fb8b64a8cb",
+      "shell": "powershell",
+      "argv": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-Command",
+        "& 'D:\\haitun agent\\psi-agent\\.venv\\Scripts\\psi-agent.exe' 'ai' '--provider' 'deepseek' '--session-socket' 'http://127.0.0.1:60472' '--model' 'deepseek-v4-flash' '--api-key' 'sk-51e803ad2cd84f1f80e0c3f9a9c95c2d' '--base-url' 'https://api.deepseek.com/v1'"
+      ],
+      "workspace": "D:\\haitun agent\\psi-agent\\ou_ce11d2eb60bf7603771aa4fb8b64a8cb",
+      "created_at": "2026-08-05T01:57:54.474356+00:00"
+    },
+    "supervisor-5a2e2acf74c0444c-session": {
+      "process_id": "supervisor-5a2e2acf74c0444c-session",
+      "pid": 12112,
+      "command": "& 'D:\\haitun agent\\psi-agent\\.venv\\Scripts\\psi-agent.exe' 'session' '--workspace' 'D:\\haitun agent\\psi-agent\\examples\\haitun-supervisor-workspace' '--channel-socket' 'http://127.0.0.1:54384' '--ai-socket' '\\\\.\\pipe\\psi\\ais\\1e108251612a4272ab7f5383ab710982' '--session-id' 'supervisor-5a2e2acf74c0444c'",
+      "cwd": "D:\\haitun agent\\psi-agent\\ou_ce11d2eb60bf7603771aa4fb8b64a8cb",
+      "shell": "powershell",
+      "argv": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-Command",
+        "& 'D:\\haitun agent\\psi-agent\\.venv\\Scripts\\psi-agent.exe' 'session' '--workspace' 'D:\\haitun agent\\psi-agent\\examples\\haitun-supervisor-workspace' '--channel-socket' 'http://127.0.0.1:54384' '--ai-socket' '\\\\.\\pipe\\psi\\ais\\1e108251612a4272ab7f5383ab710982' '--session-id' 'supervisor-5a2e2acf74c0444c'"
+      ],
+      "workspace": "D:\\haitun agent\\psi-agent\\ou_ce11d2eb60bf7603771aa4fb8b64a8cb",
+      "created_at": "2026-08-08T12:06:51.882537+00:00"
+    }
+  }
+}

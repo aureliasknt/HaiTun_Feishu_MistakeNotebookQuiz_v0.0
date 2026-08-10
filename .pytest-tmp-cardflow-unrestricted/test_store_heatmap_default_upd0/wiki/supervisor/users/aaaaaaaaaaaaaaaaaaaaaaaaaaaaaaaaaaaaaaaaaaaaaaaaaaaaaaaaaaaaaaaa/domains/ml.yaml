@@ -1,0 +1,22 @@
+user: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+domain: ml
+question_count: 1
+visited_nodes:
+- basics
+- basics
+- models
+nodes:
+  basics:
+    count: 2
+    heat: 0.4
+  models:
+    count: 1
+    heat: 0.2
+repeated_surface_questions: 1
+cognitive_history:
+- understand
+intent_history:
+- compare
+history: []
+active_branches: {}
+last_seen: '2026-08-07T10:18:03.878166+00:00'

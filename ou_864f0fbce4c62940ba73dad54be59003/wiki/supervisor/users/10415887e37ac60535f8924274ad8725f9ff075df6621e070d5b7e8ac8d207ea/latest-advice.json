@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "advice_id": "adv_10415887e37ac60535f8924274ad8725f9ff075df6621e070d5b7e8ac8d207ea_49",
+  "user_id_hash": "10415887e37ac60535f8924274ad8725f9ff075df6621e070d5b7e8ac8d207ea",
+  "profile_id": "",
+  "turn_index": 0,
+  "classification": {
+    "is_learning": false,
+    "domain": "feishu_quiz_persistence_operation",
+    "topic": "q1_external_results_record_save",
+    "confidence": 0.95
+  },
+  "user_state": {
+    "depth": 0.0,
+    "goal": 0.0,
+    "familiarity": 0.0,
+    "evidence": [
+      "hidden persistence phase for q1 quiz answer",
+      "requires exactly one feishu_bitable_create_record call then verify and output RECORD_SAVED or failure",
+      "no learning engagement"
+    ]
+  },
+  "breakout": {
+    "needed": false,
+    "type": "none",
+    "score": 0.0,
+    "reason": "Automated persistence operation requiring exact tool call and status output; no learning breakout should interfere.",
+    "directions": [],
+    "evidence": [
+      "prompt mandates exactly one bitable create_record call with verification",
+      "hidden persistence, no user learning task"
+    ]
+  },
+  "latent_need": {
+    "detected": false,
+    "need": "",
+    "missing_dimensions": [],
+    "confidence": 0.0
+  },
+  "profile_shift": {
+    "detected": false,
+    "from": "",
+    "to": "",
+    "evidence": [],
+    "confidence": 0.0
+  },
+  "response_strategy": {
+    "answer_depth": "concise",
+    "answer_scope": "local",
+    "goal_mode": "execute",
+    "terminology": "professional",
+    "breakout_integration": "none",
+    "instructions": []
+  },
+  "map_updates": {
+    "proposed_map": null,
+    "visited_nodes": [
+      "external_results_goal_criteria",
+      "misrepresentation_of_progress",
+      "todo_core_focus_points",
+      "todo_mentor_workflow_order"
+    ],
+    "branch_additions": []
+  },
+  "diagnostics": {
+    "source": "live",
+    "evidence": [
+      "hidden persistence phase for q1",
+      "user choice A, correct B, verdict 错",
+      "call bitable create_record once and verify; output RECORD_SAVED only on success"
+    ],
+    "created_at": "2026-08-08T12:10:23.365521+00:00"
+  }
+}

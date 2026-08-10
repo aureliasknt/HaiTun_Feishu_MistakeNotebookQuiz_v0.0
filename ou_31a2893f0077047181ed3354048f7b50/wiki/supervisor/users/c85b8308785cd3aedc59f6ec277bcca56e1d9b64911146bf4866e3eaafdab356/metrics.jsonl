@@ -1,0 +1,2 @@
+{"turn_index": 1, "first_turn": true, "supervisor_required": false, "source": "warmup-requested", "elapsed_ms": 0}
+{"turn_index": 1, "first_turn": true, "supervisor_required": false, "source": "warmup", "warmup_status": "failed", "elapsed_ms": 6039}

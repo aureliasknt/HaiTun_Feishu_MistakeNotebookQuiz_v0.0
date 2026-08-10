@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+import socket
 import sys
 import uuid
 
@@ -27,6 +29,11 @@ async def _noop() -> None:
 
 
 def _socket_path(prefix: str, kind: str, entity_id: str) -> str:
+    if sys.platform == "win32" and os.environ.get("PSI_FORCE_TCP_TRANSPORT", "").lower() in {"1", "true", "yes", "on"}:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.bind(("127.0.0.1", 0))
+            port = sock.getsockname()[1]
+        return f"http://127.0.0.1:{port}"
     if sys.platform == "win32":
         return rf"\\.\pipe\{prefix}\{kind}\{entity_id}"
     return f"/tmp/{prefix}/{kind}/{entity_id}.sock"
@@ -50,11 +57,17 @@ async def _remove_socket(path: str) -> None:
 
 async def _wait_socket(path: str, timeout_sec: float = _SOCKET_READY_TIMEOUT_SECONDS) -> None:
     """Poll *path* until the service behind it answers, or raise ``TimeoutError``."""
-    if sys.platform == "win32":
-        connector: aiohttp.BaseConnector = aiohttp.NamedPipeConnector(path=path)
+    if path.startswith("http://") or path.startswith("https://"):
+        connector = aiohttp.TCPConnector(ssl=path.startswith("https://"))
+        endpoint = path.rstrip("/") + "/"
+        kind = "HTTP"
+    elif sys.platform == "win32":
+        connector = aiohttp.NamedPipeConnector(path=path)
+        endpoint = "http://localhost/"
         kind = "Named Pipe"
     else:
         connector = aiohttp.UnixConnector(path=path)
+        endpoint = "http://localhost/"
         kind = "Unix socket"
     logger.debug(f"Waiting for {kind} {path!r} to become ready (timeout={timeout_sec}s)")
     deadline = anyio.current_time() + timeout_sec
@@ -62,7 +75,7 @@ async def _wait_socket(path: str, timeout_sec: float = _SOCKET_READY_TIMEOUT_SEC
     try:
         while anyio.current_time() < deadline:
             try:
-                async with session.get("http://localhost/") as _resp:
+                async with session.get(endpoint) as _resp:
                     pass
                 logger.debug(f"{kind} {path!r} is ready")
                 return

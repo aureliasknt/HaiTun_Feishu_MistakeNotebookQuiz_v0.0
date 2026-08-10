@@ -1,0 +1,27 @@
+user: 2bd806c97f0e00af1a1fc3328fa763a9269723c8db8fac4f93af71db186d6e90
+domain: machine-learning
+question_count: 1
+visited_nodes:
+- overfitting
+nodes:
+  overfitting:
+    count: 1
+    heat: 0.2
+repeated_surface_questions: 0
+cognitive_history:
+- '0.0'
+intent_history:
+- explain
+history:
+- timestamp: '2026-08-07T10:18:04.124084+00:00'
+  branch_id: machine-learning/overfitting
+  requested_depth: deep
+  cognitive_level: '0.0'
+  intent: explain
+  transition: steady
+  surface: false
+active_branches:
+  machine-learning/overfitting:
+    active_depth: deep
+    last_seen: '2026-08-07T10:18:04.124084+00:00'
+last_seen: '2026-08-07T10:18:04.124084+00:00'

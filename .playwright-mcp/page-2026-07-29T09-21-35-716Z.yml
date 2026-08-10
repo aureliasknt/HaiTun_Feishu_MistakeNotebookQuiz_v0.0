@@ -1,0 +1,37 @@
+- generic [ref=f26e2]:
+  - navigation [ref=f26e3]:
+    - generic [ref=f26e5]:
+      - link "搜索图片" [ref=f26e8] [cursor=pointer]:
+        - /url: https://www.google.com.hk/imghp?hl=zh-CN&ogbl
+        - text: 图片
+      - button "Google 应用" [ref=f26e11] [cursor=pointer]
+      - link "登录" [ref=f26e16] [cursor=pointer]:
+        - /url: https://accounts.google.com/ServiceLogin?hl=zh-CN&passive=true&continue=https://www.google.com.hk/&ec=futura_exp_og_so_72776762_e
+  - img "Google" [ref=f26e19]
+  - search [ref=f26e27]:
+    - generic [ref=f26e29]:
+      - generic [ref=f26e31]:
+        - combobox "搜索" [active] [ref=f26e38]
+        - generic [ref=f26e40]:
+          - button "按语音搜索" [ref=f26e41] [cursor=pointer]
+          - button "按图搜索" [ref=f26e44] [cursor=pointer]
+      - generic [ref=f26e48]:
+        - button "Google 搜索" [ref=f26e49] [cursor=pointer]
+        - button "手气不错" [ref=f26e50] [cursor=pointer]
+  - contentinfo [ref=f26e53]:
+    - generic [ref=f26e54]:
+      - generic [ref=f26e55]:
+        - link "关于 Google" [ref=f26e56] [cursor=pointer]:
+          - /url: https://about.google/?utm_source=google-ZZ&utm_medium=referral&utm_campaign=hp-footer&fg=1
+        - link "广告" [ref=f26e57] [cursor=pointer]:
+          - /url: https://www.google.com.hk/intl/zh-CN_zz/ads/?subid=ww-ww-et-g-awa-a-g_hpafoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpafooter&fg=1
+        - link "商务" [ref=f26e58] [cursor=pointer]:
+          - /url: https://www.google.com.hk/services/?subid=ww-ww-et-g-awa-a-g_hpbfoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpbfooter&fg=1
+        - link "Google 搜索的运作方式" [ref=f26e59] [cursor=pointer]:
+          - /url: https://google.com/search/howsearchworks/?fg=1
+      - generic [ref=f26e60]:
+        - link "隐私权" [ref=f26e61] [cursor=pointer]:
+          - /url: https://policies.google.com/privacy?hl=zh-CN&fg=1
+        - link "条款" [ref=f26e62] [cursor=pointer]:
+          - /url: https://policies.google.com/terms?hl=zh-CN&fg=1
+        - button "设置" [ref=f26e66] [cursor=pointer]

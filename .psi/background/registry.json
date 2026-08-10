@@ -1,0 +1,84 @@
+{
+  "processes": {
+    "sub-novel-part1a-session": {
+      "process_id": "sub-novel-part1a-session",
+      "pid": 5900,
+      "command": "& 'psi-agent' 'session' '--workspace' 'D:\\haitun agent\\psi-agent' '--channel-socket' 'http://127.0.0.1:60688' '--ai-socket' '\\\\.\\pipe\\psi\\ais\\7da853e15e2e454ca309e2f98f1b5c7e' '--session-id' 'sub-novel-part1a'",
+      "cwd": "D:\\haitun agent\\psi-agent",
+      "shell": "powershell",
+      "argv": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-Command",
+        "& 'psi-agent' 'session' '--workspace' 'D:\\haitun agent\\psi-agent' '--channel-socket' 'http://127.0.0.1:60688' '--ai-socket' '\\\\.\\pipe\\psi\\ais\\7da853e15e2e454ca309e2f98f1b5c7e' '--session-id' 'sub-novel-part1a'"
+      ],
+      "workspace": "D:\\haitun agent\\psi-agent",
+      "created_at": "2026-07-29T10:18:01.388463+00:00"
+    },
+    "sub-novel-part1b-session": {
+      "process_id": "sub-novel-part1b-session",
+      "pid": 26688,
+      "command": "& 'psi-agent' 'session' '--workspace' 'D:\\haitun agent\\psi-agent' '--channel-socket' 'http://127.0.0.1:60717' '--ai-socket' '\\\\.\\pipe\\psi\\ais\\7da853e15e2e454ca309e2f98f1b5c7e' '--session-id' 'sub-novel-part1b'",
+      "cwd": "D:\\haitun agent\\psi-agent",
+      "shell": "powershell",
+      "argv": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-Command",
+        "& 'psi-agent' 'session' '--workspace' 'D:\\haitun agent\\psi-agent' '--channel-socket' 'http://127.0.0.1:60717' '--ai-socket' '\\\\.\\pipe\\psi\\ais\\7da853e15e2e454ca309e2f98f1b5c7e' '--session-id' 'sub-novel-part1b'"
+      ],
+      "workspace": "D:\\haitun agent\\psi-agent",
+      "created_at": "2026-07-29T10:18:16.350628+00:00"
+    },
+    "sub-novel-part2a-session": {
+      "process_id": "sub-novel-part2a-session",
+      "pid": 5944,
+      "command": "& 'psi-agent' 'session' '--workspace' 'D:\\haitun agent\\psi-agent' '--channel-socket' 'http://127.0.0.1:60716' '--ai-socket' '\\\\.\\pipe\\psi\\ais\\7da853e15e2e454ca309e2f98f1b5c7e' '--session-id' 'sub-novel-part2a'",
+      "cwd": "D:\\haitun agent\\psi-agent",
+      "shell": "powershell",
+      "argv": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-Command",
+        "& 'psi-agent' 'session' '--workspace' 'D:\\haitun agent\\psi-agent' '--channel-socket' 'http://127.0.0.1:60716' '--ai-socket' '\\\\.\\pipe\\psi\\ais\\7da853e15e2e454ca309e2f98f1b5c7e' '--session-id' 'sub-novel-part2a'"
+      ],
+      "workspace": "D:\\haitun agent\\psi-agent",
+      "created_at": "2026-07-29T10:18:16.350840+00:00"
+    },
+    "sub-novel-part2b-session": {
+      "process_id": "sub-novel-part2b-session",
+      "pid": 21532,
+      "command": "& 'psi-agent' 'session' '--workspace' 'D:\\haitun agent\\psi-agent' '--channel-socket' 'http://127.0.0.1:60719' '--ai-socket' '\\\\.\\pipe\\psi\\ais\\7da853e15e2e454ca309e2f98f1b5c7e' '--session-id' 'sub-novel-part2b'",
+      "cwd": "D:\\haitun agent\\psi-agent",
+      "shell": "powershell",
+      "argv": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-Command",
+        "& 'psi-agent' 'session' '--workspace' 'D:\\haitun agent\\psi-agent' '--channel-socket' 'http://127.0.0.1:60719' '--ai-socket' '\\\\.\\pipe\\psi\\ais\\7da853e15e2e454ca309e2f98f1b5c7e' '--session-id' 'sub-novel-part2b'"
+      ],
+      "workspace": "D:\\haitun agent\\psi-agent",
+      "created_at": "2026-07-29T10:18:16.350912+00:00"
+    },
+    "sub-novel-part3-session": {
+      "process_id": "sub-novel-part3-session",
+      "pid": 29888,
+      "command": "& 'psi-agent' 'session' '--workspace' 'D:\\haitun agent\\psi-agent' '--channel-socket' 'http://127.0.0.1:60718' '--ai-socket' '\\\\.\\pipe\\psi\\ais\\7da853e15e2e454ca309e2f98f1b5c7e' '--session-id' 'sub-novel-part3'",
+      "cwd": "D:\\haitun agent\\psi-agent",
+      "shell": "powershell",
+      "argv": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-Command",
+        "& 'psi-agent' 'session' '--workspace' 'D:\\haitun agent\\psi-agent' '--channel-socket' 'http://127.0.0.1:60718' '--ai-socket' '\\\\.\\pipe\\psi\\ais\\7da853e15e2e454ca309e2f98f1b5c7e' '--session-id' 'sub-novel-part3'"
+      ],
+      "workspace": "D:\\haitun agent\\psi-agent",
+      "created_at": "2026-07-29T10:18:16.350952+00:00"
+    }
+  }
+}

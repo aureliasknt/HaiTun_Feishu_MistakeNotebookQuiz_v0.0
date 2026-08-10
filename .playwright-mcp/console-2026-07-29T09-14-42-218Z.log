@@ -1,0 +1,8 @@
+[   14587ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_TIMED_OUT @ https://www.youtube.com/youtubei/v1/log_event?alt=json:0
+[   14880ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_TIMED_OUT @ https://www.youtube.com/youtubei/v1/log_event?alt=json:0
+[   17883ms] [WARNING] The resource https://i.ytimg.com/generate_204 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://www.youtube.com/:0
+[   21380ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_TIMED_OUT @ https://www.youtube.com/generate_204:0
+[   24382ms] [WARNING] The resource https://i.ytimg.com/generate_204 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://www.youtube.com/:0
+[  427415ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://www.chromium.org/developers/design-documents/create-amazing-password-forms) %o @ https://x.com/:0
+[  428179ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://api.x.com/1.1/graphql/viewer_context.json:0
+[  428179ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://api.x.com/1.1/flow/viewer.json:0

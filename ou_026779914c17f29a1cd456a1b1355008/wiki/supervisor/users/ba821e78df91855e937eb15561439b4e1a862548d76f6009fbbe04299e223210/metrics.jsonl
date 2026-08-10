@@ -1,0 +1,14 @@
+{"turn_index": 1, "first_turn": true, "supervisor_required": false, "source": "warmup-requested", "elapsed_ms": 0}
+{"turn_index": 1, "first_turn": true, "supervisor_required": false, "source": "warmup", "warmup_status": "completed", "elapsed_ms": 17215}
+{"turn_index": 2, "first_turn": false, "supervisor_required": true, "source": "live", "elapsed_ms": 11924}
+{"turn_index": 3, "first_turn": false, "supervisor_required": true, "source": "live", "elapsed_ms": 8655}
+{"turn_index": 4, "first_turn": false, "supervisor_required": true, "source": "live", "elapsed_ms": 7898}
+{"turn_index": 5, "first_turn": false, "supervisor_required": true, "source": "live", "elapsed_ms": 6776}
+{"turn_index": 6, "first_turn": false, "supervisor_required": true, "source": "live", "elapsed_ms": 11698}
+{"turn_index": 7, "first_turn": false, "supervisor_required": true, "source": "live", "elapsed_ms": 21595}
+{"turn_index": 8, "first_turn": false, "supervisor_required": true, "source": "live", "elapsed_ms": 12535}
+{"turn_index": 9, "first_turn": false, "supervisor_required": true, "source": "live", "elapsed_ms": 8730}
+{"turn_index": 10, "first_turn": false, "supervisor_required": true, "source": "live", "elapsed_ms": 7787}
+{"turn_index": 11, "first_turn": false, "supervisor_required": true, "source": "live", "elapsed_ms": 8694}
+{"turn_index": 12, "first_turn": false, "supervisor_required": true, "source": "live", "elapsed_ms": 8167}
+{"turn_index": 13, "first_turn": false, "supervisor_required": true, "source": "live", "elapsed_ms": 11713}

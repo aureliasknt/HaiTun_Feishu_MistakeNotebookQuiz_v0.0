@@ -403,6 +403,34 @@ async def test_build_chunks_group_header_carries_chat_id(monkeypatch, tmp_path):
 
 
 @pytest.mark.anyio
+async def test_build_chunks_exposes_non_bot_mentions_and_uses_body_text(monkeypatch, tmp_path):
+    monkeypatch.setattr(client.platformdirs, "user_downloads_dir", lambda: str(tmp_path))
+    channel = _fake_channel()
+    ctx = SimpleNamespace(
+        content_text="@Haitun @张三 设置测试",
+        body_text="@张三 设置测试",
+        message_id="om_mentions",
+        chat_id="oc_group",
+        chat_type="group",
+        sender_id="ou_sender",
+        create_time=1_786_000_000_000,
+        mentions=[
+            SimpleNamespace(open_id="ou_bot", name="Haitun", is_bot=True),
+            SimpleNamespace(open_id="ou_zhang", name="张三", is_bot=False),
+        ],
+        resources=[],
+        raw_content_type="text",
+    )
+
+    chunks = await client._build_chunks(channel, ctx)
+
+    assert "ou_bot" not in chunks[0].text
+    assert "message_create_time_ms: 1786000000000" in chunks[0].text
+    assert 'mentioned_users_json: [{"open_id": "ou_zhang", "name": "张三"}]' in chunks[0].text
+    assert chunks[1] == TextChunk("@张三 设置测试")
+
+
+@pytest.mark.anyio
 async def test_build_chunks_empty_returns_no_chunks(monkeypatch, tmp_path):
     """No text/audio/resource -> header dropped, empty list (unsupported type)."""
     monkeypatch.setattr(client.platformdirs, "user_downloads_dir", lambda: str(tmp_path))
@@ -680,6 +708,34 @@ async def test_gateway_route_provider_raises_on_failure_and_does_not_cache() -> 
     socket = await provider.ensure("ou_1")
     assert socket == "/tmp/ok.sock"
     assert len(http.post_calls) == 2
+
+
+@pytest.mark.anyio
+async def test_gateway_route_provider_refreshes_runtime_credentials_even_on_socket_cache_hit() -> None:
+    http = _FakeHttp(
+        [
+            _FakeResp(200, {"ok": True}),
+            _FakeResp(201, {"channel_socket": "/tmp/feishu-ou_1.sock"}),
+            _FakeResp(200, {"ok": True}),
+        ]
+    )
+    provider = client._GatewayRouteProvider(
+        "http://127.0.0.1:9000",
+        cast("Any", http),
+        app_id="cli_test",
+        app_secret="secret_test",
+    )
+
+    first = await provider.ensure("ou_1")
+    second = await provider.ensure("ou_1")
+
+    assert first == second == "/tmp/feishu-ou_1.sock"
+    assert [call["url"] for call in http.post_calls] == [
+        "http://127.0.0.1:9000/feishu/runtime-config",
+        "http://127.0.0.1:9000/feishu/route",
+        "http://127.0.0.1:9000/feishu/runtime-config",
+    ]
+    assert http.post_calls[0]["json"] == {"app_id": "cli_test", "app_secret": "secret_test"}
 
 
 # ── approval status-change push ───────────────────────────────────────────────

@@ -1,0 +1,3 @@
+[  255468ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://www.chromium.org/developers/design-documents/create-amazing-password-forms) %o @ https://x.com/:0
+[  256232ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://api.x.com/1.1/graphql/viewer_context.json:0
+[  256232ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://api.x.com/1.1/flow/viewer.json:0

@@ -1,0 +1,147 @@
+user: ba821e78df91855e937eb15561439b4e1a862548d76f6009fbbe04299e223210
+domain: general
+question_count: 13
+visited_nodes:
+- quiz-card-write-back
+- quiz-card-write-back
+- quiz-card-write-back
+- quiz-card-write-back
+- quiz-card-write-back
+- quiz-card-write-back
+- quiz-card-write-back
+- quiz-card-write-back
+- quiz-card-write-back
+- quiz-card-write-back
+- quiz-card-write-back
+- quiz-card-write-back
+- quiz-card-write-back
+nodes:
+  quiz-card-write-back:
+    count: 13
+    heat: 1.0
+repeated_surface_questions: 13
+cognitive_history:
+- '0.0'
+- '0.0'
+- '0.0'
+- '0.0'
+- '0.0'
+- '0.0'
+- '0.0'
+- '0.0'
+- '0.0'
+- '0.0'
+- '0.0'
+- '0.0'
+- '0.0'
+intent_history:
+- execute
+- execute
+- execute
+- execute
+- execute
+- execute
+- execute
+- execute
+- execute
+- execute
+- execute
+- execute
+- execute
+history:
+- timestamp: '2026-08-06T05:15:36.936680+00:00'
+  branch_id: general/quiz_card_write_back
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T07:07:14.460965+00:00'
+  branch_id: general/quiz_card_write_back
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T08:03:28.402119+00:00'
+  branch_id: general/quiz_card_write_back
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T08:34:35.722091+00:00'
+  branch_id: general/quiz_card_write_back
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T08:41:30.660016+00:00'
+  branch_id: general/quiz_card_write_back
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T08:55:52.977946+00:00'
+  branch_id: general/quiz_card_write_back
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T09:02:20.998633+00:00'
+  branch_id: general/quiz_card_write_back
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T10:15:56.320653+00:00'
+  branch_id: general/quiz_card_write_back
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T10:16:57.473627+00:00'
+  branch_id: general/quiz_card_write_back
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T10:17:39.532474+00:00'
+  branch_id: general/quiz_card_write_back
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T10:18:20.575679+00:00'
+  branch_id: general/quiz_card_write_back
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T10:18:59.337121+00:00'
+  branch_id: general/quiz_card_write_back
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-06T10:29:42.119457+00:00'
+  branch_id: general/quiz_card_write_back
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+active_branches:
+  general/quiz_card_write_back:
+    active_depth: concise
+    last_seen: '2026-08-06T10:29:42.119457+00:00'
+last_seen: '2026-08-06T10:29:42.119457+00:00'

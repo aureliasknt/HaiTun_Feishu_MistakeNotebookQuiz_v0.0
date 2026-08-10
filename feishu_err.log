@@ -1,0 +1,133 @@
+15:16:46.363 | INFO     | psi_agent.channel.feishu:run:78 - Starting Feishu bot, connecting to http://127.0.0.1:8765
+15:16:46.365 | DEBUG    | psi_agent.channel.feishu.client:run_feishu:817 - FeishuChannel created (app_id=cli_aafabb2797b91bc9 require_mention=True respond_to_mention_all=False gateway_url='http://127.0.0.1:8765')
+15:16:46.365 | DEBUG    | psi_agent.channel.feishu.client:run_feishu:882 - comment subscription enabled (@bot in doc comments triggers reply)
+15:16:55.561 | INFO     | psi_agent.channel.feishu.client:run_feishu:885 - Feishu bot started (session=http://127.0.0.1:8765 interval=1.0)
+15:16:55.563 | DEBUG    | psi_agent.channel.feishu.client:_register_approval_processor:752 - approval_instance event processor registered (p1/p2)
+15:16:55.565 | INFO     | psi_agent.channel.feishu.client:_ensure_bot_identity:787 - Feishu bot identity resolved — open_id=ou_1a319eecf679bf61940cd384d6cdf19b name=佳芬的海豚
+15:16:55.569 | DEBUG    | psi_agent.channel._event_defs:load_channel_event_defs:59 - No channel_events for 'feishu' under D:\haitun agent\psi-agent
+15:16:55.570 | INFO     | psi_agent.channel.feishu._agent_events:_register_platform_map:100 - No feishu platform_map events under channel_events/feishu
+15:16:55.570 | INFO     | psi_agent.channel.feishu.client:run_feishu:905 - Feishu agent channel_events root=D:\haitun agent\psi-agent platform_processors=0 synthetic_producers=0
+15:17:02.186 | WARNING  | psi_agent.channel.feishu.client:resolve_core:840 - Gateway route failed for open_id='ou_31a2893f0077047181ed3354048f7b50' chat_id='oc_a7d78510e8f1443d186b4da029f9e372', falling back to shared socket 'http://127.0.0.1:8765' — RuntimeError('Gateway POST /feishu/route failed (status=400): {"error": "no ai_id: set Gateway --feishu-ai-id or pass ai_id in the request"}')
+15:17:02.186 | DEBUG    | psi_agent._sockets:resolve_connector_and_endpoint:57 - Resolved transport: addr='http://127.0.0.1:8765' → TCP endpoint='http://127.0.0.1:8765/chat/completions'
+15:17:02.187 | DEBUG    | psi_agent.channel.feishu.client:get:88 - created ChannelCore for socket='http://127.0.0.1:8765' (total=1)
+15:17:02.187 | DEBUG    | psi_agent.channel.feishu.client:_handle_and_stream:420 - sender=ou_31a2893f0077047181ed3354048f7b50 chat=oc_a7d78510e8f1443d186b4da029f9e372 type=p2p socket=http://127.0.0.1:8765
+15:17:02.187 | DEBUG    | psi_agent.channel.feishu.client:_add_reaction:167 - message_id=om_x100b681a6c2450bcde2a5a6d2cbed5f emoji=Typing
+15:17:03.309 | DEBUG    | psi_agent.channel.feishu.client:_add_reaction:181 - OK reaction_id=gKWKKpFmSBrKH0xNLQ_Ho1uPZrt8R1csSWp6b11KPWj5EdCHqjaSeKzkaZPbgpjI
+15:17:03.316 | DEBUG    | psi_agent.channel.feishu.client:_build_chunks:253 - downloads_dir=C:\Users\aurel\Downloads\.psi\2026-08-05 raw_content_type=text
+15:17:03.316 | DEBUG    | psi_agent.channel.feishu.client:_build_chunks:276 - content_text (2 chars)
+15:17:03.317 | DEBUG    | psi_agent.channel.feishu.client:_build_chunks:306 - total 2 chunk(s)
+15:17:03.317 | DEBUG    | psi_agent.channel.feishu.client:_handle_and_stream:439 - posting 2 chunk(s) to ChannelCore
+15:17:03.317 | DEBUG    | psi_agent.channel._core:post:78 - 2 chunk(s) — FileChunks=0 TextChunks=2
+15:17:03.317 | DEBUG    | psi_agent.channel._core:post:90 - POST http://127.0.0.1:8765/chat/completions content_len=197
+15:17:03.320 | INFO     | psi_agent.channel._core:post:92 - HTTP 404
+15:17:03.320 | DEBUG    | psi_agent.channel._core:post:101 - non-200 error: '404: Not Found'
+15:17:07.517 | WARNING  | psi_agent.channel.feishu.client:_stream_reply:398 - Feishu stream reply failed with 404, sending plain-text fallback: ChannelError('404: Not Found')
+15:17:07.518 | DEBUG    | psi_agent.channel.feishu.client:_handle_and_stream:443 - stream completed
+15:17:07.519 | DEBUG    | psi_agent.channel.feishu.client:_remove_reaction:190 - message_id=om_x100b681a6c2450bcde2a5a6d2cbed5f reaction_id=gKWKKpFmSBrKH0xNLQ_Ho1uPZrt8R1csSWp6b11KPWj5EdCHqjaSeKzkaZPbgpjI
+15:17:08.662 | DEBUG    | psi_agent.channel.feishu.client:_remove_reaction:194 - OK
+15:18:46.606 | DEBUG    | psi_agent.channel.feishu.client:ensure:139 - routed 'ou_864f0fbce4c62940ba73dad54be59003' -> socket='http://127.0.0.1:57267'
+15:18:46.606 | DEBUG    | psi_agent._sockets:resolve_connector_and_endpoint:57 - Resolved transport: addr='http://127.0.0.1:57267' → TCP endpoint='http://127.0.0.1:57267/chat/completions'
+15:18:46.606 | DEBUG    | psi_agent.channel.feishu.client:get:88 - created ChannelCore for socket='http://127.0.0.1:57267' (total=2)
+15:18:46.606 | DEBUG    | psi_agent.channel.feishu.client:_handle_and_stream:420 - sender=ou_864f0fbce4c62940ba73dad54be59003 chat=oc_25ae2010cbd0cd2de9e1e91c67f1b7df type=p2p socket=http://127.0.0.1:57267
+15:18:46.607 | DEBUG    | psi_agent.channel.feishu.client:_add_reaction:167 - message_id=om_x100b681a73ef70b0ddcfbf055394229 emoji=Typing
+15:18:47.879 | DEBUG    | psi_agent.channel.feishu.client:_add_reaction:181 - OK reaction_id=dvgF-4yOdBZl2IQUa-FpbZ6pw5a9AwtPFeThSmi5ri1wYeL1uOX-A4bY0ML7bwte
+15:18:47.882 | DEBUG    | psi_agent.channel.feishu.client:_build_chunks:253 - downloads_dir=C:\Users\aurel\Downloads\.psi\2026-08-05 raw_content_type=text
+15:18:47.882 | DEBUG    | psi_agent.channel.feishu.client:_build_chunks:276 - content_text (2 chars)
+15:18:47.882 | DEBUG    | psi_agent.channel.feishu.client:_build_chunks:306 - total 2 chunk(s)
+15:18:47.882 | DEBUG    | psi_agent.channel.feishu.client:_handle_and_stream:439 - posting 2 chunk(s) to ChannelCore
+15:18:47.882 | DEBUG    | psi_agent.channel._core:post:78 - 2 chunk(s) — FileChunks=0 TextChunks=2
+15:18:47.882 | DEBUG    | psi_agent.channel._core:post:90 - POST http://127.0.0.1:57267/chat/completions content_len=197
+15:18:47.883 | INFO     | psi_agent.channel._core:post:92 - HTTP 200
+15:18:47.883 | DEBUG    | psi_agent.channel._core:post:105 - Starting to consume SSE stream
+15:18:57.320 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (1 chars): '嗨'
+15:18:57.348 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (1 chars): '！'
+15:18:57.348 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (1 chars): '\U0001f42c'
+15:18:57.369 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (1 chars): ' '
+15:18:57.370 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (2 chars): '我在'
+15:18:57.395 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (1 chars): '的'
+15:18:57.397 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (1 chars): '，'
+15:18:57.398 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (3 chars): '有什么'
+15:18:57.398 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (2 chars): '需要'
+15:18:57.433 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (2 chars): '帮忙'
+15:18:57.435 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (2 chars): '的吗'
+15:18:57.436 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (1 chars): '？'
+15:19:20.529 | DEBUG    | psi_agent.channel.feishu.client:_handle_and_stream:420 - sender=ou_864f0fbce4c62940ba73dad54be59003 chat=oc_25ae2010cbd0cd2de9e1e91c67f1b7df type=p2p socket=http://127.0.0.1:57267
+15:19:20.530 | DEBUG    | psi_agent.channel.feishu.client:_add_reaction:167 - message_id=om_x100b681a64f67090de0c2e9b5128b6a emoji=Typing
+15:19:21.646 | DEBUG    | psi_agent.channel.feishu.client:_add_reaction:181 - OK reaction_id=nIGlZ5wBVAur2L7QUuyzdbdqGj5939uBsx4Ph9LUJvh3WsNm91kNCR5X2WoCifr_
+15:19:21.650 | DEBUG    | psi_agent.channel.feishu.client:_build_chunks:253 - downloads_dir=C:\Users\aurel\Downloads\.psi\2026-08-05 raw_content_type=text
+15:19:21.651 | DEBUG    | psi_agent.channel.feishu.client:_build_chunks:276 - content_text (2 chars)
+15:19:21.651 | DEBUG    | psi_agent.channel.feishu.client:_build_chunks:306 - total 2 chunk(s)
+15:19:21.652 | DEBUG    | psi_agent.channel.feishu.client:_handle_and_stream:439 - posting 2 chunk(s) to ChannelCore
+15:19:21.652 | DEBUG    | psi_agent.channel._core:post:78 - 2 chunk(s) — FileChunks=0 TextChunks=2
+15:19:21.653 | DEBUG    | psi_agent.channel._core:post:90 - POST http://127.0.0.1:57267/chat/completions content_len=197
+15:19:52.193 | DEBUG    | psi_agent.channel._stream:iter_sse_events:39 - SSE stream ended [DONE]
+15:19:52.193 | DEBUG    | psi_agent.channel._core:post:134 - SSE stream consumed successfully
+15:19:52.193 | DEBUG    | psi_agent.channel._stream:flush:167 - stream end flush → TextChunk (18 chars)
+15:19:52.207 | INFO     | psi_agent.channel._core:post:92 - HTTP 200
+15:19:52.207 | DEBUG    | psi_agent.channel._core:post:105 - Starting to consume SSE stream
+15:19:54.677 | DEBUG    | psi_agent.channel.feishu.client:_produce:389 - stream.append (18 chars)
+15:19:56.416 | DEBUG    | psi_agent.channel.feishu.client:_handle_and_stream:443 - stream completed
+15:19:56.416 | DEBUG    | psi_agent.channel.feishu.client:_remove_reaction:190 - message_id=om_x100b681a73ef70b0ddcfbf055394229 reaction_id=dvgF-4yOdBZl2IQUa-FpbZ6pw5a9AwtPFeThSmi5ri1wYeL1uOX-A4bY0ML7bwte
+15:19:57.467 | DEBUG    | psi_agent.channel.feishu.client:_remove_reaction:194 - OK
+15:19:58.820 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (3 chars): 'The'
+15:19:59.466 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (5 chars): ' user'
+15:19:59.497 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (5 chars): ' just'
+15:19:59.500 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (5 chars): ' said'
+15:19:59.501 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (2 chars): ' "'
+15:19:59.501 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (2 chars): 'hi'
+15:19:59.501 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (1 chars): '"'
+15:19:59.501 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (6 chars): ' again'
+15:19:59.517 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (1 chars): '.'
+15:19:59.519 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (8 chars): ' Looking'
+15:19:59.542 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (3 chars): ' at'
+15:19:59.545 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (4 chars): ' the'
+15:19:59.545 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (13 chars): ' conversation'
+15:19:59.545 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (8 chars): ' history'
+15:19:59.545 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (1 chars): ','
+15:19:59.546 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (5 chars): ' they'
+15:19:59.561 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (3 chars): "'ve"
+15:19:59.563 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (5 chars): ' been'
+15:19:59.563 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (8 chars): ' testing'
+15:19:59.563 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (8 chars): ' message'
+15:19:59.588 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (8 chars): ' replies'
+15:19:59.589 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (11 chars): ' repeatedly'
+15:19:59.589 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (1 chars): '.'
+15:19:59.611 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (5 chars): ' This'
+15:19:59.616 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (3 chars): ' is'
+15:19:59.616 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (5 chars): ' just'
+15:19:59.636 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (2 chars): ' a'
+15:19:59.638 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (7 chars): ' casual'
+15:19:59.638 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (9 chars): ' greeting'
+15:19:59.638 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (1 chars): '.'
+15:19:59.664 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (2 chars): ' I'
+15:19:59.672 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (7 chars): ' should'
+15:19:59.672 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (8 chars): ' respond'
+15:19:59.673 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (8 chars): ' briefly'
+15:19:59.674 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (4 chars): ' and'
+15:19:59.688 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (9 chars): ' friendly'
+15:19:59.689 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (1 chars): '.'
+15:19:59.689 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (3 chars): ' No'
+15:19:59.712 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (5 chars): ' need'
+15:19:59.717 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (4 chars): ' for'
+15:19:59.717 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (6 chars): ' tools'
+15:19:59.717 | DEBUG    | psi_agent.channel._core:post:129 - delta.reasoning kind='thinking' (1 chars): '.'
+15:19:59.718 | DEBUG    | psi_agent.channel._stream:switch:139 - type switch → flush ReasoningChunk (206 chars)
+15:19:59.718 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (1 chars): '嗨'
+15:19:59.738 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (1 chars): '！'
+15:19:59.741 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (1 chars): '\U0001f42c'
+15:19:59.741 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (1 chars): ' '
+15:19:59.741 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (2 chars): '我在'
+15:19:59.755 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (1 chars): '呢'
+15:19:59.757 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (1 chars): '，'
+15:19:59.757 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (3 chars): '有什么'
+15:19:59.757 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (2 chars): '需要'
+15:19:59.758 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (2 chars): '帮忙'
+15:19:59.797 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (2 chars): '的吗'
+15:19:59.801 | DEBUG    | psi_agent.channel._core:post:125 - delta.content (1 chars): '？'
+15:19:59.840 | DEBUG    | psi_agent.channel._stream:iter_sse_events:39 - SSE stream ended [DONE]
+15:19:59.840 | DEBUG    | psi_agent.channel._core:post:134 - SSE stream consumed successfully
+15:19:59.840 | DEBUG    | psi_agent.channel._stream:flush:167 - stream end flush → TextChunk (18 chars)
+15:20:02.542 | DEBUG    | psi_agent.channel.feishu.client:_produce:389 - stream.append (18 chars)
+15:20:04.274 | DEBUG    | psi_agent.channel.feishu.client:_handle_and_stream:443 - stream completed
+15:20:04.275 | DEBUG    | psi_agent.channel.feishu.client:_remove_reaction:190 - message_id=om_x100b681a64f67090de0c2e9b5128b6a reaction_id=nIGlZ5wBVAur2L7QUuyzdbdqGj5939uBsx4Ph9LUJvh3WsNm91kNCR5X2WoCifr_
+15:20:05.464 | DEBUG    | psi_agent.channel.feishu.client:_remove_reaction:194 - OK

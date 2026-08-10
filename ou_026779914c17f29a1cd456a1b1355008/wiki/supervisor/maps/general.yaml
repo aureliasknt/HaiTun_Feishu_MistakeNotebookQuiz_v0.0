@@ -1,0 +1,14 @@
+map_revision: 14
+schema_version: '2.0'
+domain_id: general
+first_seen: '2026-08-06T05:15:36.934170+00:00'
+last_seen: '2026-08-06T10:29:42.115732+00:00'
+nodes:
+- id: quiz-card-write-back
+  label: quiz_card_write_back
+  aliases: []
+  confidence: 0.5
+  source_count: 1
+  first_seen: '2026-08-06T05:15:36.934170+00:00'
+  last_seen: '2026-08-06T05:15:36.934170+00:00'
+edges: []

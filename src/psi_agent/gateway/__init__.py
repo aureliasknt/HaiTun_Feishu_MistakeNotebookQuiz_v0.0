@@ -116,6 +116,11 @@ class Gateway:
             raise ValueError("--browser and --webview are mutually exclusive")
 
         addr = self.listen or f"http://127.0.0.1:{_random_port()}"
+        # Workspace tools run inside the Gateway process. Publish the resolved
+        # address so a tool that creates the first TASK.md can wake the on-demand
+        # SchedulerManager immediately instead of waiting for another route or a
+        # process restart.
+        os.environ["PSI_GATEWAY_URL"] = addr.rstrip("/")
         logger.info(f"Starting Gateway service on {addr} (socket_path={self.socket_path})")
 
         # Path defaults: agent/workspace (Step 2) + AppData root announce (Step A).
@@ -197,6 +202,26 @@ class Gateway:
 
             for row in snapshot.get("summaries", []):
                 await sum_m.set(row["id"], row["summary"])
+
+            # Auto-create a default AI from PSI_AI_* env vars when no AI exists and
+            # Feishu routing needs one (刻意为之: avoids requiring a manual REST call before
+            # the first Feishu message arrives; harmless when an AI was already restored).
+            if not await aim.list_all() and os.environ.get("PSI_AI_PROVIDER"):
+                try:
+                    _default_ai = await aim.create(provider="", model="", api_key="", base_url="")
+                    if not self.feishu_ai_id or not aim.has(self.feishu_ai_id):
+                        self.feishu_ai_id = _default_ai.id
+                    logger.info(f"Auto-created default AI {_default_ai.id!r} from PSI_AI_* env vars")
+                except Exception as _e:
+                    logger.warning(f"Failed to auto-create default AI from env vars: {_e!r}")
+            elif self.feishu_ai_id and not aim.has(self.feishu_ai_id):
+                # feishu_ai_id was set but points to a dead/missing AI — recreate it
+                try:
+                    _default_ai = await aim.create(provider="", model="", api_key="", base_url="")
+                    self.feishu_ai_id = _default_ai.id
+                    logger.info(f"Recreated missing feishu AI as {_default_ai.id!r} from PSI_AI_* env vars")
+                except Exception as _e:
+                    logger.warning(f"Failed to recreate feishu AI: {_e!r}")
 
             attention = AttentionHub()
             schedm = SchedulerManager(_sm=sm, _ai_id=self.scheduler_ai_id or self.feishu_ai_id)

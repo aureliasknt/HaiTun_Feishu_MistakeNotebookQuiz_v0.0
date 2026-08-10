@@ -1,0 +1,15 @@
+{"role": "system", "content": "sys"}
+{"role": "user", "content": "hi", "kind": "chat"}
+{"role": "assistant", "content": "你好", "kind": "chat"}
+{"role": "assistant", "content": "有思考", "kind": "chat", "reasoning": "先分析"}
+{"role": "user", "content": "# Heartbeat Task", "kind": "schedule.silent"}
+{"role": "assistant", "content": "HEARTBEAT_OK", "kind": "schedule.silent"}
+{"role": "assistant", "content": "日报", "kind": "schedule.display"}
+{"role": "user", "content": "看图\n[RECV:/tmp/a.png]", "kind": "chat"}
+{"role": "assistant", "content": "好\n[SEND:/ws/out.md]", "kind": "chat"}
+{"role": "assistant", "content": "[SEND:/ws/only.html]", "kind": "chat"}
+{"role": "tool", "content": "ignored"}
+not json
+{"role": "assistant", "content": ["multimodal"]}
+{"role": "assistant"}
+{"role": "assistant", "content": "HEARTBEAT_OK"}

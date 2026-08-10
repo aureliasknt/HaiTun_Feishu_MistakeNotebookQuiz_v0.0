@@ -14,9 +14,12 @@ from datetime import UTC, datetime
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 import _runtime_paths as _paths
+import aiohttp
 import anyio
 import yaml
 from croniter import croniter
+
+from psi_agent.session.runtime_context import get_session_id
 
 
 def _schedules_dir() -> anyio.Path:
@@ -256,6 +259,26 @@ async def _atomic_write(path: anyio.Path, content: str) -> None:
     await tmp.replace(path)
 
 
+async def _ensure_gateway_scheduler() -> str:
+    """Wake Gateway's on-demand scheduler after the first TASK.md is created."""
+    gateway_url = (os.environ.get("PSI_GATEWAY_URL") or os.environ.get("GATEWAY_URL") or "").strip().rstrip("/")
+    session_id = get_session_id().strip()
+    if not gateway_url or not session_id:
+        return ""
+    timeout = aiohttp.ClientTimeout(total=10)
+    try:
+        async with (
+            aiohttp.ClientSession(timeout=timeout) as session,
+            session.post(f"{gateway_url}/schedulers/ensure", json={"session_id": session_id}) as response,
+        ):
+            payload = await response.text()
+            if response.status >= 400:
+                return f"scheduler wake failed (Gateway HTTP {response.status}: {payload.strip()})"
+    except Exception as exc:
+        return f"scheduler wake failed ({exc})"
+    return ""
+
+
 async def schedule_manage(
     action: str = "list",
     schedule_name: str = "",
@@ -416,7 +439,12 @@ async def schedule_manage(
             # absolute date it had to derive from something like "周一晚上", and
             # this is the one place a wrong derivation is still cheap to catch.
             extra += f", fires at {_describe_instant(fires_at)}"
-        return f"Schedule created: {schedule_name!r} ({kind}, cron: {cron_raw!r}, visibility: {vis!r}{extra})"
+        warning = await _ensure_gateway_scheduler()
+        suffix = f" [Warning: {warning}]" if warning else ""
+        return (
+            f"Schedule created: {schedule_name!r} "
+            f"({kind}, cron: {cron_raw!r}, visibility: {vis!r}{extra}){suffix}"
+        )
 
     if action == "patch":
         if err := _validate_schedule_name(schedule_name):

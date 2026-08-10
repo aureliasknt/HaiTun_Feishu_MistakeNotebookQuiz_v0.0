@@ -47,6 +47,7 @@ async def test_index_finds_known_tools_and_skips_private_files():
         "assignment_list",
         "assignment_transition",
         "assignment_send_card",
+        "mistake_notebook_quiz_send_next",
     } <= names
     # Private helper files (``_fetch_impl.py``) never expose a tool.
     assert "fetch_impl" not in names

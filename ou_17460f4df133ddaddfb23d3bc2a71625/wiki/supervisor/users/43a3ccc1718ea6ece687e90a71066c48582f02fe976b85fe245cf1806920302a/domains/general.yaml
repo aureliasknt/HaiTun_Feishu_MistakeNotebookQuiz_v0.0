@@ -1,0 +1,64 @@
+user: 43a3ccc1718ea6ece687e90a71066c48582f02fe976b85fe245cf1806920302a
+domain: general
+question_count: 2
+visited_nodes:
+- grading_task
+- question_q1
+- correct_answer_B
+- user_choice_A
+- grading_task
+- question_q1
+- question_q2
+- theme_external_outcome
+- theme_values
+- correct_answer_B
+- user_choice_A
+nodes:
+  grading_task:
+    count: 2
+    heat: 0.4
+  question_q1:
+    count: 2
+    heat: 0.4
+  correct_answer_B:
+    count: 2
+    heat: 0.4
+  user_choice_A:
+    count: 2
+    heat: 0.4
+  question_q2:
+    count: 1
+    heat: 0.2
+  theme_external_outcome:
+    count: 1
+    heat: 0.2
+  theme_values:
+    count: 1
+    heat: 0.2
+repeated_surface_questions: 2
+cognitive_history:
+- '0.0'
+- '0.0'
+intent_history:
+- execute
+- execute
+history:
+- timestamp: '2026-08-04T17:20:11.335480+00:00'
+  branch_id: general/Feishu quiz card grading output
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+- timestamp: '2026-08-04T17:27:23.873769+00:00'
+  branch_id: general/Feishu quiz card grading output
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: execute
+  transition: steady
+  surface: true
+active_branches:
+  general/Feishu quiz card grading output:
+    active_depth: concise
+    last_seen: '2026-08-04T17:27:23.873769+00:00'
+last_seen: '2026-08-04T17:27:23.873769+00:00'

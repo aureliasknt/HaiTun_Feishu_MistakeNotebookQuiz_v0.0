@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "advice_id": "",
+  "user_id_hash": "",
+  "profile_id": "",
+  "turn_index": 0,
+  "classification": {
+    "is_learning": true,
+    "domain": "machine-learning",
+    "topic": "overfitting",
+    "confidence": 0.9
+  },
+  "user_state": {
+    "depth": 0.0,
+    "goal": 0.0,
+    "familiarity": 0.0,
+    "evidence": []
+  },
+  "breakout": {
+    "needed": true,
+    "type": "broaden",
+    "score": 0.8,
+    "reason": "当前问题需要放回机器学习全局框架。",
+    "directions": [
+      "偏差与方差",
+      "模型评估"
+    ],
+    "evidence": [
+      "连续聚焦局部定义"
+    ]
+  },
+  "latent_need": {
+    "detected": true,
+    "need": "建立领域框架",
+    "missing_dimensions": [
+      "方法之间的关系"
+    ],
+    "confidence": 0.7
+  },
+  "profile_shift": {
+    "detected": true,
+    "from": "入门",
+    "to": "体系化理解",
+    "evidence": [
+      "开始追问机制"
+    ],
+    "confidence": 0.8
+  },
+  "response_strategy": {
+    "answer_depth": "deep",
+    "answer_scope": "framework",
+    "goal_mode": "explain",
+    "terminology": "explain_key_terms",
+    "breakout_integration": "integrated_section",
+    "instructions": []
+  },
+  "map_updates": {
+    "proposed_map": null,
+    "visited_nodes": [],
+    "branch_additions": []
+  },
+  "diagnostics": {
+    "source": "repaired",
+    "evidence": [],
+    "created_at": "2026-08-07T10:18:04.079081+00:00"
+  }
+}

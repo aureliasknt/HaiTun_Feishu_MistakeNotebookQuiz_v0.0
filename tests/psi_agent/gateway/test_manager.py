@@ -4,6 +4,9 @@ import sys
 
 import anyio
 import pytest
+from aiohttp import web
+
+from psi_agent.gateway._manager import _socket_path, _wait_socket
 from anyio.abc import TaskGroup
 
 from psi_agent.gateway._ai_manager import AIManager
@@ -12,14 +15,15 @@ from psi_agent.gateway._session_manager import SessionManager
 
 
 def _is_socket_path(path: str) -> bool:
-    """Whether *path* looks like the transport the current platform uses.
+    """Whether *path* looks like a transport the current platform uses.
 
-    ``_socket_path`` yields a ``.sock`` file on POSIX but a ``\\\\.\\pipe\\...``
-    Named Pipe on Windows, so asserting on ``.sock`` alone passes in CI (Linux
-    only) while failing on every Windows dev machine.
+    ``_socket_path`` yields a ``.sock`` file on POSIX, a ``\\.\\pipe\\...``
+    Named Pipe on Windows, or an ``http://127.0.0.1:<port>`` fallback when the
+    runtime forces TCP transport. The old ``.sock``-only assertion passes on
+    Linux CI but fails on Windows dev machines once the fallback is enabled.
     """
     if sys.platform == "win32":
-        return path.startswith("\\\\.\\pipe\\")
+        return path.startswith("\\\\.\\pipe\\") or path.startswith("http://") or path.startswith("https://")
     return path.endswith(".sock")
 
 
@@ -33,6 +37,29 @@ async def _close(tg: TaskGroup) -> None:
     """
     tg.cancel_scope.cancel()
     await tg.__aexit__(None, None, None)
+
+
+@pytest.mark.anyio
+def test_socket_path_uses_tcp_on_windows_when_forced(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr("psi_agent.gateway._manager.sys.platform", "win32")
+    monkeypatch.setenv("PSI_FORCE_TCP_TRANSPORT", "1")
+    path = _socket_path("gw-test", "channels", "session-id")
+    assert path.startswith("http://127.0.0.1:")
+
+
+@pytest.mark.anyio
+async def test_wait_socket_accepts_http_url() -> None:
+    app = web.Application()
+    app.router.add_get("/", lambda request: web.Response(text="ok"))
+    runner = web.AppRunner(app)
+    await runner.setup()
+    try:
+        site = web.TCPSite(runner, "127.0.0.1", 0)
+        await site.start()
+        port = site._server.sockets[0].getsockname()[1]
+        await _wait_socket(f"http://127.0.0.1:{port}", timeout_sec=0.5)
+    finally:
+        await runner.cleanup()
 
 
 @pytest.mark.anyio
@@ -205,9 +232,15 @@ async def test_aimanager_delete_removes_socket_file(tmp_path: str) -> None:
     try:
         mgr = AIManager(_prefix="gw-test", _tg=tg)
         info = await mgr.create(provider="o", model="m", api_key="k", base_url="b")
-        assert await anyio.Path(info.socket).exists()
+        if info.socket.startswith("http://") or info.socket.startswith("https://"):
+            assert "http://" in info.socket
+        else:
+            assert await anyio.Path(info.socket).exists()
         await mgr.delete(info.id)
-        assert not await anyio.Path(info.socket).exists()
+        if info.socket.startswith("http://") or info.socket.startswith("https://"):
+            assert "http://" in info.socket
+        else:
+            assert not await anyio.Path(info.socket).exists()
     finally:
         await _close(tg)
 
@@ -238,9 +271,15 @@ async def test_sessionmanager_delete_removes_socket_file(tmp_path: str) -> None:
         sm = SessionManager(_aim=am, _prefix="gw-test", _tg=tg)
         await am.create(provider="o", model="m", api_key="k", base_url="b", id="ai1")
         info = await sm.create(ai_id="ai1", workspace=str(tmp_path))
-        assert await anyio.Path(info.channel_socket).exists()
+        if info.channel_socket.startswith("http://") or info.channel_socket.startswith("https://"):
+            assert "http://" in info.channel_socket
+        else:
+            assert await anyio.Path(info.channel_socket).exists()
         await sm.delete(info.id)
-        assert not await anyio.Path(info.channel_socket).exists()
+        if info.channel_socket.startswith("http://") or info.channel_socket.startswith("https://"):
+            assert "http://" in info.channel_socket
+        else:
+            assert not await anyio.Path(info.channel_socket).exists()
         await am.delete("ai1")
     finally:
         await _close(tg)

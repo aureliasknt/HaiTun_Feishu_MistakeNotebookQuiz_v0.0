@@ -1,0 +1,14 @@
+map_revision: 7
+schema_version: '2.0'
+domain_id: general
+first_seen: '2026-08-05T01:58:11.631593+00:00'
+last_seen: '2026-08-08T12:07:11.041087+00:00'
+nodes:
+- id: quiz-card-click-grading-and-record-write
+  label: quiz card click grading and record write
+  aliases: []
+  confidence: 0.5
+  source_count: 1
+  first_seen: '2026-08-05T01:58:11.631593+00:00'
+  last_seen: '2026-08-05T01:58:11.631593+00:00'
+edges: []

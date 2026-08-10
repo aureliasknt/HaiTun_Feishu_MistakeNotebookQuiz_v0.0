@@ -1,0 +1,366 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e9]:
+        - link [ref=e13] [cursor=pointer]:
+          - /url: https://www.ub.ac.id/en/
+          - img "Universitas Brawijaya" [ref=e14]
+        - button "Menu" [ref=e17] [cursor=pointer]
+    - main [ref=e22]:
+      - generic [ref=e23]:
+        - generic [ref=e31]:
+          - iframe [ref=e36]:
+            - generic "YouTube 视频播放器" [ref=f3e3]
+          - generic [ref=e37]:
+            - heading "Impactful Campus" [level=3] [ref=e40]
+            - paragraph [ref=e43]: Impactful Campus at Universitas Brawijaya represents a tangible effort by higher education to deliver direct contributions to society through the integration of education, research, and community service. Through programs such as community service (KKN), applied research, and technological innovation, UB encourages students and faculty to actively engage in addressing various social, economic, and environmental challenges. This approach not only produces practical and sustainable solutions, but also shapes graduates who are adaptive, socially aware, and ready to become agents of change within society.
+            - generic [ref=e44]:
+              - link "Berita tentang Kampus Berdampak" [ref=e48] [cursor=pointer]:
+                - /url: https://prasetya.ub.ac.id/category/kampus-berdampak/
+              - link "Tentang Kampus Berdampak" [ref=e54] [cursor=pointer]:
+                - /url: https://impact.ub.ac.id/
+        - generic [ref=e60]:
+          - heading "UB GIRAFFE" [level=3] [ref=e63]
+          - paragraph [ref=e66]:
+            - text: GIRAFFE is a core value framework of Universitas Brawijaya that serves as the foundation for realizing effective, efficient, and sustainable autonomous university governance. This concept integrates seven strategic elements—
+            - strong [ref=e67]: Governance, Innovation, Reputation, Alumni, Faculty, Fund, and Efficiency
+            - text: —to cultivate an autonomous way of thinking among all stakeholders within UB. As a strategic value pillar, GIRAFFE acts as a reference in translating the university’s vision and mission into strategic objectives, work programs, and various initiatives that support the enhancement of institutional performance and competitiveness.
+          - link "Tentang UB GIRAFFE" [ref=e71] [cursor=pointer]:
+            - /url: https://www.ub.ac.id/ub-giraffe/
+        - generic [ref=e78]:
+          - heading "UBNews" [level=3] [ref=e82]
+          - generic [ref=e86]:
+            - link "Post image UB Berikan Bantuan Laptop Dan Beasiswa Untuk Calon Mahasiswa Di Bandung  Thursday, July 23, 2026" [ref=e88] [cursor=pointer]:
+              - /url: https://prasetya.ub.ac.id/en/ub-berikan-bantuan-laptop-dan-beasiswa-untuk-calon-mahasiswa-di-bandung/
+              - img "Post image" [ref=e90]
+              - heading "UB Berikan Bantuan Laptop Dan Beasiswa Untuk Calon Mahasiswa Di Bandung" [level=5] [ref=e91]
+              - generic [ref=e92]:
+                - generic [ref=e93]: 
+                - text: Thursday, July 23, 2026
+            - link "Post image “Corpus Fractum” Presents a Critical Reflection on the Body, Violence, and Power Relations  Tuesday, July 21, 2026" [ref=e95] [cursor=pointer]:
+              - /url: https://prasetya.ub.ac.id/en/corpus-fractum-hadirkan-refleksi-kritis-tentang-tubuh-kekerasan-dan-relasi-kuasa/
+              - img "Post image" [ref=e97]
+              - heading "“Corpus Fractum” Presents a Critical Reflection on the Body, Violence, and Power Relations" [level=5] [ref=e98]
+              - generic [ref=e99]:
+                - generic [ref=e100]: 
+                - text: Tuesday, July 21, 2026
+            - link "Post image MMD Group 62 Holds Outdoor Literacy Program at Jiwut Village  Monday, July 20, 2026" [ref=e102] [cursor=pointer]:
+              - /url: https://prasetya.ub.ac.id/en/mmd-kelompok-62-gelar-literasi-alam-terbuka-di-desa-jiwut/
+              - img "Post image" [ref=e104]
+              - heading "MMD Group 62 Holds Outdoor Literacy Program at Jiwut Village" [level=5] [ref=e105]
+              - generic [ref=e106]:
+                - generic [ref=e107]: 
+                - text: Monday, July 20, 2026
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - heading [level=3] [ref=e113]:
+              - link "Impactful Campus" [ref=e114] [cursor=pointer]:
+                - /url: https://prasetya.ub.ac.id/en/category/kampus-merdeka/
+            - generic [ref=e117]:
+              - generic [ref=e118]:
+                - text: 9 July 2026
+                - link "FCS UB Sends Off 131 Students Participating in the 2026 Village Community Service Program" [ref=e119] [cursor=pointer]:
+                  - /url: https://prasetya.ub.ac.id/en/fib-lepas-131-mahasiswa-pkm-desa-2026-dorong-rebranding-desa-wisata-ngajum/
+              - generic [ref=e120]:
+                - text: 8 June 2026
+                - link "DRPM Equips Students Build Village with Ethics to Appropriate Technology" [ref=e121] [cursor=pointer]:
+                  - /url: https://prasetya.ub.ac.id/en/drpm-bekali-mahasiswa-membangun-desa-mulai-dari-etika-hingga-teknologi-tepat-guna/
+              - generic [ref=e122]:
+                - text: 7 April 2026
+                - link "UB Lecturer and Students Turn Goat Manure into Valuable Organic Fertilizer" [ref=e123] [cursor=pointer]:
+                  - /url: https://prasetya.ub.ac.id/en/dosen-dan-mahasiswa-ub-sulap-limbah-kambing-jadi-pupuk-organik-bernilai-jual/
+              - generic [ref=e124]:
+                - text: 9 September 2025
+                - link "Girimulyo and Ngrayudan Village Communities in Ngawi Regency were Provided with Compost and Biopesticide Skills" [ref=e125] [cursor=pointer]:
+                  - /url: https://prasetya.ub.ac.id/en/masyarakat-desa-girimulyo-dan-ngrayudan-ngawi-dibekali-keterampilan-kompos-dan-biopestisida/
+              - generic [ref=e126]:
+                - text: 5 September 2025
+                - link "MMD Trains Klampok Village Official to Master Digital Accounting" [ref=e127] [cursor=pointer]:
+                  - /url: https://prasetya.ub.ac.id/en/latih-perangkat-desa-klampok-kuasai-akuntansi-digital-lewat-program-pakde-klop/
+            - link "Berita Kampus Berdampak Lainnya" [ref=e131] [cursor=pointer]:
+              - /url: https://prasetya.ub.ac.id/en/tag/mmd/
+          - generic [ref=e134]:
+            - heading [level=3] [ref=e137]:
+              - link "UB Events" [ref=e138] [cursor=pointer]:
+                - /url: https://kegiatan.ub.ac.id/
+            - generic [ref=e141]:
+              - generic [ref=e143]:
+                - generic [ref=e145]:
+                  - generic [ref=e146]: Jan 2026
+                  - generic [ref=e147]: "21"
+                - link "Expo Pendidikan Universitas Brawijaya 2026" [ref=e149] [cursor=pointer]:
+                  - /url: https://kegiatan.ub.ac.id/single/162-expo-pendidikan-universitas-brawijaya-2026
+              - generic [ref=e151]:
+                - generic [ref=e153]:
+                  - generic [ref=e154]: Sep 2025
+                  - generic [ref=e155]: "18"
+                - link "Brawijaya Economics And Finance" [ref=e157] [cursor=pointer]:
+                  - /url: https://kegiatan.ub.ac.id/single/157-brawijaya-economics-and-finance
+              - generic [ref=e159]:
+                - generic [ref=e161]:
+                  - generic [ref=e162]: Mar 2025
+                  - generic [ref=e163]: "12"
+                - link "Short-term International Academic Program (SIAP) - 2025 Mandarin Summer Camp at Da-Yeh University, Taiwan (July 21 - Aug 1, 2025)" [ref=e165] [cursor=pointer]:
+                  - /url: https://kegiatan.ub.ac.id/single/156-short-term-international-academic-program-siap-2025-mandarin-summer-camp-at-da-yeh-university-taiwan-july-21-aug-1-2025
+              - generic [ref=e167]:
+                - generic [ref=e169]:
+                  - generic [ref=e170]: Feb 2025
+                  - generic [ref=e171]: "26"
+                - 'link "WORKSHOP PENULISAN ARTIKEL ILMIAH UNTUK JURNAL INTERNASIONAL BEREPUTASI: PENGGUNAAN ARTIFICIAL INTELLIGENCE" [ref=e173] [cursor=pointer]':
+                  - /url: https://kegiatan.ub.ac.id/single/127-workshop-penulisan-artikel-ilmiah-untuk-jurnal-internasional-bereputasi-penggunaan-artificial-intelligence
+              - generic [ref=e175]:
+                - generic [ref=e177]:
+                  - generic [ref=e178]: Feb 2025
+                  - generic [ref=e179]: "14"
+                - link "Research Grant Bank Indonesia (RGBI) tahun 2025." [ref=e181] [cursor=pointer]:
+                  - /url: https://kegiatan.ub.ac.id/single/126-research-grant-bank-indonesia-rgbi-tahun-2025
+          - generic [ref=e182]:
+            - heading [level=3] [ref=e185]:
+              - link "UB Announcements" [ref=e186] [cursor=pointer]:
+                - /url: https://ub.ac.id/category/pengumuman
+            - generic [ref=e189]:
+              - generic [ref=e190]:
+                - text: 17 June 2026
+                - link "Pelaksanaan Wisuda Periode XXI dan Periode XXII TA. 2025/2026" [ref=e191] [cursor=pointer]:
+                  - /url: https://www.ub.ac.id/en/pelaksanaan-wisuda-periode-xxi-dan-periode-xxii-ta-2025-2026/
+              - generic [ref=e192]:
+                - text: 9 June 2026
+                - link "Circular Regarding The Implementation of Introduction to Campus Life for New Students of Diploma and Undergraduate Programs" [ref=e193] [cursor=pointer]:
+                  - /url: https://www.ub.ac.id/en/edaran-tentang-pelaksanaan-pengenalan-kehidupan-kampus-mahasiswa-baru/
+              - generic [ref=e194]:
+                - text: 21 May 2026
+                - link "Circular Letter Regarding Car Free Day" [ref=e195] [cursor=pointer]:
+                  - /url: https://www.ub.ac.id/en/surat-edaran-tentang-car-free-day/
+              - generic [ref=e196]:
+                - text: 12 May 2026
+                - link "Pelaksanaan Wisuda Periode XIX dan Periode XX TA. 2025/2026" [ref=e197] [cursor=pointer]:
+                  - /url: https://www.ub.ac.id/en/pelaksanaan-wisuda-periode-xix-dan-periode-xx-ta-2025-2026/
+              - generic [ref=e198]:
+                - text: 17 April 2026
+                - link "Circular Letter in Regards to Gate Opening and Closing Regulations During The UTBK Activities" [ref=e199] [cursor=pointer]:
+                  - /url: https://www.ub.ac.id/en/surat-edaran-tentang-ketentuan-buka-dan-tutup-pintu-gerbang-selama-kegiatan-utbk/
+            - link "Pengumuman Lainnya" [ref=e203] [cursor=pointer]:
+              - /url: https://www.ub.ac.id/category/pengumuman/
+        - generic [ref=e209]:
+          - heading "UB in Numbers" [level=3] [ref=e212]
+          - paragraph [ref=e215]: data per March 2026
+        - generic [ref=e220]:
+          - generic [ref=e223]:
+            - figure:
+              - link "award-symbol":
+                - /url: https://www.webometrics.info/en/Asia/indonesia
+                - img "award-symbol"
+            - generic [ref=e224]:
+              - heading [level=3] [ref=e225]:
+                - link "#6" [ref=e226] [cursor=pointer]:
+                  - /url: https://www.webometrics.info/en/Asia/indonesia
+              - paragraph [ref=e227]: Indonesia Webometric
+          - generic [ref=e230]:
+            - figure:
+              - link "award-symbol":
+                - /url: https://www.timeshighereducation.com/world-university-rankings/2023/world-ranking#!/length/25/locations/IDN/sort_by/rank/sort_order/asc/cols/stats
+                - img "award-symbol"
+            - generic [ref=e231]:
+              - heading [level=3] [ref=e232]:
+                - link "#1501+" [ref=e233] [cursor=pointer]:
+                  - /url: https://www.timeshighereducation.com/world-university-rankings/2023/world-ranking#!/length/25/locations/IDN/sort_by/rank/sort_order/asc/cols/stats
+              - paragraph [ref=e234]: THE's World University Rankings
+          - generic [ref=e237]:
+            - figure:
+              - link "award-symbol":
+                - /url: https://www.topuniversities.com/universities/universitas-brawijaya
+                - img "award-symbol"
+            - generic [ref=e238]:
+              - heading [level=3] [ref=e239]:
+                - link "#680" [ref=e240] [cursor=pointer]:
+                  - /url: https://www.topuniversities.com/universities/universitas-brawijaya
+              - paragraph [ref=e241]: QS World University Rankings
+          - generic [ref=e244]:
+            - figure:
+              - link "award-symbol":
+                - /url: https://www.4icu.org/id/
+                - img "award-symbol"
+            - generic [ref=e245]:
+              - heading [level=3] [ref=e246]:
+                - link "#5" [ref=e247] [cursor=pointer]:
+                  - /url: https://www.4icu.org/id/
+              - paragraph [ref=e248]: 4ICU Indonesian University
+          - generic [ref=e251]:
+            - figure:
+              - link "award-symbol":
+                - /url: https://greenmetric.ui.ac.id/rankings/overall-rankings-2023
+                - img "award-symbol"
+            - generic [ref=e252]:
+              - heading [level=3] [ref=e253]:
+                - link "#140" [ref=e254] [cursor=pointer]:
+                  - /url: https://greenmetric.ui.ac.id/rankings/overall-rankings-2023
+              - paragraph [ref=e255]: UI GreenMetric World University
+        - generic [ref=e263]:
+          - generic [ref=e266]:
+            - heading "Akademik" [level=5] [ref=e267]
+            - navigation "Akademik" [ref=e268]:
+              - list [ref=e269]:
+                - listitem [ref=e270]:
+                  - link "Directorate of Administration and Academic Services" [ref=e271] [cursor=pointer]:
+                    - /url: https://akademik.ub.ac.id/
+                - listitem [ref=e272]:
+                  - link "Directorate for Innovation and Educational Development" [ref=e273] [cursor=pointer]:
+                    - /url: https://dipp.ub.ac.id/
+                - listitem [ref=e274]:
+                  - link "Unit for Student Character Development" [ref=e275] [cursor=pointer]:
+                    - /url: https://uptpkm.ub.ac.id/
+                - listitem [ref=e276]:
+                  - link "Library" [ref=e277] [cursor=pointer]:
+                    - /url: https://lib.ub.ac.id/
+                - listitem [ref=e278]:
+                  - link "UPT Global Partnership and Reputation" [ref=e279] [cursor=pointer]:
+                    - /url: https://reputasi.ub.ac.id/
+                - listitem [ref=e280]:
+                  - link "UPT International Academic Affairs" [ref=e281] [cursor=pointer]:
+                    - /url: https://io.ub.ac.id/
+          - generic [ref=e284]:
+            - heading "Keuangan dan Sumberdaya" [level=5] [ref=e285]
+            - navigation "Keuangan dan Sumberdaya" [ref=e286]:
+              - list [ref=e287]:
+                - listitem [ref=e288]:
+                  - link "Directorate of Budgeting and Finance" [ref=e289] [cursor=pointer]:
+                    - /url: https://dap.ub.ac.id/
+                - listitem [ref=e290]:
+                  - link "Directorate of Accounting, Reporting, and Taxation" [ref=e291] [cursor=pointer]:
+                    - /url: https://dapp.ub.ac.id/
+                - listitem [ref=e292]:
+                  - link "Directorate of Human Resources" [ref=e293] [cursor=pointer]:
+                    - /url: https://kepegawaian.ub.ac.id/
+                - listitem [ref=e294]:
+                  - link "Directorate of Asset" [ref=e295] [cursor=pointer]:
+                    - /url: https://aset.ub.ac.id/
+                - listitem [ref=e296]:
+                  - link "Procurement Service Unit" [ref=e297] [cursor=pointer]:
+                    - /url: https://ulp.ub.ac.id/blog/
+          - generic [ref=e300]:
+            - heading "Kemahasiswaan, Alumni, dan Kewirausahaan Mahasiswa" [level=5] [ref=e301]
+            - navigation "Kemahasiswaan, Alumni, dan Kewirausahaan Mahasiswa" [ref=e302]:
+              - list [ref=e303]:
+                - listitem [ref=e304]:
+                  - link "Directorate of Student Affairs" [ref=e305] [cursor=pointer]:
+                    - /url: https://kemahasiswaan.ub.ac.id/
+                - listitem [ref=e306]:
+                  - link "Directorate of Career and Alumni Development" [ref=e307] [cursor=pointer]:
+                    - /url: https://dpka.ub.ac.id/
+          - generic [ref=e310]:
+            - heading "Perencanaan, Kerjasama, dan Internasionalisasi" [level=5] [ref=e311]
+            - navigation "Perencanaan, Kerjasama, dan Internasionalisasi" [ref=e312]:
+              - list [ref=e313]:
+                - listitem [ref=e314]:
+                  - link "Directorate of Planning and Program Control" [ref=e315] [cursor=pointer]:
+                    - /url: https://perencanaan.ub.ac.id/
+                - listitem [ref=e316]:
+                  - link "Directorate of Cooperation" [ref=e317] [cursor=pointer]:
+                    - /url: https://kerjasama.ub.ac.id/
+                - listitem [ref=e318]:
+                  - link "Directorate of Information Technology" [ref=e319] [cursor=pointer]:
+                    - /url: https://bits.ub.ac.id/
+          - generic [ref=e322]:
+            - heading "Riset dan Inovasi" [level=5] [ref=e323]
+            - navigation "Riset dan Inovasi" [ref=e324]:
+              - list [ref=e325]:
+                - listitem [ref=e326]:
+                  - link "Directorate of Research and Community Services" [ref=e327] [cursor=pointer]:
+                    - /url: https://lppm.ub.ac.id/en/
+                - listitem [ref=e328]:
+                  - link "Directorate of Innovation and Science and Technology Park" [ref=e329] [cursor=pointer]:
+                    - /url: https://dikst.ub.ac.id/
+                - listitem [ref=e330]:
+                  - link "Integrated Research Laboratory" [ref=e331] [cursor=pointer]:
+                    - /url: https://lrt.ub.ac.id/
+                - listitem [ref=e332]:
+                  - link "Integrated Services Laboratory" [ref=e333] [cursor=pointer]:
+                    - /url: "#"
+                - listitem [ref=e334]:
+                  - link "Forest Area Management Unit" [ref=e335] [cursor=pointer]:
+                    - /url: https://ubforest.ub.ac.id/
+                - listitem [ref=e336]:
+                  - link "Center for Scientific Publication and Journal Sustainability" [ref=e337] [cursor=pointer]:
+                    - /url: https://ppikj.ub.ac.id/
+          - generic [ref=e340]:
+            - heading "Sekretaris Universitas" [level=5] [ref=e341]
+            - navigation "Sekretaris Universitas" [ref=e342]:
+              - list [ref=e343]:
+                - listitem [ref=e344]:
+                  - link "Legal Division" [ref=e345] [cursor=pointer]:
+                    - /url: https://divisihukum.ub.ac.id/
+                - listitem [ref=e346]:
+                  - link "Division of Administration and General Affairs" [ref=e347] [cursor=pointer]:
+                    - /url: https://unitarsip.ub.ac.id/
+                - listitem [ref=e348]:
+                  - link "Division of Informations and Public Relations" [ref=e349] [cursor=pointer]:
+                    - /url: https://didk.ub.ac.id/
+                - listitem [ref=e350]:
+                  - link "Division of Executive Secretariat and Protocol Affairs" [ref=e351] [cursor=pointer]:
+                    - /url: https://protokol.ub.ac.id/
+                - listitem [ref=e352]:
+                  - link "Division of Health, Safety, and Environment" [ref=e353] [cursor=pointer]:
+                    - /url: https://k3l.ub.ac.id/
+          - generic [ref=e356]:
+            - heading "Satuan Lainnya" [level=5] [ref=e357]
+            - navigation "Satuan Lainnya" [ref=e358]:
+              - list [ref=e359]:
+                - listitem [ref=e360]:
+                  - link "Institute for Quality Assurance" [ref=e361] [cursor=pointer]:
+                    - /url: https://lpm.ub.ac.id/
+                - listitem [ref=e362]:
+                  - link "Performance Accountability Unit" [ref=e363] [cursor=pointer]:
+                    - /url: https://sakip.ub.ac.id/
+                - listitem [ref=e364]:
+                  - link "Internal Monitoring Unit" [ref=e365] [cursor=pointer]:
+                    - /url: https://spi.ub.ac.id/
+                - listitem [ref=e366]:
+                  - link "Business Management Unit" [ref=e367] [cursor=pointer]:
+                    - /url: https://bpu.ub.ac.id/
+                - listitem [ref=e368]:
+                  - link "Bureaucratic Reformation Unit" [ref=e369] [cursor=pointer]:
+                    - /url: https://rb.ub.ac.id/
+    - contentinfo [ref=e370]:
+      - generic [ref=e375]:
+        - link "Facebook" [ref=e376] [cursor=pointer]:
+          - /url: https://www.facebook.com/Universitas.Brawijaya.Official/
+        - link "X (Twitter)" [ref=e380] [cursor=pointer]:
+          - /url: https://x.com/UB_Official
+        - link "Instagram" [ref=e384] [cursor=pointer]:
+          - /url: https://www.instagram.com/univ.brawijaya
+        - link "YouTube" [ref=e389] [cursor=pointer]:
+          - /url: https://www.youtube.com/channel/UCnc-7fM48ye43KLZH7n9ZXg
+        - link "TikTok" [ref=e393] [cursor=pointer]:
+          - /url: https://www.tiktok.com/@univbrawijaya
+        - link "LinkedIn" [ref=e397] [cursor=pointer]:
+          - /url: https://linkedin.com/school/universitas-brawijaya
+      - generic [ref=e402]:
+        - navigation "Footnav" [ref=e404]:
+          - list [ref=e405]:
+            - listitem [ref=e406]:
+              - link "Terms of Use" [ref=e407] [cursor=pointer]:
+                - /url: https://ub.ac.id/term-of-use/
+            - listitem [ref=e408]:
+              - link "FAQ" [ref=e409] [cursor=pointer]:
+                - /url: https://ult.ub.ac.id/
+            - listitem [ref=e410]:
+              - link "Copyrights" [ref=e411] [cursor=pointer]:
+                - /url: https://ub.ac.id/copy-rights/
+            - listitem [ref=e412]:
+              - link "Sitemap" [ref=e413] [cursor=pointer]:
+                - /url: https://www.ub.ac.id/en/sitemap/
+            - listitem [ref=e414]:
+              - link "RSS" [ref=e415] [cursor=pointer]:
+                - /url: https://prasetya.ub.ac.id/rss.xml?lang=en
+            - listitem [ref=e416]:
+              - link "Contact" [ref=e417] [cursor=pointer]:
+                - /url: https://www.ub.ac.id/en/contact/
+            - listitem [ref=e418]:
+              - link "Gapura UB" [ref=e419] [cursor=pointer]:
+                - /url: https://gapura.ub.ac.id/
+        - paragraph [ref=e422]: Copyright © 2026 by Universitas Brawijaya
+  - link "" [ref=e423] [cursor=pointer]:
+    - /url: https://ub-care.ub.ac.id/
+  - generic [ref=e425]: tablet

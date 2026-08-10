@@ -1,0 +1,8 @@
+[Lark] [2026-08-03 18:19:14,874] [INFO] FeishuChannel: bot identity resolved — open_id=ou_1a319eecf679bf61940cd384d6cdf19b name=佳芬的海豚
+[Lark] [2026-08-03 18:19:16,810] [INFO] connected to wss://msg-frontier.feishu.cn/ws/v2?fpid=493&aid=552564&device_id=7669747921101081572&access_key=73bc2328f523e59cd682c55faf8ce18a&service_id=33554678&ticket=f1bace00-f641-44f9-9643-e1ac7ed2d0c9 [conn_id=7669747921101081572]
+[Lark] [2026-08-03 18:24:05,346] [WARNING] markdown-stream: producer raised: [Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]
+[Lark] [2026-08-03 18:32:22,706] [WARNING] markdown-stream: producer raised: [Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]
+[Lark] [2026-08-03 18:34:58,089] [WARNING] markdown-stream: producer raised: [Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]
+[Lark] [2026-08-03 18:48:20,864] [WARNING] markdown-stream: producer raised: [Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]
+[Lark] [2026-08-03 19:14:04,656] [WARNING] markdown-stream: producer raised: [Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]
+[Lark] [2026-08-03 19:42:20,566] [WARNING] markdown-stream: producer raised: [Session Error: Cannot connect to host 127.0.0.1:62665 ssl:default [远程计算机拒绝网络连接。]]

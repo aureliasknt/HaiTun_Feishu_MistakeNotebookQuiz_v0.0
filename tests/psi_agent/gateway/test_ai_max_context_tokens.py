@@ -35,6 +35,26 @@ async def test_defaults_to_sentinel_preserving_ai_resolution() -> None:
 
 
 @pytest.mark.anyio
+async def test_empty_values_fall_back_to_environment(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("PSI_AI_PROVIDER", "deepseek")
+    monkeypatch.setenv("PSI_AI_MODEL", "deepseek-v4-flash")
+    monkeypatch.setenv("PSI_AI_API_KEY", "sk-env-test")
+    monkeypatch.setenv("PSI_AI_BASE_URL", "https://api.deepseek.com/v1")
+
+    tg = anyio.create_task_group()
+    await tg.__aenter__()
+    try:
+        mgr = AIManager(_prefix="gw-env-fallback", _tg=tg)
+        info = await mgr.create(provider="", model="", api_key="", base_url="")
+        assert info.provider == "deepseek"
+        assert info.model == "deepseek-v4-flash"
+        assert info.api_key == "sk-env-test"
+        assert info.base_url == "https://api.deepseek.com/v1"
+    finally:
+        await _close(tg)
+
+
+@pytest.mark.anyio
 async def test_explicit_value_is_recorded() -> None:
     tg = anyio.create_task_group()
     await tg.__aenter__()

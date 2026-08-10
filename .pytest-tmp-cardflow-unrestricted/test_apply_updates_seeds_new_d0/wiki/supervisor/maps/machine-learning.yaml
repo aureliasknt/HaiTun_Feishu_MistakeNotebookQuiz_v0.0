@@ -1,0 +1,14 @@
+map_revision: 2
+schema_version: '2.0'
+domain_id: machine-learning
+first_seen: '2026-08-07T10:18:03.904010+00:00'
+last_seen: '2026-08-07T10:18:03.904035+00:00'
+nodes:
+- id: model-evaluation
+  label: model-evaluation
+  aliases: []
+  confidence: 0.5
+  source_count: 1
+  first_seen: '2026-08-07T10:18:03.904010+00:00'
+  last_seen: '2026-08-07T10:18:03.904010+00:00'
+edges: []

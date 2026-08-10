@@ -122,6 +122,30 @@ OPENAPI_SPEC = {
                 },
             },
         },
+        "/schedulers/ensure": {
+            "post": {
+                "summary": "Ensure the current Session workspace has a scheduler",
+                "operationId": "ensureScheduler",
+                "requestBody": {
+                    "required": True,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["session_id"],
+                                "properties": {"session_id": {"type": "string"}},
+                            }
+                        }
+                    },
+                },
+                "responses": {
+                    "200": {"description": "Scheduler is running"},
+                    "400": {"$ref": "#/components/responses/Error"},
+                    "404": {"$ref": "#/components/responses/Error"},
+                    "503": {"$ref": "#/components/responses/Error"},
+                },
+            }
+        },
         "/sessions/{session_id}/chat": {
             "post": {
                 "summary": "Chat with a Session (SSE stream)",

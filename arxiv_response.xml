@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/Pe8ZuyiukX+AN5+y+/zCHdwatm4</id>
+  <title>arXiv Query: search_query=all:BIPV&amp;id_list=&amp;start=0&amp;max_results=3</title>
+  <updated>2026-07-29T08:47:28Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:BIPV&amp;start=0&amp;max_results=3&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>3</opensearch:itemsPerPage>
+  <opensearch:totalResults>9</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2511.18882v1</id>
+    <title>Facade Segmentation for Solar Photovoltaic Suitability</title>
+    <updated>2025-11-24T08:37:35Z</updated>
+    <link href="https://arxiv.org/abs/2511.18882v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.18882v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Building integrated photovoltaic (BIPV) facades represent a promising pathway towards urban decarbonization, especially where roof areas are insufficient and ground-mounted arrays are infeasible. Although machine learning-based approaches to support photovoltaic (PV) planning on rooftops are well researched, automated approaches for facades still remain scarce and oversimplified. This paper therefore presents a pipeline that integrates detailed information on the architectural composition of the facade to automatically identify suitable surfaces for PV application and estimate the solar energy potential. The pipeline fine-tunes SegFormer-B5 on the CMP Facades dataset and converts semantic predictions into facade-level PV suitability masks and PV panel layouts considering module sizes and clearances. Applied to a dataset of 373 facades with known dimensions from ten cities, the results show that installable BIPV potential is significantly lower than theoretical potential, thus providing valuable insights for reliable urban energy planning. With the growing availability of facade imagery, the proposed pipeline can be scaled to support BIPV planning in cities worldwide.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-24T08:37:35Z</published>
+    <arxiv:comment>NeurIPS 2025 Tackling Climate Change with Machine Learning Workshop version. Non-archival</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Ayca Duran</name>
+    </author>
+    <author>
+      <name>Christoph Waibel</name>
+    </author>
+    <author>
+      <name>Bernd Bickel</name>
+    </author>
+    <author>
+      <name>Iro Armeni</name>
+    </author>
+    <author>
+      <name>Arno Schlueter</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.00797v1</id>
+    <title>Solar PV Installation Potential Assessment on Building Facades Based on Vision and Language Foundation Models</title>
+    <updated>2025-10-01T11:51:28Z</updated>
+    <link href="https://arxiv.org/abs/2510.00797v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.00797v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Building facades represent a significant untapped resource for solar energy generation in dense urban environments, yet assessing their photovoltaic (PV) potential remains challenging due to complex geometries and semantic com ponents. This study introduces SF-SPA (Semantic Facade Solar-PV Assessment), an automated framework that transforms street-view photographs into quantitative PV deployment assessments. The approach combines com puter vision and artificial intelligence techniques to address three key challenges: perspective distortion correction, semantic understanding of facade elements, and spatial reasoning for PV layout optimization. Our four-stage pipeline processes images through geometric rectification, zero-shot semantic segmentation, Large Language Model (LLM) guided spatial reasoning, and energy simulation. Validation across 80 buildings in four countries demonstrates ro bust performance with mean area estimation errors of 6.2% &amp;#177; 2.8% compared to expert annotations. The auto mated assessment requires approximately 100 seconds per building, a substantial gain in efficiency over manual methods. Simulated energy yield predictions confirm the method's reliability and applicability for regional poten tial studies, urban energy planning, and building-integrated photovoltaic (BIPV) deployment. Code is available at: https:github.com/CodeAXu/Solar-PV-Installation</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-01T11:51:28Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Ruyu Liu</name>
+    </author>
+    <author>
+      <name>Dongxu Zhuang</name>
+    </author>
+    <author>
+      <name>Jianhua Zhang</name>
+    </author>
+    <author>
+      <name>Arega Getaneh Abate</name>
+    </author>
+    <author>
+      <name>Per Sieverts Nielsen</name>
+    </author>
+    <author>
+      <name>Ben Wang</name>
+    </author>
+    <author>
+      <name>Xiufeng Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.26396v1</id>
+    <title>Assessment of East-West (E-W) and South-North (S-N) facing Vertical Bifacial Photovoltaic Modules for Agrivoltaics and Dual-Land Use Applications in India</title>
+    <updated>2025-09-30T15:30:40Z</updated>
+    <link href="https://arxiv.org/abs/2509.26396v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.26396v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deploying vertical bifacial PV modules can play a significant role in agrivoltaics, fencing walls, noise barriers, building integrated photovoltaics (BIPV), solar PV for electric vehicles, and many other applications. This research work presents the performance comparison of vertical bifacial photovoltaic (VBPV) modules facing East-West (E-W) and South-North (S-N) directions. Also, the VBPV modules are compared with vertical and tilted south-facing monofacial PV modules. Six PV modules (monofacial and bifacial) were installed at the rooftop of IIT Bhilai academic building, Raipur (21.16° N, 81.65° E), India, and studied for a year from May 2022 to April 2023. The results show that the E-W facing VBPV module gives two production peaks, one in the morning and another in the evening, as compared to the single notable rise at midday observed for a monofacial module. From a series of experiments, 19 days of data were collected over the one-year period from May 2022 to April 2023, with specific inclusion of important days like solstices and equinoxes. In addition, the energy generation results are compared with PVsyst simulations, while also addressing the limitations of the PVsyst simulation of vertical PV modules. E-W bifacial generation is higher than S-N bifacial and south-facing monofacial modules from February to April. The VBPV modules in E-W and S-N orientations present a promising opportunity for expanding the agrivoltaics sector in tropical and sub-tropical countries, like India. This has huge implications for addressing the sustainable development goals by simultaneously contributing to sustainable land management, green energy generation, energy security and water conservation in the vast geo-climatic expanse of tropics.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-30T15:30:40Z</published>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Nishant Kumar</name>
+    </author>
+    <author>
+      <name>Shravan Kumar Singh</name>
+    </author>
+    <author>
+      <name>Nikhil Chander</name>
+    </author>
+  </entry>
+</feed>

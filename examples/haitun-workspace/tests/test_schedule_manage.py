@@ -26,6 +26,8 @@ tool: Any = importlib.import_module("schedule_manage")
 def workspace(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> Path:
     """Point the tool at an isolated temporary workspace."""
     monkeypatch.setenv("WORKSPACE_DIR", str(tmp_path))
+    monkeypatch.delenv("PSI_GATEWAY_URL", raising=False)
+    monkeypatch.delenv("GATEWAY_URL", raising=False)
     return tmp_path
 
 
@@ -82,6 +84,31 @@ async def test_create_view_and_list(workspace: Path) -> None:
 
     listing = await tool.schedule_manage(action="list")
     assert "daily-report [0 9 * * *] [agent]: Send the daily report" in listing
+
+
+async def test_create_wakes_gateway_scheduler(workspace: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    calls = 0
+
+    async def fake_ensure() -> str:
+        nonlocal calls
+        calls += 1
+        return ""
+
+    monkeypatch.setattr(tool, "_ensure_gateway_scheduler", fake_ensure)
+    msg = await tool.schedule_manage(action="create", schedule_name="wake", cron="0 8-22 * * *")
+
+    assert not msg.startswith("[Error]")
+    assert calls == 1
+
+
+async def test_create_surfaces_scheduler_wake_failure(workspace: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    async def fake_ensure() -> str:
+        return "scheduler wake failed (unreachable)"
+
+    monkeypatch.setattr(tool, "_ensure_gateway_scheduler", fake_ensure)
+    msg = await tool.schedule_manage(action="create", schedule_name="wake-fail", cron="0 8-22 * * *")
+
+    assert "[Warning: scheduler wake failed (unreachable)]" in msg
 
 
 async def test_create_one_shot_once_at(workspace: Path) -> None:

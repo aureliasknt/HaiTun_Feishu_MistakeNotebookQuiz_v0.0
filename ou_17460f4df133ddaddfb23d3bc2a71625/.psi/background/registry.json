@@ -1,0 +1,20 @@
+{
+  "processes": {
+    "supervisor-43a3ccc1718ea6ec-session": {
+      "process_id": "supervisor-43a3ccc1718ea6ec-session",
+      "pid": 18916,
+      "command": "& 'D:\\haitun agent\\psi-agent\\.venv\\Scripts\\psi-agent.exe' 'session' '--workspace' 'D:\\haitun agent\\psi-agent\\examples\\haitun-supervisor-workspace' '--channel-socket' 'http://127.0.0.1:59416' '--ai-socket' '\\\\.\\pipe\\psi\\ais\\1e108251612a4272ab7f5383ab710982' '--session-id' 'supervisor-43a3ccc1718ea6ec'",
+      "cwd": "D:\\haitun agent\\psi-agent\\ou_17460f4df133ddaddfb23d3bc2a71625",
+      "shell": "powershell",
+      "argv": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-Command",
+        "& 'D:\\haitun agent\\psi-agent\\.venv\\Scripts\\psi-agent.exe' 'session' '--workspace' 'D:\\haitun agent\\psi-agent\\examples\\haitun-supervisor-workspace' '--channel-socket' 'http://127.0.0.1:59416' '--ai-socket' '\\\\.\\pipe\\psi\\ais\\1e108251612a4272ab7f5383ab710982' '--session-id' 'supervisor-43a3ccc1718ea6ec'"
+      ],
+      "workspace": "D:\\haitun agent\\psi-agent\\ou_17460f4df133ddaddfb23d3bc2a71625",
+      "created_at": "2026-08-08T12:12:37.826425+00:00"
+    }
+  }
+}

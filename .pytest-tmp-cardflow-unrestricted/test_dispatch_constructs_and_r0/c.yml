@@ -1,0 +1,14 @@
+- type: ai
+  session_socket: ./ai.sock
+- type: session
+  ai_socket: ./ai.sock
+- type: router
+  mode: aggregation
+  session_socket: ./router.sock
+  router_socket: ./ai.sock
+  default_socket: ./ai.sock
+  upstream:
+    - [./ai.sock, general]
+- type: channel
+  name: repl
+  session_socket: ./ch.sock
