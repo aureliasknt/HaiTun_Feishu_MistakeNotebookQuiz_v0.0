@@ -1,0 +1,223 @@
+user: 10415887e37ac60535f8924274ad8725f9ff075df6621e070d5b7e8ac8d207ea
+domain: general
+question_count: 18
+visited_nodes:
+- what_is_an_agent
+- what_is_llm
+- what_is_an_agent
+- what_is_llm
+- what_is_an_agent
+- what_is_llm
+- user-identity-query
+- what_is_an_agent
+- what_is_llm
+- what_is_an_agent
+- what_is_llm
+- what_is_an_agent
+- what_is_llm
+- what_is_an_agent
+- what_is_llm
+- what_is_an_agent
+- what_is_llm
+- qna-bank-response-routing-feishu-webapp-vs-local-webconsole
+- feishu-webapp-user-identification
+- feishu-webapp-user-identification
+nodes:
+  what_is_an_agent:
+    count: 14
+    heat: 1.0
+  what_is_llm:
+    count: 12
+    heat: 1.0
+  user-identity-query:
+    count: 1
+    heat: 0.2
+  qna-bank-response-routing-feishu-webapp-vs-local-webconsole:
+    count: 1
+    heat: 0.2
+  feishu-webapp-user-identification:
+    count: 2
+    heat: 0.4
+repeated_surface_questions: 14
+cognitive_history:
+- '0.1'
+- '0.1'
+- '0.2'
+- '0.1'
+- '0.15'
+- '0.3'
+- '0.2'
+- '0.2'
+- '0.3'
+- '0.0'
+- '0.3'
+- '0.2'
+- '0.4'
+- '0.4'
+- '0.4'
+- '0.0'
+- '0.0'
+- '0.0'
+intent_history:
+- explain
+- explain
+- explain
+- explain
+- explain
+- explain
+- explain
+- explain
+- explain
+- explain
+- explain
+- explain
+- explain
+- explain
+- explain
+- explain
+- explain
+- explain
+history:
+- timestamp: '2026-08-13T09:33:47.274959+00:00'
+  branch_id: general/what_is_an_agent
+  requested_depth: balanced
+  cognitive_level: '0.1'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-13T13:24:45.564239+00:00'
+  branch_id: general/what_is_llm
+  requested_depth: balanced
+  cognitive_level: '0.1'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-14T04:05:29.685108+00:00'
+  branch_id: general/what_is_an_agent
+  requested_depth: balanced
+  cognitive_level: '0.2'
+  intent: explain
+  transition: steady
+  surface: false
+- timestamp: '2026-08-14T06:40:01.761975+00:00'
+  branch_id: general/what_is_an_agent
+  requested_depth: concise
+  cognitive_level: '0.1'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-14T06:40:40.153920+00:00'
+  branch_id: general/what_is_an_agent
+  requested_depth: balanced
+  cognitive_level: '0.15'
+  intent: explain
+  transition: steady
+  surface: false
+- timestamp: '2026-08-14T07:52:06.700461+00:00'
+  branch_id: general/what_is_an_agent
+  requested_depth: balanced
+  cognitive_level: '0.3'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-14T07:54:27.478250+00:00'
+  branch_id: general/what_is_llm
+  requested_depth: balanced
+  cognitive_level: '0.2'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-14T08:21:40.219006+00:00'
+  branch_id: general/what_is_an_agent
+  requested_depth: concise
+  cognitive_level: '0.2'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-14T08:22:00.276214+00:00'
+  branch_id: general/what_is_an_agent
+  requested_depth: balanced
+  cognitive_level: '0.3'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-14T08:33:41.365527+00:00'
+  branch_id: general/user_identity_query
+  requested_depth: concise
+  cognitive_level: '0.0'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-14T09:04:55.925457+00:00'
+  branch_id: general/what_is_an_agent
+  requested_depth: balanced
+  cognitive_level: '0.3'
+  intent: explain
+  transition: steady
+  surface: false
+- timestamp: '2026-08-14T09:05:20.809280+00:00'
+  branch_id: general/what_is_an_agent
+  requested_depth: balanced
+  cognitive_level: '0.2'
+  intent: explain
+  transition: steady
+  surface: false
+- timestamp: '2026-08-14T10:21:02.609357+00:00'
+  branch_id: general/what_is_an_agent
+  requested_depth: balanced
+  cognitive_level: '0.4'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-14T10:22:28.217582+00:00'
+  branch_id: general/what_is_an_agent
+  requested_depth: concise
+  cognitive_level: '0.4'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-14T10:23:02.873215+00:00'
+  branch_id: general/what_is_an_agent
+  requested_depth: concise
+  cognitive_level: '0.4'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-14T12:23:13.172197+00:00'
+  branch_id: general/qna_bank_response_routing_feishu_webapp_vs_local_webconsole
+  requested_depth: balanced
+  cognitive_level: '0.0'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-14T16:26:16.106586+00:00'
+  branch_id: general/feishu_webapp_user_identification
+  requested_depth: balanced
+  cognitive_level: '0.0'
+  intent: explain
+  transition: steady
+  surface: true
+- timestamp: '2026-08-14T16:27:17.515427+00:00'
+  branch_id: general/feishu_webapp_user_identification
+  requested_depth: balanced
+  cognitive_level: '0.0'
+  intent: explain
+  transition: steady
+  surface: true
+active_branches:
+  general/what_is_an_agent:
+    active_depth: concise
+    last_seen: '2026-08-14T10:23:02.873215+00:00'
+  general/what_is_llm:
+    active_depth: balanced
+    last_seen: '2026-08-14T07:54:27.478250+00:00'
+  general/user_identity_query:
+    active_depth: concise
+    last_seen: '2026-08-14T08:33:41.365527+00:00'
+  general/qna_bank_response_routing_feishu_webapp_vs_local_webconsole:
+    active_depth: balanced
+    last_seen: '2026-08-14T12:23:13.172197+00:00'
+  general/feishu_webapp_user_identification:
+    active_depth: balanced
+    last_seen: '2026-08-14T16:27:17.515427+00:00'
+last_seen: '2026-08-14T16:27:17.515427+00:00'

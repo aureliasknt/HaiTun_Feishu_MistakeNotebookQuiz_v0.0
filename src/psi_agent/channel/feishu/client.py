@@ -369,11 +369,25 @@ async def _stream_reply(
     reply_to: str | None,
     suppress_silent_reply: bool = False,
 ) -> None:
-    """Stream agent text and files into one Feishu chat."""
+    """Stream agent text and files into one Feishu chat.
+
+    A reply that is *only* the silent token is dropped rather than delivered: the
+    system prompt tells the agent to answer with exactly ``NO_REPLY`` when it has
+    nothing to say (``prompt_sections.SILENT_REPLIES_SECTION``), so shipping that
+    literal to the chat shows the user an internal control token. Buffering applies
+    from the first text chunk on every path — ``suppress_silent_reply`` additionally
+    re-arms the check after each tool result, which is what a card-action turn needs
+    when its handler runs mid-stream.
+
+    Only a standalone token is dropped. As soon as the buffered text can no longer
+    become the token it is flushed, so a real answer that happens to start with "N"
+    streams normally and a reply that merely *contains* the word is left untouched.
+    """
 
     async def _produce(stream: Any) -> None:
         silent_candidate = ""
-        checking_silent_reply = suppress_silent_reply
+        # Always start buffering: the token arrives as the very first text chunk.
+        checking_silent_reply = True
 
         async def flush_silent_candidate() -> None:
             nonlocal silent_candidate
@@ -383,9 +397,9 @@ async def _stream_reply(
             silent_candidate = ""
             normalized = candidate.strip()
             if not normalized:
-                logger.debug("suppressed whitespace-only Feishu card action reply")
+                logger.debug("suppressed whitespace-only Feishu reply")
             elif normalized == _SILENT_REPLY_TOKEN:
-                logger.debug("suppressed standalone NO_REPLY from Feishu card action")
+                logger.debug(f"suppressed standalone {_SILENT_REPLY_TOKEN} reply")
             else:
                 await stream.append(candidate)
                 logger.debug(f"stream.append ({len(candidate)} chars)")

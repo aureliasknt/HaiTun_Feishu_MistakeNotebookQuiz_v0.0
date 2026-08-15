@@ -1,0 +1,2061 @@
+{
+  "scenario": "法律顾问：Agent 治理",
+  "user_id": "demo-legal-agent-governance",
+  "profile_id": "legal-learning",
+  "user_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+  "turns": [
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.952150+00:00",
+      "user_message": "我是科技公司的法律顾问，懂法律但对 Agent 一无所知。请先解释 Agent 是什么。",
+      "assistant_message": "Agent 是能围绕目标持续观察、规划、调用工具并执行动作的软件主体。与只生成文字的模型相比，关键差别是它可能改变外部状态，因此法律分析必须关注权限、行为链和可追责证据。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 1,
+        "current_user_question": "我是科技公司的法律顾问，懂法律但对 Agent 一无所知。请先解释 Agent 是什么。",
+        "stage_profile": {
+          "depth": 0.15,
+          "goal": 0.45,
+          "familiarity": 0.35,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "ai_agent_governance",
+          "nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "legal_domains",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "legal_domains",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ],
+          "breakout_count": 7
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-1",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 1,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "agent_basics",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.15,
+          "goal": 0.45,
+          "familiarity": 0.35,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": false,
+          "type": "none",
+          "score": 0.0,
+          "reason": "当前是首轮信号，先回答直接问题并观察。",
+          "directions": [],
+          "evidence": [
+            "我是科技公司的法律顾问，懂法律但对 Agent 一无所知。请先解释 Agent 是什么。"
+          ]
+        },
+        "latent_need": {
+          "detected": false,
+          "need": "",
+          "missing_dimensions": [],
+          "confidence": 0.0
+        },
+        "profile_shift": {
+          "detected": false,
+          "from": "",
+          "to": "",
+          "evidence": [],
+          "confidence": 0.0
+        },
+        "response_strategy": {
+          "answer_depth": "concise",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "none",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "agent_basics"
+          ],
+          "branch_additions": []
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-1",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 1,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "agent_basics",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.15,
+          "goal": 0.45,
+          "familiarity": 0.35,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": false,
+          "type": "none",
+          "score": 0.0,
+          "reason": "当前是首轮信号，先回答直接问题并观察。",
+          "directions": [],
+          "evidence": [
+            "我是科技公司的法律顾问，懂法律但对 Agent 一无所知。请先解释 Agent 是什么。"
+          ]
+        },
+        "latent_need": {
+          "detected": false,
+          "need": "",
+          "missing_dimensions": [],
+          "confidence": 0.0
+        },
+        "profile_shift": {
+          "detected": false,
+          "from": "",
+          "to": "",
+          "evidence": [],
+          "confidence": 0.0
+        },
+        "response_strategy": {
+          "answer_depth": "concise",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "none",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "agent_basics"
+          ],
+          "branch_additions": []
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.15,
+        "goal": 0.45,
+        "familiarity": 0.35,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 0,
+        "visited_nodes": [],
+        "breakout_count": 0
+      },
+      "heatmap_after": {
+        "question_count": 1,
+        "visited_nodes": [
+          "agent_basics"
+        ],
+        "breakout_count": 0
+      },
+      "map_before": {
+        "domain": "",
+        "nodes": []
+      },
+      "map_after": {
+        "domain": "ai_agent_governance",
+        "nodes": [
+          "agent_basics"
+        ]
+      },
+      "errors": []
+    },
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.952198+00:00",
+      "user_message": "Agent 和普通聊天机器人、传统自动化程序到底有什么区别？",
+      "assistant_message": "聊天机器人通常一问一答；传统自动化按预写规则运行；Agent 会根据环境选择下一步并调用工具。边界不在名称，而在自主程度、可访问资源、影响范围和人类是否批准关键动作。\n\n💡 破圈效果：用感知—规划—调用工具—执行—记录解释 Agent 生命周期；按自主程度和影响范围划分风险等级。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 2,
+        "current_user_question": "Agent 和普通聊天机器人、传统自动化程序到底有什么区别？",
+        "stage_profile": {
+          "depth": 0.27,
+          "goal": 0.55,
+          "familiarity": 0.43,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "ai_agent_governance",
+          "nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "legal_domains",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "legal_domains",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ],
+          "breakout_count": 7
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-2",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 2,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "agent_autonomy",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.27,
+          "goal": 0.55,
+          "familiarity": 0.43,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "deepen",
+          "score": 0.6799999999999999,
+          "reason": "用户已进入第 2 个认知节点，需要用 deepen 补足决策或治理维度。",
+          "directions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级"
+          ],
+          "evidence": [
+            "Agent 和普通聊天机器人、传统自动化程序到底有什么区别？"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "missing_dimensions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": false,
+          "from": "",
+          "to": "",
+          "evidence": [],
+          "confidence": 0.0
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "agent_autonomy"
+          ],
+          "branch_additions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-2",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 2,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "agent_autonomy",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.27,
+          "goal": 0.55,
+          "familiarity": 0.43,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "deepen",
+          "score": 0.6799999999999999,
+          "reason": "用户已进入第 2 个认知节点，需要用 deepen 补足决策或治理维度。",
+          "directions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级"
+          ],
+          "evidence": [
+            "Agent 和普通聊天机器人、传统自动化程序到底有什么区别？"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "missing_dimensions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": false,
+          "from": "",
+          "to": "",
+          "evidence": [],
+          "confidence": 0.0
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "agent_autonomy"
+          ],
+          "branch_additions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.27,
+        "goal": 0.55,
+        "familiarity": 0.43,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 1,
+        "visited_nodes": [
+          "agent_basics"
+        ],
+        "breakout_count": 0
+      },
+      "heatmap_after": {
+        "question_count": 2,
+        "visited_nodes": [
+          "agent_basics",
+          "agent_autonomy"
+        ],
+        "breakout_count": 1
+      },
+      "map_before": {
+        "domain": "ai_agent_governance",
+        "nodes": [
+          "agent_basics"
+        ]
+      },
+      "map_after": {
+        "domain": "ai_agent_governance",
+        "nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "按自主程度和影响范围划分风险等级"
+        ]
+      },
+      "errors": []
+    },
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.952266+00:00",
+      "user_message": "如果公司内部开始使用 Agent，可能涉及哪些法律领域和主要风险？",
+      "assistant_message": "主要领域包括隐私与数据保护、商业秘密、知识产权、网络安全、劳动管理、消费者与产品责任、合同和代理授权。建议按数据敏感度、工具权限、外部影响和可逆性做风险分级。\n\n💡 破圈效果：用感知—规划—调用工具—执行—记录解释 Agent 生命周期；按自主程度和影响范围划分风险等级；连接隐私、商业秘密、知识产权、劳动和产品责任。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 3,
+        "current_user_question": "如果公司内部开始使用 Agent，可能涉及哪些法律领域和主要风险？",
+        "stage_profile": {
+          "depth": 0.39,
+          "goal": 0.65,
+          "familiarity": 0.51,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "ai_agent_governance",
+          "nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "legal_domains",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "legal_domains",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ],
+          "breakout_count": 7
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-3",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 3,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "legal_domains",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.39,
+          "goal": 0.65,
+          "familiarity": 0.51,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "broaden",
+          "score": 0.74,
+          "reason": "用户已进入第 3 个认知节点，需要用 broaden 补足决策或治理维度。",
+          "directions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "evidence": [
+            "如果公司内部开始使用 Agent，可能涉及哪些法律领域和主要风险？"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "missing_dimensions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "legal_domains"
+          ],
+          "branch_additions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-3",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 3,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "legal_domains",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.39,
+          "goal": 0.65,
+          "familiarity": 0.51,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "broaden",
+          "score": 0.74,
+          "reason": "用户已进入第 3 个认知节点，需要用 broaden 补足决策或治理维度。",
+          "directions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "evidence": [
+            "如果公司内部开始使用 Agent，可能涉及哪些法律领域和主要风险？"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "missing_dimensions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "legal_domains"
+          ],
+          "branch_additions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.39,
+        "goal": 0.65,
+        "familiarity": 0.51,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 2,
+        "visited_nodes": [
+          "agent_basics",
+          "agent_autonomy"
+        ],
+        "breakout_count": 1
+      },
+      "heatmap_after": {
+        "question_count": 3,
+        "visited_nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "legal_domains"
+        ],
+        "breakout_count": 2
+      },
+      "map_before": {
+        "domain": "ai_agent_governance",
+        "nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "按自主程度和影响范围划分风险等级"
+        ]
+      },
+      "map_after": {
+        "domain": "ai_agent_governance",
+        "nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "按自主程度和影响范围划分风险等级",
+          "legal_domains",
+          "连接隐私、商业秘密、知识产权、劳动和产品责任"
+        ]
+      },
+      "errors": []
+    },
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.952320+00:00",
+      "user_message": "请把隐私、商业秘密、知识产权、劳动管理、产品责任和授权代理串成一个治理框架。",
+      "assistant_message": "治理框架可沿 Agent 生命周期展开：数据进入对应隐私和秘密；模型与内容对应知识产权；工具执行对应授权和责任；员工使用对应劳动管理；对外输出和产品行为对应合同、消费者保护与产品责任；日志贯穿举证和审计。\n\n💡 破圈效果：用感知—规划—调用工具—执行—记录解释 Agent 生命周期；按自主程度和影响范围划分风险等级；连接隐私、商业秘密、知识产权、劳动和产品责任。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 4,
+        "current_user_question": "请把隐私、商业秘密、知识产权、劳动管理、产品责任和授权代理串成一个治理框架。",
+        "stage_profile": {
+          "depth": 0.51,
+          "goal": 0.75,
+          "familiarity": 0.59,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "ai_agent_governance",
+          "nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "legal_domains",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "legal_domains",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ],
+          "breakout_count": 7
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-4",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 4,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "governance_framework",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.51,
+          "goal": 0.75,
+          "familiarity": 0.59,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "cross_domain",
+          "score": 0.8,
+          "reason": "用户已进入第 4 个认知节点，需要用 cross_domain 补足决策或治理维度。",
+          "directions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "evidence": [
+            "请把隐私、商业秘密、知识产权、劳动管理、产品责任和授权代理串成一个治理框架。"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "missing_dimensions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "governance_framework"
+          ],
+          "branch_additions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-4",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 4,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "governance_framework",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.51,
+          "goal": 0.75,
+          "familiarity": 0.59,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "cross_domain",
+          "score": 0.8,
+          "reason": "用户已进入第 4 个认知节点，需要用 cross_domain 补足决策或治理维度。",
+          "directions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "evidence": [
+            "请把隐私、商业秘密、知识产权、劳动管理、产品责任和授权代理串成一个治理框架。"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "missing_dimensions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "governance_framework"
+          ],
+          "branch_additions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.51,
+        "goal": 0.75,
+        "familiarity": 0.59,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 3,
+        "visited_nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "legal_domains"
+        ],
+        "breakout_count": 2
+      },
+      "heatmap_after": {
+        "question_count": 4,
+        "visited_nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "legal_domains",
+          "governance_framework"
+        ],
+        "breakout_count": 3
+      },
+      "map_before": {
+        "domain": "ai_agent_governance",
+        "nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "按自主程度和影响范围划分风险等级",
+          "legal_domains",
+          "连接隐私、商业秘密、知识产权、劳动和产品责任"
+        ]
+      },
+      "map_after": {
+        "domain": "ai_agent_governance",
+        "nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "按自主程度和影响范围划分风险等级",
+          "legal_domains",
+          "连接隐私、商业秘密、知识产权、劳动和产品责任",
+          "governance_framework"
+        ]
+      },
+      "errors": []
+    },
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.952378+00:00",
+      "user_message": "公司应该设置哪些审批、权限、日志和事故响应机制？",
+      "assistant_message": "控制机制应包括：风险分级、最小权限、敏感数据限制、关键动作人类批准、不可篡改日志、供应商审查、定期复核、异常暂停和事故响应。高风险 Agent必须指定业务负责人、技术负责人和法律审查人。\n\n💡 破圈效果：用感知—规划—调用工具—执行—记录解释 Agent 生命周期；按自主程度和影响范围划分风险等级；连接隐私、商业秘密、知识产权、劳动和产品责任。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 5,
+        "current_user_question": "公司应该设置哪些审批、权限、日志和事故响应机制？",
+        "stage_profile": {
+          "depth": 0.63,
+          "goal": 0.8500000000000001,
+          "familiarity": 0.6699999999999999,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "ai_agent_governance",
+          "nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "legal_domains",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "legal_domains",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ],
+          "breakout_count": 7
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-5",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 5,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "controls",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.63,
+          "goal": 0.8500000000000001,
+          "familiarity": 0.6699999999999999,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "operationalize",
+          "score": 0.86,
+          "reason": "用户已进入第 5 个认知节点，需要用 operationalize 补足决策或治理维度。",
+          "directions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "evidence": [
+            "公司应该设置哪些审批、权限、日志和事故响应机制？"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "missing_dimensions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "controls"
+          ],
+          "branch_additions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-5",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 5,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "controls",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.63,
+          "goal": 0.8500000000000001,
+          "familiarity": 0.6699999999999999,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "operationalize",
+          "score": 0.86,
+          "reason": "用户已进入第 5 个认知节点，需要用 operationalize 补足决策或治理维度。",
+          "directions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "evidence": [
+            "公司应该设置哪些审批、权限、日志和事故响应机制？"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "missing_dimensions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "controls"
+          ],
+          "branch_additions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.63,
+        "goal": 0.8500000000000001,
+        "familiarity": 0.6699999999999999,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 4,
+        "visited_nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "legal_domains",
+          "governance_framework"
+        ],
+        "breakout_count": 3
+      },
+      "heatmap_after": {
+        "question_count": 5,
+        "visited_nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "legal_domains",
+          "governance_framework",
+          "controls"
+        ],
+        "breakout_count": 4
+      },
+      "map_before": {
+        "domain": "ai_agent_governance",
+        "nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "按自主程度和影响范围划分风险等级",
+          "legal_domains",
+          "连接隐私、商业秘密、知识产权、劳动和产品责任",
+          "governance_framework"
+        ]
+      },
+      "map_after": {
+        "domain": "ai_agent_governance",
+        "nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "按自主程度和影响范围划分风险等级",
+          "legal_domains",
+          "连接隐私、商业秘密、知识产权、劳动和产品责任",
+          "governance_framework",
+          "controls"
+        ]
+      },
+      "errors": []
+    },
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.952441+00:00",
+      "user_message": "请起草一份简洁但能落地的《公司 AI Agent 使用管理规范》。",
+      "assistant_message": "《公司 AI Agent 使用管理规范（简版）》：一、适用于所有代表公司读取数据、调用工具或影响外部主体的 Agent；二、按低中高风险登记审批；三、仅授予完成任务所需权限；四、敏感数据和对外承诺须经授权；五、付款、签约、删除、生产变更等动作须人工批准；六、保存输入来源、计划、工具调用、批准和结果日志；七、第三方服务须审查数据、知识产权、跨境和审计条款；八、发现异常立即暂停、保全证据并上报；九、业务负责人承担使用责任，法务、安保和技术共同复核。\n\n💡 破圈效果：用感知—规划—调用工具—执行—记录解释 Agent 生命周期；按自主程度和影响范围划分风险等级；连接隐私、商业秘密、知识产权、劳动和产品责任。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 6,
+        "current_user_question": "请起草一份简洁但能落地的《公司 AI Agent 使用管理规范》。",
+        "stage_profile": {
+          "depth": 0.75,
+          "goal": 0.95,
+          "familiarity": 0.75,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "ai_agent_governance",
+          "nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "legal_domains",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "legal_domains",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ],
+          "breakout_count": 7
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-6",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 6,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "policy",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.75,
+          "goal": 0.95,
+          "familiarity": 0.75,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "operationalize",
+          "score": 0.9199999999999999,
+          "reason": "用户已进入第 6 个认知节点，需要用 operationalize 补足决策或治理维度。",
+          "directions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "evidence": [
+            "请起草一份简洁但能落地的《公司 AI Agent 使用管理规范》。"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "missing_dimensions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "policy"
+          ],
+          "branch_additions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-6",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 6,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "policy",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.75,
+          "goal": 0.95,
+          "familiarity": 0.75,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "operationalize",
+          "score": 0.9199999999999999,
+          "reason": "用户已进入第 6 个认知节点，需要用 operationalize 补足决策或治理维度。",
+          "directions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "evidence": [
+            "请起草一份简洁但能落地的《公司 AI Agent 使用管理规范》。"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "missing_dimensions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "policy"
+          ],
+          "branch_additions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.75,
+        "goal": 0.95,
+        "familiarity": 0.75,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 5,
+        "visited_nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "legal_domains",
+          "governance_framework",
+          "controls"
+        ],
+        "breakout_count": 4
+      },
+      "heatmap_after": {
+        "question_count": 6,
+        "visited_nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "legal_domains",
+          "governance_framework",
+          "controls",
+          "policy"
+        ],
+        "breakout_count": 5
+      },
+      "map_before": {
+        "domain": "ai_agent_governance",
+        "nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "按自主程度和影响范围划分风险等级",
+          "legal_domains",
+          "连接隐私、商业秘密、知识产权、劳动和产品责任",
+          "governance_framework",
+          "controls"
+        ]
+      },
+      "map_after": {
+        "domain": "ai_agent_governance",
+        "nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "按自主程度和影响范围划分风险等级",
+          "legal_domains",
+          "连接隐私、商业秘密、知识产权、劳动和产品责任",
+          "governance_framework",
+          "controls",
+          "policy"
+        ]
+      },
+      "errors": []
+    },
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.952519+00:00",
+      "user_message": "压力测试一下：如果采购 Agent 能自行读取报价、联系供应商并准备订单，这份规范还缺什么？",
+      "assistant_message": "采购 Agent 暴露了规范缺口：‘准备订单’和‘代表公司作出承诺’必须分开。还需加入供应商身份验证、利益冲突检查、报价保密、反商业贿赂、授权金额阈值、双人批准、禁止自行签约或付款、通信留痕、订单撤销机制以及供应商知情规则。\n\n💡 破圈效果：用感知—规划—调用工具—执行—记录解释 Agent 生命周期；按自主程度和影响范围划分风险等级；连接隐私、商业秘密、知识产权、劳动和产品责任。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 7,
+        "current_user_question": "压力测试一下：如果采购 Agent 能自行读取报价、联系供应商并准备订单，这份规范还缺什么？",
+        "stage_profile": {
+          "depth": 0.87,
+          "goal": 1.0,
+          "familiarity": 0.83,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "ai_agent_governance",
+          "nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "legal_domains",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "legal_domains",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ],
+          "breakout_count": 7
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-7",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 7,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "procurement_agent",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.87,
+          "goal": 1.0,
+          "familiarity": 0.83,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "reframe",
+          "score": 0.95,
+          "reason": "用户已进入第 7 个认知节点，需要用 reframe 补足决策或治理维度。",
+          "directions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "evidence": [
+            "压力测试一下：如果采购 Agent 能自行读取报价、联系供应商并准备订单，这份规范还缺什么？"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "missing_dimensions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "procurement_agent"
+          ],
+          "branch_additions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-7",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 7,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "procurement_agent",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.87,
+          "goal": 1.0,
+          "familiarity": 0.83,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "reframe",
+          "score": 0.95,
+          "reason": "用户已进入第 7 个认知节点，需要用 reframe 补足决策或治理维度。",
+          "directions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "evidence": [
+            "压力测试一下：如果采购 Agent 能自行读取报价、联系供应商并准备订单，这份规范还缺什么？"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "missing_dimensions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "procurement_agent"
+          ],
+          "branch_additions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.87,
+        "goal": 1.0,
+        "familiarity": 0.83,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 6,
+        "visited_nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "legal_domains",
+          "governance_framework",
+          "controls",
+          "policy"
+        ],
+        "breakout_count": 5
+      },
+      "heatmap_after": {
+        "question_count": 7,
+        "visited_nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "legal_domains",
+          "governance_framework",
+          "controls",
+          "policy",
+          "procurement_agent"
+        ],
+        "breakout_count": 6
+      },
+      "map_before": {
+        "domain": "ai_agent_governance",
+        "nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "按自主程度和影响范围划分风险等级",
+          "legal_domains",
+          "连接隐私、商业秘密、知识产权、劳动和产品责任",
+          "governance_framework",
+          "controls",
+          "policy"
+        ]
+      },
+      "map_after": {
+        "domain": "ai_agent_governance",
+        "nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "按自主程度和影响范围划分风险等级",
+          "legal_domains",
+          "连接隐私、商业秘密、知识产权、劳动和产品责任",
+          "governance_framework",
+          "controls",
+          "policy",
+          "procurement_agent"
+        ]
+      },
+      "errors": []
+    },
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.952568+00:00",
+      "user_message": "先简化成给全体员工看的五条规则，然后说明何时必须升级到法务审查。",
+      "assistant_message": "员工五条规则：只用已批准 Agent；不输入无权处理的数据；不授予超出任务的工具权限；付款、签约、删除和对外承诺必须人工批准；异常立即停止并报告。涉及敏感数据、高影响个人决策、外部承诺、跨境传输或高权限工具时必须升级到法务审查。\n\n💡 破圈效果：用感知—规划—调用工具—执行—记录解释 Agent 生命周期；按自主程度和影响范围划分风险等级；连接隐私、商业秘密、知识产权、劳动和产品责任。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 8,
+        "current_user_question": "先简化成给全体员工看的五条规则，然后说明何时必须升级到法务审查。",
+        "stage_profile": {
+          "depth": 0.99,
+          "goal": 1.0,
+          "familiarity": 0.91,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "ai_agent_governance",
+          "nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "legal_domains",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "agent_basics",
+            "agent_autonomy",
+            "legal_domains",
+            "governance_framework",
+            "controls",
+            "policy",
+            "procurement_agent",
+            "employee_rules"
+          ],
+          "breakout_count": 7
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-8",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 8,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "employee_rules",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.99,
+          "goal": 1.0,
+          "familiarity": 0.91,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "operationalize",
+          "score": 0.95,
+          "reason": "用户已进入第 8 个认知节点，需要用 operationalize 补足决策或治理维度。",
+          "directions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "evidence": [
+            "先简化成给全体员工看的五条规则，然后说明何时必须升级到法务审查。"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "missing_dimensions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "employee_rules"
+          ],
+          "branch_additions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-legal-agent-governance-8",
+        "user_id_hash": "82fa5160acf457d366c4e5148716a3e168dd6f994ddb0b1c0518081ebaf0d9a3",
+        "profile_id": "legal-learning",
+        "turn_index": 8,
+        "classification": {
+          "is_learning": true,
+          "domain": "ai_agent_governance",
+          "topic": "employee_rules",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.99,
+          "goal": 1.0,
+          "familiarity": 0.91,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "operationalize",
+          "score": 0.95,
+          "reason": "用户已进入第 8 个认知节点，需要用 operationalize 补足决策或治理维度。",
+          "directions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "evidence": [
+            "先简化成给全体员工看的五条规则，然后说明何时必须升级到法务审查。"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "missing_dimensions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "explain",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "employee_rules"
+          ],
+          "branch_additions": [
+            "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+            "按自主程度和影响范围划分风险等级",
+            "连接隐私、商业秘密、知识产权、劳动和产品责任"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.99,
+        "goal": 1.0,
+        "familiarity": 0.91,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 7,
+        "visited_nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "legal_domains",
+          "governance_framework",
+          "controls",
+          "policy",
+          "procurement_agent"
+        ],
+        "breakout_count": 6
+      },
+      "heatmap_after": {
+        "question_count": 8,
+        "visited_nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "legal_domains",
+          "governance_framework",
+          "controls",
+          "policy",
+          "procurement_agent",
+          "employee_rules"
+        ],
+        "breakout_count": 7
+      },
+      "map_before": {
+        "domain": "ai_agent_governance",
+        "nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "按自主程度和影响范围划分风险等级",
+          "legal_domains",
+          "连接隐私、商业秘密、知识产权、劳动和产品责任",
+          "governance_framework",
+          "controls",
+          "policy",
+          "procurement_agent"
+        ]
+      },
+      "map_after": {
+        "domain": "ai_agent_governance",
+        "nodes": [
+          "agent_basics",
+          "agent_autonomy",
+          "用感知—规划—调用工具—执行—记录解释 Agent 生命周期",
+          "按自主程度和影响范围划分风险等级",
+          "legal_domains",
+          "连接隐私、商业秘密、知识产权、劳动和产品责任",
+          "governance_framework",
+          "controls",
+          "policy",
+          "procurement_agent",
+          "employee_rules"
+        ]
+      },
+      "errors": []
+    }
+  ]
+}

@@ -8,6 +8,9 @@ dist/
 .pytest_cache/
 *.sock
 .coverage
+.env
+.env.local
+.env.*.local
 /result
 .worktrees/
 evals/

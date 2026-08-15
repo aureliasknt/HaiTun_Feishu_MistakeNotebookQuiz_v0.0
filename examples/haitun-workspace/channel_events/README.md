@@ -50,6 +50,7 @@
 | `haitun.finance.expense_submitted` | `expense_submitted` | 4 | 同上 |
 | `haitun.finance.attendance_review_needed` | `attendance_review_needed` | 4 | 同上 |
 | `haitun.finance.report_ready` | `finance_report_ready` | 4 | 同上 |
+| `haitun.outreach.daily` | `outreach_daily` | 场景 1（外呼推送，每日随机时间） | 读 `outreach/state.yaml`（`OUTREACH_STATE_PATH`→`WORKSPACE_DIR`），`now >= next_send_at` 且 `sending=false` 时 emit；guard 过期 26h |
 | `feishu.synthetic.demo_tick` | `demo_tick` | — | 模板 |
 
 ---
@@ -61,6 +62,16 @@
 | `feishu.chat.member_added` | `member_added` | `im.chat.member.user.added_v1` | 通用 |
 | `feishu.hr.identity_changed` | `identity_changed` | `contact.user.updated_v3` | 10（字段级身份变，`filters: true`） |
 | `feishu.hr.user_created` | `user_created` | `contact.user.created_v3` | 3 / 10 入职入口 |
+| `feishu.agent_literacy.question` | `agent_literacy_question` | `im.message.receive_v1` | 场景 3（反应式问答 + 理解确认卡，`filters: true`）|
+
+> `agent_literacy_question` 是关键词过滤器：私聊文本 + 发件人在 `outreach/state.yaml`
+> 的 `users` 里 + 命中 `scenario3.keywords` 才发信封，其余一律 `[]`。关键词与名单按
+> `OUTREACH_STATE_PATH` → `WORKSPACE_DIR/outreach/state.yaml` → **本能力包自身的
+> `outreach/state.yaml`** 顺序查找（按 mtime 缓存，不会每条消息重解析 YAML）。
+> 最后一条兜底是刻意的：`scripts/dev-feishu.ps1` 不导出这两个 env，靠它才能零配置生效；
+> 三处都找不到才回落内置词表（此时**没有名单可过滤**，任何私聊提问都会命中）。
+> 挂在 TRIGGER `outreach-confirm-auto`（`fire=tool` → `outreach_confirm_send`），
+> 所以用户等待的那条路径上 **0 次大模型调用**。
 
 ---
 

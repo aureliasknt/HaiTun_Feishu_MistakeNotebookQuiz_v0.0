@@ -1,0 +1,208 @@
+cohort: agent-basics
+source_wiki: wiki/
+source_wiki_hub: Agent Basics
+source_wiki_tag: agent-basics
+controller_open_id: ''
+thresholds:
+  familiarity_done: 0.7
+  confident_answers_needed: 3
+scenario3:
+  enabled: true
+  keywords:
+  - agent
+  - 智能体
+  - llm
+  - 大模型
+  - 海豚
+  - haitun
+  - 工具调用
+  - tool calling
+  - prompt
+  - 提示词
+  qa_bank_path: outreach/qna_bank.yaml
+  followup:
+    mode: immediate
+  card:
+    ask_after_every_answer: true
+    probe_question_every: 3
+  dedup_window_seconds: 60
+users:
+- open_id: ou_864f0fbce4c62940ba73dad54be59003
+  name: Target 1
+  stage: done
+  status: active
+  last_message_id: ''
+  last_sent_at: ''
+  node: what-is-an-agent
+  last_qa:
+    qa_id: qa_20260814T220925_8f92d9fd
+    question: tolong jelaskan bagaimana cara "both Feishu Bot and Feishu Web App share
+      the core Agent, tools, as well as user profiles, llm_wiki and Supervisor and
+      other functions"
+    keyword: agent
+    topic: what-is-an-agent
+    card_message_id: ''
+    sent_at: '2026-08-14T22:09:25+08:00'
+  answers:
+  - qa_id: qa_20260812T153522_cb546a2f
+    question: do you know what agent is?
+    self_assessment: partial
+    at: '2026-08-12T15:36:37+08:00'
+  - qa_id: qa_20260812T160811_cb546a2f
+    question: do you know what agent is?
+    self_assessment: partial
+    at: '2026-08-12T16:09:23+08:00'
+  - qa_id: qa_20260812T160926_cb546a2f
+    question: do you know what agent is?
+    self_assessment: not_understood
+    at: '2026-08-12T16:10:48+08:00'
+  - qa_id: qa_20260812T163634_cb546a2f
+    question: do you know what agent is?
+    self_assessment: not_understood
+    at: '2026-08-12T16:37:17+08:00'
+  - qa_id: qa_20260812T163826_cb546a2f
+    question: do you know what agent is?
+    self_assessment: partial
+    at: '2026-08-12T16:39:20+08:00'
+  - qa_id: qa_20260812T164034_cb546a2f
+    question: do you know what agent is?
+    self_assessment: understood
+    at: '2026-08-12T16:41:19+08:00'
+  - qa_id: qa_20260812T170735_cb546a2f
+    question: do you know what agent is?
+    self_assessment: partial
+    at: '2026-08-12T17:08:27+08:00'
+  - qa_id: qa_20260812T170829_9e354681
+    question: do you know what agent is?
+    self_assessment: understood
+    at: '2026-08-12T17:10:34+08:00'
+  - qa_id: qa_20260812T181334_6cf056cb
+    question: can you explain what agent is?
+    self_assessment: not_understood
+    at: '2026-08-12T18:14:05+08:00'
+  - qa_id: qa_20260812T181408_b25fb561
+    question: can you explain what agent is?
+    self_assessment: partial
+    at: '2026-08-12T18:15:09+08:00'
+  - qa_id: qa_20260812T181511_92cd5bd7
+    question: can you explain what agent is?
+    self_assessment: understood
+    at: '2026-08-12T18:15:59+08:00'
+  - qa_id: qa_20260813T151148_5ea98843
+    question: please explain the definition of agent
+    self_assessment: understood
+    at: '2026-08-13T15:12:26+08:00'
+  - qa_id: qa_20260813T161901_27ba17fe
+    question: what is agent?
+    self_assessment: understood
+    at: '2026-08-13T16:19:45+08:00'
+  - qa_id: qa_20260813T170757_422b96a1
+    question: can you explain again, what is agent?
+    self_assessment: understood
+    at: '2026-08-13T17:27:35+08:00'
+  - qa_id: qa_20260813T223427_27ba17fe
+    question: what is agent?
+    self_assessment: partial
+    at: '2026-08-13T22:35:05+08:00'
+  - qa_id: qa_20260814T120228_27ba17fe
+    question: what is agent?
+    self_assessment: partial
+    at: '2026-08-14T12:04:03+08:00'
+  - qa_id: qa_20260814T120405_92cd5bd7
+    question: what is agent?
+    self_assessment: understood
+    at: '2026-08-14T12:05:40+08:00'
+  - qa_id: qa_20260814T143931_b192b1de
+    question: agent is?
+    self_assessment: partial
+    at: '2026-08-14T14:40:51+08:00'
+  - qa_id: qa_20260814T144054_92cd5bd7
+    question: agent is?
+    self_assessment: understood
+    at: '2026-08-14T15:52:23+08:00'
+  - qa_id: qa_20260814T155408_604c82dc
+    question: what is llm?
+    self_assessment: understood
+    at: '2026-08-14T15:58:50+08:00'
+  - qa_id: qa_20260814T162121_026b8d96
+    question: do you know what is agent?
+    self_assessment: understood
+    at: '2026-08-14T16:22:13+08:00'
+  - qa_id: qa_20260814T170156_bc85ba41
+    question: what actually agent is?
+    self_assessment: understood
+    at: '2026-08-14T17:03:41+08:00'
+  - qa_id: qa_20260814T170431_51d8f10b
+    question: explain to me about agent
+    self_assessment: partial
+    at: '2026-08-14T17:05:39+08:00'
+  - qa_id: qa_20260814T181419_7ff69b14
+    question: hi, do you know the definition of agent?
+    self_assessment: partial
+    at: '2026-08-14T18:18:57+08:00'
+  - qa_id: qa_20260814T181900_92cd5bd7
+    question: hi, do you know the definition of agent?
+    self_assessment: understood
+    at: '2026-08-14T18:21:15+08:00'
+  - qa_id: qa_20260814T182215_60b575fa
+    question: what is agent??
+    self_assessment: understood
+    at: '2026-08-14T18:23:12+08:00'
+  card_sent_count: 34
+  confident_streak: 2
+  confident_count: 13
+  not_understood_count: 13
+  familiarity_est: 0.8417
+  handed_off_to_scenario1: false
+  handed_off_to_scenario2: false
+- open_id: ou_17460f4df133ddaddfb23d3bc2a71625
+  name: Target 2
+  stage: qna_reactive
+  status: active
+  last_message_id: ''
+  last_sent_at: ''
+  node: ''
+  last_qa:
+    qa_id: ''
+    question: ''
+    keyword: ''
+    card_message_id: ''
+    sent_at: ''
+  answers: []
+  card_sent_count: 0
+  confident_streak: 0
+  confident_count: 0
+  not_understood_count: 0
+  familiarity_est: 0.0
+  handed_off_to_scenario1: false
+  handed_off_to_scenario2: false
+- open_id: ou_ce11d2eb60bf7603771aa4fb8b64a8cb
+  name: Target 3
+  stage: qna_reactive
+  status: active
+  last_message_id: ''
+  last_sent_at: ''
+  node: ''
+  last_qa:
+    qa_id: ''
+    question: ''
+    keyword: ''
+    card_message_id: ''
+    sent_at: ''
+  answers: []
+  card_sent_count: 0
+  confident_streak: 0
+  confident_count: 0
+  not_understood_count: 0
+  familiarity_est: 0.0
+  handed_off_to_scenario1: false
+  handed_off_to_scenario2: false
+daily:
+  send_window:
+    start: 09:00
+    end: '21:00'
+  poll_every_minutes: 5
+  next_send_at: ''
+  last_daily_at: ''
+  sending: false
+  sending_at: ''

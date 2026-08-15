@@ -1,0 +1,14 @@
+map_revision: 19
+schema_version: '2.0'
+domain_id: general
+first_seen: '2026-08-13T09:33:47.266378+00:00'
+last_seen: '2026-08-14T16:27:17.496737+00:00'
+nodes:
+- id: what-is-an-agent
+  label: what_is_an_agent
+  aliases: []
+  confidence: 0.5
+  source_count: 1
+  first_seen: '2026-08-13T09:33:47.266378+00:00'
+  last_seen: '2026-08-13T09:33:47.266378+00:00'
+edges: []

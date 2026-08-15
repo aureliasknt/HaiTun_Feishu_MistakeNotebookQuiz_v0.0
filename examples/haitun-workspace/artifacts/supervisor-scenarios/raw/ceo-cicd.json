@@ -1,0 +1,2037 @@
+{
+  "scenario": "CEO：是否采用 CI/CD",
+  "user_id": "demo-ceo-cicd",
+  "profile_id": "executive-decision",
+  "user_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+  "turns": [
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.951409+00:00",
+      "user_message": "我是公司的 CEO。我们是否应该使用 CI/CD？请先给我一个直接判断。",
+      "assistant_message": "直接判断：应该采用 CI/CD，但不要把它理解为一次性采购工具；应从最小流水线开始。当前先确认发布痛点、测试基础和回滚能力。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 1,
+        "current_user_question": "我是公司的 CEO。我们是否应该使用 CI/CD？请先给我一个直接判断。",
+        "stage_profile": {
+          "depth": 0.15,
+          "goal": 0.45,
+          "familiarity": 0.2,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "software_delivery_governance",
+          "nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "delivery_baseline",
+            "用最小可行流水线替代一次性全面改造",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "delivery_baseline",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ],
+          "breakout_count": 6
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-1",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 1,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "cicd_decision",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.15,
+          "goal": 0.45,
+          "familiarity": 0.2,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": false,
+          "type": "none",
+          "score": 0.0,
+          "reason": "当前是首轮信号，先回答直接问题并观察。",
+          "directions": [],
+          "evidence": [
+            "我是公司的 CEO。我们是否应该使用 CI/CD？请先给我一个直接判断。"
+          ]
+        },
+        "latent_need": {
+          "detected": false,
+          "need": "",
+          "missing_dimensions": [],
+          "confidence": 0.0
+        },
+        "profile_shift": {
+          "detected": false,
+          "from": "",
+          "to": "",
+          "evidence": [],
+          "confidence": 0.0
+        },
+        "response_strategy": {
+          "answer_depth": "concise",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "none",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "cicd_decision"
+          ],
+          "branch_additions": []
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-1",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 1,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "cicd_decision",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.15,
+          "goal": 0.45,
+          "familiarity": 0.2,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": false,
+          "type": "none",
+          "score": 0.0,
+          "reason": "当前是首轮信号，先回答直接问题并观察。",
+          "directions": [],
+          "evidence": [
+            "我是公司的 CEO。我们是否应该使用 CI/CD？请先给我一个直接判断。"
+          ]
+        },
+        "latent_need": {
+          "detected": false,
+          "need": "",
+          "missing_dimensions": [],
+          "confidence": 0.0
+        },
+        "profile_shift": {
+          "detected": false,
+          "from": "",
+          "to": "",
+          "evidence": [],
+          "confidence": 0.0
+        },
+        "response_strategy": {
+          "answer_depth": "concise",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "none",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "cicd_decision"
+          ],
+          "branch_additions": []
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.15,
+        "goal": 0.45,
+        "familiarity": 0.2,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 0,
+        "visited_nodes": [],
+        "breakout_count": 0
+      },
+      "heatmap_after": {
+        "question_count": 1,
+        "visited_nodes": [
+          "cicd_decision"
+        ],
+        "breakout_count": 0
+      },
+      "map_before": {
+        "domain": "",
+        "nodes": []
+      },
+      "map_after": {
+        "domain": "software_delivery_governance",
+        "nodes": [
+          "cicd_decision"
+        ]
+      },
+      "errors": []
+    },
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.951568+00:00",
+      "user_message": "实施它要花多少钱，短期内能给业务带来什么收益？",
+      "assistant_message": "短期成本主要是工程时间、流水线环境和测试补齐；收益是减少人工发布、缩短反馈周期并降低事故恢复成本。决策前应把发布事故损失和等待时间计入成本，而不只看工具订阅费。\n\n💡 破圈效果：把是否采用工具重构为交付风险和投资回报决策；先评估自动化测试、回滚能力和变更失败率。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 2,
+        "current_user_question": "实施它要花多少钱，短期内能给业务带来什么收益？",
+        "stage_profile": {
+          "depth": 0.27,
+          "goal": 0.55,
+          "familiarity": 0.28,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "software_delivery_governance",
+          "nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "delivery_baseline",
+            "用最小可行流水线替代一次性全面改造",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "delivery_baseline",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ],
+          "breakout_count": 6
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-2",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 2,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "cicd_economics",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.27,
+          "goal": 0.55,
+          "familiarity": 0.28,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "reframe",
+          "score": 0.6799999999999999,
+          "reason": "用户已进入第 2 个认知节点，需要用 reframe 补足决策或治理维度。",
+          "directions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率"
+          ],
+          "evidence": [
+            "实施它要花多少钱，短期内能给业务带来什么收益？"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "把是否采用工具重构为交付风险和投资回报决策",
+          "missing_dimensions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": false,
+          "from": "",
+          "to": "",
+          "evidence": [],
+          "confidence": 0.0
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "cicd_economics"
+          ],
+          "branch_additions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-2",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 2,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "cicd_economics",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.27,
+          "goal": 0.55,
+          "familiarity": 0.28,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "reframe",
+          "score": 0.6799999999999999,
+          "reason": "用户已进入第 2 个认知节点，需要用 reframe 补足决策或治理维度。",
+          "directions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率"
+          ],
+          "evidence": [
+            "实施它要花多少钱，短期内能给业务带来什么收益？"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "把是否采用工具重构为交付风险和投资回报决策",
+          "missing_dimensions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": false,
+          "from": "",
+          "to": "",
+          "evidence": [],
+          "confidence": 0.0
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "cicd_economics"
+          ],
+          "branch_additions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.27,
+        "goal": 0.55,
+        "familiarity": 0.28,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 1,
+        "visited_nodes": [
+          "cicd_decision"
+        ],
+        "breakout_count": 0
+      },
+      "heatmap_after": {
+        "question_count": 2,
+        "visited_nodes": [
+          "cicd_decision",
+          "cicd_economics"
+        ],
+        "breakout_count": 1
+      },
+      "map_before": {
+        "domain": "software_delivery_governance",
+        "nodes": [
+          "cicd_decision"
+        ]
+      },
+      "map_after": {
+        "domain": "software_delivery_governance",
+        "nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "把是否采用工具重构为交付风险和投资回报决策",
+          "先评估自动化测试、回滚能力和变更失败率"
+        ]
+      },
+      "errors": []
+    },
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.951684+00:00",
+      "user_message": "我们有 24 名研发，每两周发布一次，自动化测试覆盖率约 30%，过去半年发生过三次发布事故。",
+      "assistant_message": "你们具备试点价值但不适合立刻全面自动发布：24 人团队和三次事故说明收益空间明显，30% 测试覆盖率则意味着应先建设 CI、质量门禁和一键回滚，再逐步开放 CD。\n\n💡 破圈效果：把是否采用工具重构为交付风险和投资回报决策；先评估自动化测试、回滚能力和变更失败率；用最小可行流水线替代一次性全面改造。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 3,
+        "current_user_question": "我们有 24 名研发，每两周发布一次，自动化测试覆盖率约 30%，过去半年发生过三次发布事故。",
+        "stage_profile": {
+          "depth": 0.39,
+          "goal": 0.65,
+          "familiarity": 0.36,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "software_delivery_governance",
+          "nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "delivery_baseline",
+            "用最小可行流水线替代一次性全面改造",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "delivery_baseline",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ],
+          "breakout_count": 6
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-3",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 3,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "delivery_baseline",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.39,
+          "goal": 0.65,
+          "familiarity": 0.36,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "broaden",
+          "score": 0.74,
+          "reason": "用户已进入第 3 个认知节点，需要用 broaden 补足决策或治理维度。",
+          "directions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "evidence": [
+            "我们有 24 名研发，每两周发布一次，自动化测试覆盖率约 30%，过去半年发生过三次发布事故。"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "把是否采用工具重构为交付风险和投资回报决策",
+          "missing_dimensions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "delivery_baseline"
+          ],
+          "branch_additions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-3",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 3,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "delivery_baseline",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.39,
+          "goal": 0.65,
+          "familiarity": 0.36,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "broaden",
+          "score": 0.74,
+          "reason": "用户已进入第 3 个认知节点，需要用 broaden 补足决策或治理维度。",
+          "directions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "evidence": [
+            "我们有 24 名研发，每两周发布一次，自动化测试覆盖率约 30%，过去半年发生过三次发布事故。"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "把是否采用工具重构为交付风险和投资回报决策",
+          "missing_dimensions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "delivery_baseline"
+          ],
+          "branch_additions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.39,
+        "goal": 0.65,
+        "familiarity": 0.36,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 2,
+        "visited_nodes": [
+          "cicd_decision",
+          "cicd_economics"
+        ],
+        "breakout_count": 1
+      },
+      "heatmap_after": {
+        "question_count": 3,
+        "visited_nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "delivery_baseline"
+        ],
+        "breakout_count": 2
+      },
+      "map_before": {
+        "domain": "software_delivery_governance",
+        "nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "把是否采用工具重构为交付风险和投资回报决策",
+          "先评估自动化测试、回滚能力和变更失败率"
+        ]
+      },
+      "map_after": {
+        "domain": "software_delivery_governance",
+        "nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "把是否采用工具重构为交付风险和投资回报决策",
+          "先评估自动化测试、回滚能力和变更失败率",
+          "delivery_baseline",
+          "用最小可行流水线替代一次性全面改造"
+        ]
+      },
+      "errors": []
+    },
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.951798+00:00",
+      "user_message": "基于这些情况，请明确建议：现在全面采用、暂缓，还是分阶段采用？",
+      "assistant_message": "明确建议：分阶段采用。第一阶段自动构建、测试和安全扫描；第二阶段自动部署测试环境；达到门槛后再对低风险服务启用生产发布，高风险变更保留人工批准。\n\n💡 破圈效果：把是否采用工具重构为交付风险和投资回报决策；先评估自动化测试、回滚能力和变更失败率；用最小可行流水线替代一次性全面改造。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 4,
+        "current_user_question": "基于这些情况，请明确建议：现在全面采用、暂缓，还是分阶段采用？",
+        "stage_profile": {
+          "depth": 0.51,
+          "goal": 0.75,
+          "familiarity": 0.44,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "software_delivery_governance",
+          "nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "delivery_baseline",
+            "用最小可行流水线替代一次性全面改造",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "delivery_baseline",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ],
+          "breakout_count": 6
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-4",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 4,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "adoption_decision",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.51,
+          "goal": 0.75,
+          "familiarity": 0.44,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "operationalize",
+          "score": 0.8,
+          "reason": "用户已进入第 4 个认知节点，需要用 operationalize 补足决策或治理维度。",
+          "directions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "evidence": [
+            "基于这些情况，请明确建议：现在全面采用、暂缓，还是分阶段采用？"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "把是否采用工具重构为交付风险和投资回报决策",
+          "missing_dimensions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "adoption_decision"
+          ],
+          "branch_additions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-4",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 4,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "adoption_decision",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.51,
+          "goal": 0.75,
+          "familiarity": 0.44,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "operationalize",
+          "score": 0.8,
+          "reason": "用户已进入第 4 个认知节点，需要用 operationalize 补足决策或治理维度。",
+          "directions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "evidence": [
+            "基于这些情况，请明确建议：现在全面采用、暂缓，还是分阶段采用？"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "把是否采用工具重构为交付风险和投资回报决策",
+          "missing_dimensions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "adoption_decision"
+          ],
+          "branch_additions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.51,
+        "goal": 0.75,
+        "familiarity": 0.44,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 3,
+        "visited_nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "delivery_baseline"
+        ],
+        "breakout_count": 2
+      },
+      "heatmap_after": {
+        "question_count": 4,
+        "visited_nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "delivery_baseline",
+          "adoption_decision"
+        ],
+        "breakout_count": 3
+      },
+      "map_before": {
+        "domain": "software_delivery_governance",
+        "nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "把是否采用工具重构为交付风险和投资回报决策",
+          "先评估自动化测试、回滚能力和变更失败率",
+          "delivery_baseline",
+          "用最小可行流水线替代一次性全面改造"
+        ]
+      },
+      "map_after": {
+        "domain": "software_delivery_governance",
+        "nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "把是否采用工具重构为交付风险和投资回报决策",
+          "先评估自动化测试、回滚能力和变更失败率",
+          "delivery_baseline",
+          "用最小可行流水线替代一次性全面改造",
+          "adoption_decision"
+        ]
+      },
+      "errors": []
+    },
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.951875+00:00",
+      "user_message": "给我一个 90 天试点方案，以及我在管理会上应该看的指标。",
+      "assistant_message": "90 天试点：第 1—30 天选一个低风险服务建立流水线；31—60 天补关键测试、回滚和审计；61—90 天扩大到两三个服务。管理会查看部署频率、交付周期、变更失败率、平均恢复时间、流水线通过率和每次发布人工耗时，并据此决定扩大投入。\n\n💡 破圈效果：把是否采用工具重构为交付风险和投资回报决策；先评估自动化测试、回滚能力和变更失败率；用最小可行流水线替代一次性全面改造。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 5,
+        "current_user_question": "给我一个 90 天试点方案，以及我在管理会上应该看的指标。",
+        "stage_profile": {
+          "depth": 0.63,
+          "goal": 0.8500000000000001,
+          "familiarity": 0.52,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "software_delivery_governance",
+          "nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "delivery_baseline",
+            "用最小可行流水线替代一次性全面改造",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "delivery_baseline",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ],
+          "breakout_count": 6
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-5",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 5,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "pilot_metrics",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.63,
+          "goal": 0.8500000000000001,
+          "familiarity": 0.52,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "operationalize",
+          "score": 0.86,
+          "reason": "用户已进入第 5 个认知节点，需要用 operationalize 补足决策或治理维度。",
+          "directions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "evidence": [
+            "给我一个 90 天试点方案，以及我在管理会上应该看的指标。"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "把是否采用工具重构为交付风险和投资回报决策",
+          "missing_dimensions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "pilot_metrics"
+          ],
+          "branch_additions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-5",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 5,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "pilot_metrics",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.63,
+          "goal": 0.8500000000000001,
+          "familiarity": 0.52,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "operationalize",
+          "score": 0.86,
+          "reason": "用户已进入第 5 个认知节点，需要用 operationalize 补足决策或治理维度。",
+          "directions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "evidence": [
+            "给我一个 90 天试点方案，以及我在管理会上应该看的指标。"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "把是否采用工具重构为交付风险和投资回报决策",
+          "missing_dimensions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "pilot_metrics"
+          ],
+          "branch_additions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.63,
+        "goal": 0.8500000000000001,
+        "familiarity": 0.52,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 4,
+        "visited_nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "delivery_baseline",
+          "adoption_decision"
+        ],
+        "breakout_count": 3
+      },
+      "heatmap_after": {
+        "question_count": 5,
+        "visited_nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "delivery_baseline",
+          "adoption_decision",
+          "pilot_metrics"
+        ],
+        "breakout_count": 4
+      },
+      "map_before": {
+        "domain": "software_delivery_governance",
+        "nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "把是否采用工具重构为交付风险和投资回报决策",
+          "先评估自动化测试、回滚能力和变更失败率",
+          "delivery_baseline",
+          "用最小可行流水线替代一次性全面改造",
+          "adoption_decision"
+        ]
+      },
+      "map_after": {
+        "domain": "software_delivery_governance",
+        "nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "把是否采用工具重构为交付风险和投资回报决策",
+          "先评估自动化测试、回滚能力和变更失败率",
+          "delivery_baseline",
+          "用最小可行流水线替代一次性全面改造",
+          "adoption_decision",
+          "pilot_metrics"
+        ]
+      },
+      "errors": []
+    },
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.951943+00:00",
+      "user_message": "先不要展开技术细节，用三句话告诉我为什么不是全面采用。",
+      "assistant_message": "三句话：你们已有事故成本，值得采用；测试覆盖率只有 30%，不适合一步到位；先试点并用结果决定扩大，风险和投入都更可控。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 6,
+        "current_user_question": "先不要展开技术细节，用三句话告诉我为什么不是全面采用。",
+        "stage_profile": {
+          "depth": 0.75,
+          "goal": 0.95,
+          "familiarity": 0.6000000000000001,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "software_delivery_governance",
+          "nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "delivery_baseline",
+            "用最小可行流水线替代一次性全面改造",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "delivery_baseline",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ],
+          "breakout_count": 6
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-6",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 6,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "executive_summary",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.75,
+          "goal": 0.95,
+          "familiarity": 0.6000000000000001,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": false,
+          "type": "none",
+          "score": 0.0,
+          "reason": "当前是首轮信号，先回答直接问题并观察。",
+          "directions": [],
+          "evidence": [
+            "先不要展开技术细节，用三句话告诉我为什么不是全面采用。"
+          ]
+        },
+        "latent_need": {
+          "detected": false,
+          "need": "",
+          "missing_dimensions": [],
+          "confidence": 0.0
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "none",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "executive_summary"
+          ],
+          "branch_additions": []
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-6",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 6,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "executive_summary",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.75,
+          "goal": 0.95,
+          "familiarity": 0.6000000000000001,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": false,
+          "type": "none",
+          "score": 0.0,
+          "reason": "当前是首轮信号，先回答直接问题并观察。",
+          "directions": [],
+          "evidence": [
+            "先不要展开技术细节，用三句话告诉我为什么不是全面采用。"
+          ]
+        },
+        "latent_need": {
+          "detected": false,
+          "need": "",
+          "missing_dimensions": [],
+          "confidence": 0.0
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "none",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "executive_summary"
+          ],
+          "branch_additions": []
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.75,
+        "goal": 0.95,
+        "familiarity": 0.6000000000000001,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 5,
+        "visited_nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "delivery_baseline",
+          "adoption_decision",
+          "pilot_metrics"
+        ],
+        "breakout_count": 4
+      },
+      "heatmap_after": {
+        "question_count": 6,
+        "visited_nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "delivery_baseline",
+          "adoption_decision",
+          "pilot_metrics",
+          "executive_summary"
+        ],
+        "breakout_count": 4
+      },
+      "map_before": {
+        "domain": "software_delivery_governance",
+        "nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "把是否采用工具重构为交付风险和投资回报决策",
+          "先评估自动化测试、回滚能力和变更失败率",
+          "delivery_baseline",
+          "用最小可行流水线替代一次性全面改造",
+          "adoption_decision",
+          "pilot_metrics"
+        ]
+      },
+      "map_after": {
+        "domain": "software_delivery_governance",
+        "nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "把是否采用工具重构为交付风险和投资回报决策",
+          "先评估自动化测试、回滚能力和变更失败率",
+          "delivery_baseline",
+          "用最小可行流水线替代一次性全面改造",
+          "adoption_decision",
+          "pilot_metrics",
+          "executive_summary"
+        ]
+      },
+      "errors": []
+    },
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.952000+00:00",
+      "user_message": "现在重新深入：组织权限、审计和回滚责任应该怎么分？",
+      "assistant_message": "权限上由平台团队维护流水线，业务团队拥有服务，安全团队设置门禁；审计记录代码、批准、构建和部署；失败时服务负责人决定回滚，重大事故由统一指挥机制接管。\n\n💡 破圈效果：把是否采用工具重构为交付风险和投资回报决策；先评估自动化测试、回滚能力和变更失败率；用最小可行流水线替代一次性全面改造。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 7,
+        "current_user_question": "现在重新深入：组织权限、审计和回滚责任应该怎么分？",
+        "stage_profile": {
+          "depth": 0.87,
+          "goal": 1.0,
+          "familiarity": 0.6799999999999999,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "software_delivery_governance",
+          "nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "delivery_baseline",
+            "用最小可行流水线替代一次性全面改造",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "delivery_baseline",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ],
+          "breakout_count": 6
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-7",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 7,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "delivery_accountability",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.87,
+          "goal": 1.0,
+          "familiarity": 0.6799999999999999,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "deepen",
+          "score": 0.95,
+          "reason": "用户已进入第 7 个认知节点，需要用 deepen 补足决策或治理维度。",
+          "directions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "evidence": [
+            "现在重新深入：组织权限、审计和回滚责任应该怎么分？"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "把是否采用工具重构为交付风险和投资回报决策",
+          "missing_dimensions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "delivery_accountability"
+          ],
+          "branch_additions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-7",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 7,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "delivery_accountability",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.87,
+          "goal": 1.0,
+          "familiarity": 0.6799999999999999,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "deepen",
+          "score": 0.95,
+          "reason": "用户已进入第 7 个认知节点，需要用 deepen 补足决策或治理维度。",
+          "directions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "evidence": [
+            "现在重新深入：组织权限、审计和回滚责任应该怎么分？"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "把是否采用工具重构为交付风险和投资回报决策",
+          "missing_dimensions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "delivery_accountability"
+          ],
+          "branch_additions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.87,
+        "goal": 1.0,
+        "familiarity": 0.6799999999999999,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 6,
+        "visited_nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "delivery_baseline",
+          "adoption_decision",
+          "pilot_metrics",
+          "executive_summary"
+        ],
+        "breakout_count": 4
+      },
+      "heatmap_after": {
+        "question_count": 7,
+        "visited_nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "delivery_baseline",
+          "adoption_decision",
+          "pilot_metrics",
+          "executive_summary",
+          "delivery_accountability"
+        ],
+        "breakout_count": 5
+      },
+      "map_before": {
+        "domain": "software_delivery_governance",
+        "nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "把是否采用工具重构为交付风险和投资回报决策",
+          "先评估自动化测试、回滚能力和变更失败率",
+          "delivery_baseline",
+          "用最小可行流水线替代一次性全面改造",
+          "adoption_decision",
+          "pilot_metrics",
+          "executive_summary"
+        ]
+      },
+      "map_after": {
+        "domain": "software_delivery_governance",
+        "nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "把是否采用工具重构为交付风险和投资回报决策",
+          "先评估自动化测试、回滚能力和变更失败率",
+          "delivery_baseline",
+          "用最小可行流水线替代一次性全面改造",
+          "adoption_decision",
+          "pilot_metrics",
+          "executive_summary",
+          "delivery_accountability"
+        ]
+      },
+      "errors": []
+    },
+    {
+      "mode": "DETERMINISTIC MOCK",
+      "timestamp": "2026-08-11T04:03:44.952067+00:00",
+      "user_message": "把 CI/CD 决策和公司的整体风险治理联系起来，给我最终董事会建议。",
+      "assistant_message": "董事会建议：批准分阶段 CI/CD计划，把它纳入技术风险治理而非单纯工具采购；设定风险容忍度、责任人和季度指标；只有试点同时改善交付速度和变更失败率才扩大投资。\n\n💡 破圈效果：把是否采用工具重构为交付风险和投资回报决策；先评估自动化测试、回滚能力和变更失败率；用最小可行流水线替代一次性全面改造。",
+      "supervisor_input": {
+        "event": "user_question",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 8,
+        "current_user_question": "把 CI/CD 决策和公司的整体风险治理联系起来，给我最终董事会建议。",
+        "stage_profile": {
+          "depth": 0.99,
+          "goal": 1.0,
+          "familiarity": 0.76,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "map_summary": {
+          "domain": "software_delivery_governance",
+          "nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "delivery_baseline",
+            "用最小可行流水线替代一次性全面改造",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ]
+        },
+        "heatmap_summary": {
+          "question_count": 8,
+          "visited_nodes": [
+            "cicd_decision",
+            "cicd_economics",
+            "delivery_baseline",
+            "adoption_decision",
+            "pilot_metrics",
+            "executive_summary",
+            "delivery_accountability",
+            "enterprise_risk"
+          ],
+          "breakout_count": 6
+        }
+      },
+      "raw_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-8",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 8,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "enterprise_risk",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.99,
+          "goal": 1.0,
+          "familiarity": 0.76,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "cross_domain",
+          "score": 0.95,
+          "reason": "用户已进入第 8 个认知节点，需要用 cross_domain 补足决策或治理维度。",
+          "directions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "evidence": [
+            "把 CI/CD 决策和公司的整体风险治理联系起来，给我最终董事会建议。"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "把是否采用工具重构为交付风险和投资回报决策",
+          "missing_dimensions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "enterprise_risk"
+          ],
+          "branch_additions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "validated_advice": {
+        "schema_version": "1.0",
+        "advice_id": "mock-ceo-cicd-8",
+        "user_id_hash": "fbd00529fa0367fa39f898b4fca76cc1505ee4cec34a4cb3b544b5cf25339e36",
+        "profile_id": "executive-decision",
+        "turn_index": 8,
+        "classification": {
+          "is_learning": true,
+          "domain": "software_delivery_governance",
+          "topic": "enterprise_risk",
+          "confidence": 0.95
+        },
+        "user_state": {
+          "depth": 0.99,
+          "goal": 1.0,
+          "familiarity": 0.76,
+          "evidence": [
+            "用户问题显示认知或决策阶段发生推进。"
+          ]
+        },
+        "breakout": {
+          "needed": true,
+          "type": "cross_domain",
+          "score": 0.95,
+          "reason": "用户已进入第 8 个认知节点，需要用 cross_domain 补足决策或治理维度。",
+          "directions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "evidence": [
+            "把 CI/CD 决策和公司的整体风险治理联系起来，给我最终董事会建议。"
+          ]
+        },
+        "latent_need": {
+          "detected": true,
+          "need": "把是否采用工具重构为交付风险和投资回报决策",
+          "missing_dimensions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ],
+          "confidence": 0.82
+        },
+        "profile_shift": {
+          "detected": true,
+          "from": "概念了解",
+          "to": "落地决策",
+          "evidence": [
+            "连续问题从定义转向风险、控制或实施。"
+          ],
+          "confidence": 0.8
+        },
+        "response_strategy": {
+          "answer_depth": "balanced",
+          "answer_scope": "framework",
+          "goal_mode": "decide",
+          "terminology": "explain_key_terms",
+          "breakout_integration": "integrated_section",
+          "instructions": []
+        },
+        "map_updates": {
+          "proposed_map": null,
+          "visited_nodes": [
+            "enterprise_risk"
+          ],
+          "branch_additions": [
+            "把是否采用工具重构为交付风险和投资回报决策",
+            "先评估自动化测试、回滚能力和变更失败率",
+            "用最小可行流水线替代一次性全面改造"
+          ]
+        },
+        "diagnostics": {
+          "source": "live",
+          "evidence": [
+            "确定性演示夹具；并非真实 LLM 判断。"
+          ]
+        }
+      },
+      "prompt_advice_injected": true,
+      "profile": {
+        "depth": 0.99,
+        "goal": 1.0,
+        "familiarity": 0.76,
+        "evidence": [
+          "用户问题显示认知或决策阶段发生推进。"
+        ]
+      },
+      "heatmap_before": {
+        "question_count": 7,
+        "visited_nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "delivery_baseline",
+          "adoption_decision",
+          "pilot_metrics",
+          "executive_summary",
+          "delivery_accountability"
+        ],
+        "breakout_count": 5
+      },
+      "heatmap_after": {
+        "question_count": 8,
+        "visited_nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "delivery_baseline",
+          "adoption_decision",
+          "pilot_metrics",
+          "executive_summary",
+          "delivery_accountability",
+          "enterprise_risk"
+        ],
+        "breakout_count": 6
+      },
+      "map_before": {
+        "domain": "software_delivery_governance",
+        "nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "把是否采用工具重构为交付风险和投资回报决策",
+          "先评估自动化测试、回滚能力和变更失败率",
+          "delivery_baseline",
+          "用最小可行流水线替代一次性全面改造",
+          "adoption_decision",
+          "pilot_metrics",
+          "executive_summary",
+          "delivery_accountability"
+        ]
+      },
+      "map_after": {
+        "domain": "software_delivery_governance",
+        "nodes": [
+          "cicd_decision",
+          "cicd_economics",
+          "把是否采用工具重构为交付风险和投资回报决策",
+          "先评估自动化测试、回滚能力和变更失败率",
+          "delivery_baseline",
+          "用最小可行流水线替代一次性全面改造",
+          "adoption_decision",
+          "pilot_metrics",
+          "executive_summary",
+          "delivery_accountability",
+          "enterprise_risk"
+        ]
+      },
+      "errors": []
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+# Scenario 3 — a user asks about agents/HaiTun (keyword filtered).
+name: feishu.agent_literacy.question
+source: feishu
+kind: platform_map
+platform_event: im.message.receive_v1
+# Most incoming messages have nothing to do with the agent-literacy campaign, so
+# this mapper drops them by design. Declaring filters keeps those empty results at
+# DEBUG instead of logging an "event dropped" warning for every ordinary message.
+filters: true
+description: >
+  智能体素养问答（场景 3）：私聊文本消息命中 outreach/state.yaml 的
+  scenario3.keywords（不区分大小写、子串匹配）时发出信封，交给 TRIGGER
+  outreach-confirm-auto 以 fire=tool 直接出「答案 + 理解确认卡」（0 LLM）。
+  未命中一律返回 []。payload: open_id / text / keyword / message_id / chat_id；
+  routing.open_id = 提问者。需要 Channel 进程设置 OUTREACH_STATE_PATH 才能读到
+  配置化关键词，读不到时回落到内置默认词表。

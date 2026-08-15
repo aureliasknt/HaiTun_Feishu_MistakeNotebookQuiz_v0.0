@@ -24,6 +24,7 @@ _GATEWAY_URL_FILE = Path(".psi") / "gateway.url"
 _DEFAULT_GATEWAY_URLS = (
     "http://127.0.0.1:62720",
     "http://127.0.0.1:8080",
+    "http://127.0.0.1:8765",
 )
 
 

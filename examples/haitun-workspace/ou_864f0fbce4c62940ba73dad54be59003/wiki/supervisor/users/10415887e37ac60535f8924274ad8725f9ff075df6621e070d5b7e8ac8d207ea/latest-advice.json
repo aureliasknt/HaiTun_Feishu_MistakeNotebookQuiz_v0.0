@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "advice_id": "advice_10415887e37ac60535f8924274ad8725f9ff075df6621e070d5b7e8ac8d207ea_t0_r",
+  "user_id_hash": "10415887e37ac60535f8924274ad8725f9ff075df6621e070d5b7e8ac8d207ea",
+  "profile_id": "",
+  "turn_index": 0,
+  "classification": {
+    "is_learning": false,
+    "domain": "technical_troubleshooting",
+    "topic": "feishu_webapp_user_identification",
+    "confidence": 0.85
+  },
+  "user_state": {
+    "depth": 0.0,
+    "goal": 0.0,
+    "familiarity": 0.2,
+    "evidence": [
+      "User repeated the same technical question about Feishu web app user recognition",
+      "Question is part of an ongoing deployment/routing troubleshooting context",
+      "No learning-oriented content is present"
+    ]
+  },
+  "breakout": {
+    "needed": false,
+    "type": "none",
+    "score": 0.0,
+    "reason": "This is a technical troubleshooting question; breakout would interfere with directly addressing the user's current configuration problem.",
+    "directions": [],
+    "evidence": [
+      "User asks 'bagaimana cara feishu web app ini mengenali user?'",
+      "The context is deployment troubleshooting, not concept learning"
+    ]
+  },
+  "latent_need": {
+    "detected": false,
+    "need": "",
+    "missing_dimensions": [],
+    "confidence": 0.0
+  },
+  "profile_shift": {
+    "detected": false,
+    "from": "",
+    "to": "",
+    "evidence": [],
+    "confidence": 0.0
+  },
+  "response_strategy": {
+    "answer_depth": "balanced",
+    "answer_scope": "local",
+    "goal_mode": "explain",
+    "terminology": "professional",
+    "breakout_integration": "none",
+    "instructions": []
+  },
+  "map_updates": {
+    "proposed_map": null,
+    "visited_nodes": [],
+    "branch_additions": []
+  },
+  "diagnostics": {
+    "source": "live",
+    "evidence": [
+      "Current question is a technical user-identification query",
+      "Question follows a routing/troubleshooting context"
+    ],
+    "created_at": "2026-08-14T16:27:17.488492+00:00"
+  }
+}

@@ -11,7 +11,7 @@ import pytest
 from lark_channel import PolicyConfig
 
 from psi_agent.channel._core import ChannelCore
-from psi_agent.channel._types import FileChunk, TextChunk
+from psi_agent.channel._types import FileChunk, ReasoningChunk, TextChunk
 from psi_agent.channel.feishu import ChannelFeishu, client
 from psi_agent.channel.feishu._card_action import (
     _card_has_action_value,
@@ -1110,6 +1110,82 @@ async def test_handle_p2p_message_passes_p2p_chat_type(monkeypatch, tmp_path):
     await _handle_and_stream(channel, resolve, None, ctx)
 
     assert calls == [{"open_id": "ou_1", "chat_id": "oc_dm", "chat_type": "p2p"}]
+
+
+class _CapturingStream:
+    """Collects what ``_produce`` appends, so the silent-token filter is observable."""
+
+    def __init__(self) -> None:
+        self.parts: list[str] = []
+
+    async def append(self, text: str) -> None:
+        self.parts.append(text)
+
+    @property
+    def text(self) -> str:
+        return "".join(self.parts)
+
+
+async def _run_stream(monkeypatch, tmp_path, chunks, *, suppress: bool = False) -> _CapturingStream:
+    """Drive ``_stream_reply`` over *chunks* and return what reached the chat."""
+
+    async def _post(_chunks):
+        for chunk in chunks:
+            yield chunk
+
+    core = ChannelCore(session_socket=str(tmp_path / "x.sock"))
+    monkeypatch.setattr(core, "post", _post)
+
+    stream = _CapturingStream()
+    channel = _fake_channel()
+
+    async def _stream(_chat_id, produce_map, _options):
+        await produce_map["markdown"](stream)
+
+    channel.stream = _stream
+    await client._stream_reply(channel, core, "oc_1", [TextChunk("q")], reply_to=None, suppress_silent_reply=suppress)
+    return stream
+
+
+@pytest.mark.anyio
+async def test_standalone_silent_token_is_not_delivered_on_the_ordinary_path(monkeypatch, tmp_path):
+    """The system prompt asks for exactly NO_REPLY when silent, so it must never ship.
+
+    Regression: suppression used to be enabled only for card-action turns, so an
+    ordinary DM the agent meant to ignore delivered the literal control token.
+    """
+    stream = await _run_stream(monkeypatch, tmp_path, [TextChunk("NO_REPLY")])
+    assert stream.text == ""
+
+
+@pytest.mark.anyio
+async def test_silent_token_split_across_chunks_is_still_suppressed(monkeypatch, tmp_path):
+    stream = await _run_stream(monkeypatch, tmp_path, [TextChunk("NO_"), TextChunk("REPLY")])
+    assert stream.text == ""
+
+
+@pytest.mark.anyio
+async def test_a_real_reply_is_delivered_unchanged(monkeypatch, tmp_path):
+    stream = await _run_stream(monkeypatch, tmp_path, [TextChunk("Nope, "), TextChunk("here is the answer.")])
+    assert stream.text == "Nope, here is the answer."
+
+
+@pytest.mark.anyio
+async def test_a_reply_merely_containing_the_token_is_left_alone(monkeypatch, tmp_path):
+    """Only a standalone token is a control signal; the word inside prose is content."""
+    stream = await _run_stream(monkeypatch, tmp_path, [TextChunk("Reply NO_REPLY when silent.")])
+    assert stream.text == "Reply NO_REPLY when silent."
+
+
+@pytest.mark.anyio
+async def test_card_action_path_still_rearms_after_a_tool_result(monkeypatch, tmp_path):
+    """A handler running mid-stream must not let a later NO_REPLY through."""
+    chunks = [
+        ReasoningChunk("calling handler", kind="tool_result"),
+        TextChunk("NO_REPLY"),
+    ]
+    stream = await _run_stream(monkeypatch, tmp_path, chunks, suppress=True)
+    assert stream.text == ""
 
 
 @pytest.mark.anyio
