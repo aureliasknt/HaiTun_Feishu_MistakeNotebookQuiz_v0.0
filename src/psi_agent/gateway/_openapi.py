@@ -276,6 +276,48 @@ OPENAPI_SPEC = {
                 },
             },
         },
+        "/feishu/app/sessions": {
+            "post": {
+                "summary": "Create a web-app Session in the caller's own Feishu workspace",
+                "description": (
+                    "Identity comes from the HttpOnly cookie only; ``workspace`` is derived "
+                    "server-side and any value in the body is ignored. The new Session shares the "
+                    "bot's workspace (profile / wiki / deliverables) but gets its own id, so chat "
+                    "history stays separate from the DM."
+                ),
+                "operationId": "createFeishuAppSession",
+                "requestBody": {
+                    "required": False,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "ai_id": {
+                                        "type": "string",
+                                        "description": "Optional; defaults to the bot Session's AI",
+                                    },
+                                    "agent": {
+                                        "type": "string",
+                                        "description": "Optional; defaults to the bot Session's agent pack",
+                                    },
+                                },
+                            }
+                        }
+                    },
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {"application/json": {"schema": {"$ref": "#/components/schemas/SessionInfo"}}},
+                    },
+                    "400": {"$ref": "#/components/responses/Error"},
+                    "401": {"$ref": "#/components/responses/Error"},
+                    "404": {"$ref": "#/components/responses/Error"},
+                    "500": {"$ref": "#/components/responses/Error"},
+                },
+            },
+        },
         "/oauth/callback": {
             "get": {
                 "summary": "OAuth redirect landing point (relays the code, no manual copy)",

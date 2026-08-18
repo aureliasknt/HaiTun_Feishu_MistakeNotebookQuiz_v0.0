@@ -11,7 +11,7 @@ import pytest
 from lark_channel import PolicyConfig
 
 from psi_agent.channel._core import ChannelCore
-from psi_agent.channel._types import FileChunk, TextChunk
+from psi_agent.channel._types import FileChunk, ReasoningChunk, TextChunk
 from psi_agent.channel.feishu import ChannelFeishu, client
 from psi_agent.channel.feishu._card_action import (
     _card_has_action_value,
@@ -480,6 +480,46 @@ async def test_build_chunks_group_header_carries_chat_id(monkeypatch, tmp_path):
     assert "chat_id: oc_group" in header.text
     # channel 层保持与 workspace 工具解耦: header 不含具体工具名
     assert "feishu_message_list" not in header.text
+
+
+def test_context_header_carries_mention_open_ids():
+    """@ 的 open_id 必须原样进 header —— content_text 里只剩显示名。
+
+    这是 "按 @某人 办事" 唯一可靠的凭据: lark SDK 已把 ``@_user_N`` 渲染成 ``@张三``,
+    名字在同名同事之间不唯一, 私聊里更没有 roster 可反查。
+    """
+    ctx = SimpleNamespace(
+        chat_id="oc_1",
+        chat_type="p2p",
+        message_id="om_1",
+        sender_id="ou_boss",
+        mentions=[
+            SimpleNamespace(open_id="ou_a", name="张三"),
+            SimpleNamespace(open_id="ou_b", name="李四"),
+        ],
+    )
+    header = client._context_header(ctx)
+    assert "mentions: ou_a (张三), ou_b (李四)" in header
+    # 发送者与被 @ 者是两回事, 别把前者当成目标。
+    assert "sender_open_id: ou_boss" in header
+
+
+def test_context_header_omits_mentions_line_when_nobody_was_mentioned():
+    ctx = SimpleNamespace(chat_id="oc_1", chat_type="p2p", message_id="om_1", sender_id="ou_1", mentions=[])
+    assert "mentions:" not in client._context_header(ctx)
+
+
+def test_mention_facts_skips_ids_it_cannot_address_and_flags_at_all():
+    """没有 open_id 的 mention 不能寻址, 报名字会被当成可用 id; @所有人 只留标记。"""
+    ctx = SimpleNamespace(
+        mentions=[SimpleNamespace(open_id="", name="外部用户"), SimpleNamespace(open_id="ou_c", name="")],
+        mentioned_all=True,
+    )
+    facts = client._mention_facts(ctx)
+    assert "外部用户" not in facts
+    # 无名字时只给 id, 不编造括号。
+    assert "ou_c" in facts and "ou_c (" not in facts
+    assert "@all" in facts
 
 
 @pytest.mark.anyio
@@ -1194,3 +1234,108 @@ async def test_gateway_route_provider_group_cache_is_per_chat() -> None:
 
     assert (a, b) == ("/tmp/a.sock", "/tmp/b.sock")
     assert len(http.post_calls) == 2
+
+
+# --------------------------------------------------------------- silent replies
+# The token must never reach the chat. A card click leaked every dressed-up form of
+# it (`**NO_REPLY**`, a trailing period, lower case), and an ordinary DM — the turn
+# Scenario 3 silences by dedup — had no filter at all.
+
+
+class _CollectingStream:
+    def __init__(self) -> None:
+        self.parts: list[str] = []
+
+    async def append(self, text: str) -> None:
+        self.parts.append(text)
+
+    @property
+    def text(self) -> str:
+        return "".join(self.parts)
+
+
+def _streaming_core(chunks: list[Any]) -> Any:
+    def post(_chunks: list[Any]) -> Any:
+        async def _gen() -> Any:
+            for chunk in chunks:
+                yield chunk
+
+        return _gen()
+
+    return SimpleNamespace(post=post, session_socket="/tmp/x.sock")
+
+
+async def _streamed(chunks: list[Any], *, suppress: bool) -> str:
+    """Run _stream_reply over *chunks* and return what the user would see."""
+    stream = _CollectingStream()
+    channel = MagicMock()
+
+    async def _stream(_chat_id: str, producers: dict, _options: dict) -> None:
+        await producers["markdown"](stream)
+
+    channel.stream = _stream
+    await client._stream_reply(
+        channel,
+        _streaming_core(chunks),
+        "oc_1",
+        [TextChunk("in")],
+        reply_to=None,
+        suppress_silent_reply=suppress,
+    )
+    return stream.text
+
+
+def _tool_result() -> Any:
+    return ReasoningChunk("", kind="tool_result")
+
+
+@pytest.mark.anyio
+@pytest.mark.parametrize(
+    "text",
+    [
+        pytest.param("NO_REPLY", id="bare"),
+        pytest.param("**NO_REPLY**", id="bold"),
+        pytest.param("`NO_REPLY`", id="code-span"),
+        pytest.param("NO_REPLY.", id="trailing-period"),
+        pytest.param("no_reply", id="lower-case"),
+        pytest.param("  NO_REPLY\n", id="surrounding-whitespace"),
+    ],
+)
+async def test_a_whole_message_silent_token_is_suppressed_however_it_is_dressed(text: str) -> None:
+    """The prompt forbids dressing it up; models do it anyway, and it used to leak."""
+    assert await _streamed([_tool_result(), TextChunk(text)], suppress=True) == ""
+
+
+@pytest.mark.anyio
+async def test_the_token_is_suppressed_on_an_ordinary_message_too() -> None:
+    """Scenario 3 silences the background DM turn with the token — that path has no card."""
+    assert await _streamed([TextChunk("NO_REPLY")], suppress=False) == ""
+    assert await _streamed([TextChunk("NO"), TextChunk("_REP"), TextChunk("LY")], suppress=False) == ""
+
+
+@pytest.mark.anyio
+async def test_a_real_reply_is_delivered_even_when_it_contains_the_token() -> None:
+    """Suppression is whole-message only: a leaked token inside prose stays visible.
+
+    Deliberate — hiding it would hide the rest of the sentence with it, and the
+    visible token is the signal that the turn said more than the token alone.
+    """
+    failure = "卡片发送失败, 请重试"
+    assert await _streamed([_tool_result(), TextChunk(failure)], suppress=True) == failure
+    assert await _streamed([_tool_result(), TextChunk("Nice, "), TextChunk("已记录")], suppress=True) == "Nice, 已记录"
+    assert "NO_REPLY" in await _streamed([TextChunk("已记录 NO_REPLY")], suppress=False)
+
+
+@pytest.mark.anyio
+async def test_text_before_a_tool_result_is_kept_and_the_token_after_it_dropped() -> None:
+    """A card turn buffers afresh after each tool result, so only the tail is judged."""
+    preamble = "好的, 我记录一下"
+    chunks = [TextChunk(preamble), _tool_result(), TextChunk("NO_REPLY")]
+    assert await _streamed(chunks, suppress=True) == preamble
+
+
+@pytest.mark.anyio
+async def test_long_prose_is_not_held_back_waiting_for_a_token_that_never_comes() -> None:
+    """The candidate buffer is bounded: streamed prose must not be withheld to the end."""
+    long_text = "N" * (4 * len("NO_REPLY") + 20)
+    assert await _streamed([TextChunk(long_text)], suppress=False) == long_text

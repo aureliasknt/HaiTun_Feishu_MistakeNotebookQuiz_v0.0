@@ -1,0 +1,93 @@
+/* 理解确认卡 (场景 3, 工作台内嵌)。
+   配色沿用 --brand-* / --ink / --line, 与飞书那张蓝色 header 的卡片观感对齐。 */
+
+.confirm-card {
+  margin: 12px 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 6%);
+}
+
+/* 卡面只有一句提问 + 三个按钮, 所以不再有蓝色 header 与正文分区 —— 一张卡一件事。 */
+.confirm-card-prompt {
+  margin: 0;
+  padding: 14px 14px 10px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.confirm-card-actions {
+  display: flex;
+  gap: 8px;
+  padding: 0 14px 14px;
+  flex-wrap: wrap;
+}
+
+.confirm-card-button {
+  flex: 1 1 auto;
+  min-width: 96px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  background: #fff;
+  color: var(--ink);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.confirm-card-button:hover:not(:disabled) {
+  border-color: var(--brand-400);
+  background: var(--brand-50);
+}
+
+.confirm-card-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* 三个按钮各给一点色彩暗示, 但不靠颜色单独承载语义 (文字已经写明)。 */
+.confirm-card-button.ok:hover:not(:disabled) {
+  border-color: #2ea043;
+}
+
+.confirm-card-button.mid:hover:not(:disabled) {
+  border-color: #d29922;
+}
+
+.confirm-card-button.no:hover:not(:disabled) {
+  border-color: #cf222e;
+}
+
+.confirm-card-error {
+  margin: 0;
+  padding: 0 14px 12px;
+  font-size: 12px;
+  color: #cf222e;
+}
+
+/* 模式徽标: 一个 URL 同时服务 2B / 2C, 当前是哪一种必须看得见。 */
+.mode-badge {
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.mode-badge.feishu {
+  color: #0958d9;
+  background: #e6f0ff;
+  border: 1px solid #adc9ff;
+}
+
+.mode-badge.local {
+  color: var(--text-muted);
+  background: #f4f5f7;
+  border: 1px solid var(--line);
+}

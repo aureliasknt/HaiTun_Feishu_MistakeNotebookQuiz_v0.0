@@ -38,6 +38,34 @@ from ._card_action import CardActionBatcher, handle_card_action
 _EMOJI_PROCESSING = "Typing"
 _EMOJI_FAILED = "CrossMark"
 _SILENT_REPLY_TOKEN = "NO_REPLY"
+# The token reduced the same way _reduce_silent_candidate reduces streamed text.
+_SILENT_REPLY_REDUCED = "NOREPLY"
+# Past this length a candidate is prose, not a dressed-up token: stop buffering it.
+_SILENT_REPLY_MAX_CANDIDATE = 4 * len(_SILENT_REPLY_TOKEN)
+
+
+def _may_still_become_silent_token(candidate: str) -> bool:
+    """True while *candidate* could still grow into the token, so keep buffering it.
+
+    ``**NO_`` reduces to ``NO``, a prefix of the token — the next chunk may complete
+    it. The length bound is what keeps ordinary prose flowing: a long message that
+    happens to start with a prefix is released instead of being withheld to the end.
+    """
+    if len(candidate) > _SILENT_REPLY_MAX_CANDIDATE:
+        return False
+    return _SILENT_REPLY_REDUCED.startswith(_reduce_silent_candidate(candidate))
+
+
+def _reduce_silent_candidate(text: str) -> str:
+    """Keep alphanumerics only, upper-cased — ``**NO_REPLY**`` and ``no_reply.`` both reduce to the token.
+
+    The system prompt forbids dressing the token up, but models do it anyway (bold,
+    code span, trailing period, lower case), and each variant used to reach the user
+    as literal text. Judging the reduced form suppresses a *whole-message* token in
+    all of those shapes; a real reply that merely contains it reduces to something
+    longer than the token and is still delivered.
+    """
+    return "".join(ch for ch in text if ch.isalnum()).upper()
 
 
 class ResolveCore(Protocol):
@@ -229,8 +257,38 @@ def _context_header(ctx: Any) -> str:
     thread_id = getattr(ctx, "thread_id", None) or getattr(ctx, "reply_to_message_id", None)
     if thread_id:
         lines.append(f"thread_id: {thread_id}")
+    mentions = _mention_facts(ctx)
+    if mentions:
+        lines.append(f"mentions: {mentions}")
     lines.append("</feishu_context>")
     return "\n".join(lines)
+
+
+def _mention_facts(ctx: Any) -> str:
+    """被 @ 的人, 形如 ``ou_a (张三), ou_b (李四)``; 无人被 @ 时返回 ""。
+
+    为什么非得单独给一行: ``content_text`` 里的 ``@_user_N`` 占位符已被 lark SDK 换成
+    **显示名** (``@张三``), open_id 在渲染中彻底消失。于是 agent 想按 "@某人" 办事只剩
+    按名字反查 (``feishu_chat_find_member``) 一条路 —— 群里两个同名的人就选错人, 私聊里
+    压根没有 roster 可查。mention 的 open_id 是协议事实, 与 ``sender_open_id`` 同级,
+    直接给出即可, 无需任何 API 往返。
+
+    机器人自己那条 mention 刻意**不**过滤: ``mentions`` 只报事实, 谁该被忽略由读者决定
+    (私聊里 @机器人 是唤醒动作, 群聊里则是寻址) —— 而且 SDK 已另给 ``mentioned_bot`` /
+    ``body_text`` 两个视图, 这里再筛一遍等于第三套语义。``@所有人`` 不带 open_id, 故只
+    在 ``mentioned_all`` 时补一个 ``@all`` 标记, 不伪造 id。
+    """
+    parts: list[str] = []
+    for mention in getattr(ctx, "mentions", None) or []:
+        open_id = str(getattr(mention, "open_id", "") or "").strip()
+        if not open_id:
+            # 没有 open_id 的 mention 无法寻址 (如外部租户), 报名字反而会被当成可用 id。
+            continue
+        name = str(getattr(mention, "name", "") or "").strip()
+        parts.append(f"{open_id} ({name})" if name else open_id)
+    if getattr(ctx, "mentioned_all", False):
+        parts.append("@all")
+    return ", ".join(parts)
 
 
 def _comment_context_header(event: Any, ctx: Any) -> str:
@@ -359,11 +417,20 @@ async def _stream_reply(
     reply_to: str | None,
     suppress_silent_reply: bool = False,
 ) -> None:
-    """Stream agent text and files into one Feishu chat."""
+    """Stream agent text and files into one Feishu chat.
+
+    A turn whose entire visible output is the silent-reply token is dropped, so
+    ``NO_REPLY`` never reaches the chat. This holds on **every** path: a card click
+    (where a tool result is normally the whole turn) and an ordinary DM, where
+    Scenario 3's dedup rule has the background turn answer with just the token.
+    ``suppress_silent_reply`` only decides whether buffering restarts after each tool
+    result — on the card path the interesting text comes after the handler runs.
+    """
 
     async def _produce(stream: Any) -> None:
         silent_candidate = ""
-        checking_silent_reply = suppress_silent_reply
+        # Every turn starts as a silence candidate; the first non-token text releases it.
+        checking_silent_reply = True
 
         async def flush_silent_candidate() -> None:
             nonlocal silent_candidate
@@ -371,11 +438,10 @@ async def _stream_reply(
                 return
             candidate = silent_candidate
             silent_candidate = ""
-            normalized = candidate.strip()
-            if not normalized:
-                logger.debug("suppressed whitespace-only Feishu card action reply")
-            elif normalized == _SILENT_REPLY_TOKEN:
-                logger.debug("suppressed standalone NO_REPLY from Feishu card action")
+            if not candidate.strip():
+                logger.debug("suppressed whitespace-only Feishu reply")
+            elif _reduce_silent_candidate(candidate) == _SILENT_REPLY_REDUCED:
+                logger.debug(f"suppressed standalone silent-reply token {candidate.strip()!r}")
             else:
                 await stream.append(candidate)
                 logger.debug(f"stream.append ({len(candidate)} chars)")
@@ -386,8 +452,7 @@ async def _stream_reply(
                     if isinstance(chunk, TextChunk):
                         if checking_silent_reply:
                             silent_candidate += chunk.text
-                            normalized = silent_candidate.strip()
-                            if not normalized or _SILENT_REPLY_TOKEN.startswith(normalized):
+                            if _may_still_become_silent_token(silent_candidate):
                                 continue
                             await flush_silent_candidate()
                             checking_silent_reply = False

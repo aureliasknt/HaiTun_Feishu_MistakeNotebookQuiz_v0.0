@@ -8,6 +8,13 @@
     />
     <link rel="icon" href="/spa-v2/haitun-dolphin.png" />
     <title>HaiTun Agent · 任务工作台</title>
+    <!--
+      飞书 JSSDK: 提供 window.h5sdk / window.tt, 让页面在飞书客户端里能走免登
+      (services/feishuIdentity.ts 的 requestAuthCode)。在普通浏览器里这两个全局不会出现,
+      因此纯 2C 流程完全不受影响 —— 那时身份走 /feishu/app/login 授权码回跳。
+      加载失败也只是退回回跳; 所以不 defer/async 之外不做任何额外兜底。
+    -->
+    <script src="https://lf1-cdn-tos.bytegoofy.com/goofy/lark/op/h5-js-sdk-1.5.35.js"></script>
   </head>
   <body>
     <div id="app"></div>

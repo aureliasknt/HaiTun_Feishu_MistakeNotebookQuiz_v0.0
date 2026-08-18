@@ -111,6 +111,15 @@ _SKILLS_SNAPSHOT_FILE = ".skills_prompt_snapshot.json"
 
 _SUPERVISOR_MANAGERS: dict[str, Any] = {}
 
+# Scenario 3: ``open_id`` → the ``last_qa.qa_id`` in force when this turn's prompt
+# was built. ``_ensure_confirmation_card`` compares against it after the answer is
+# committed; a changed id means the turn sent its own card. One entry per user at a
+# time, written by the prompt builder and consumed by the after-turn hook, so it
+# cannot accumulate. Deliberately in memory: it describes one turn in flight, and
+# on a restart the correct behaviour is to forget it rather than act on a card
+# decision from a turn that no longer exists.
+_PENDING_CARD_QA: dict[str, str] = {}
+
 # Global skills directory, shared across workspaces (AGENTS.md ecosystem
 # convention). Each skill lives at ~/.agent/skills/<name>/SKILL.md, mirroring
 # the per-workspace skills/ layout. Workspace skills override global ones on
@@ -1407,6 +1416,156 @@ def _get_supervisor_manager(workspace: anyio.Path) -> Any:
     return manager
 
 
+def _literacy_context(user_workspace: anyio.Path, user_text: str) -> str:
+    """Scenario 3's audience rules + curriculum grounding, or ``""`` off-campaign.
+
+    Scenario 3 used to answer agent-literacy questions from a static bank with no
+    model on the path the user waited on. The answer is written by the model now,
+    which means the curriculum has to reach the model *before* it starts writing —
+    and it has to arrive for free, or the change trades a wait for a wait.
+
+    So this is pure file IO: match the message against the campaign keywords, read
+    the matching bank entry, and hand over the teaching text plus the rules for
+    whom it is being explained to. No LLM call, no tool round-trip. Without it the
+    model would answer from general knowledge, because the six ``agent-basics``
+    wiki pages the campaign teaches from are not present in this package.
+
+    ``open_id`` comes from the workspace directory name: the Gateway gives every DM
+    user their own workspace at ``<root>/<open_id>``
+    (``_feishu_manager._workspace_for``), so the folder the turn is bound to *is*
+    the identity. Any other surface (group chats, the SPA, the CLI) has a different
+    shape there, finds no matching campaign row, and gets no block — which is
+    correct: the campaign is a DM campaign.
+
+    It also records the ``qa_id`` in force right now, in ``_PENDING_CARD_QA``. That
+    is what lets ``_ensure_confirmation_card`` tell, after the answer is committed,
+    whether the turn sent its own card — a changed id means it did. Grounding a turn
+    and owing it a card are the same condition, so the same pass decides both.
+
+    Failure is always ``""``. A missing state file, an unreadable bank or a
+    surprise in either is a reason to answer the question normally, never a reason
+    to lose the turn.
+    """
+    if not user_text.strip():
+        return ""
+    open_id = Path(str(user_workspace)).name
+    if not open_id.startswith("ou_"):
+        return ""
+    try:
+        outreach = importlib.import_module("_outreach_confirm")
+        state_file = outreach.state_path()
+        state = outreach.read_yaml_mapping(state_file)
+        if not isinstance(state, dict):
+            return ""
+        turn = outreach.campaign_turn(state, state_file, open_id, user_text)
+        if turn is None:
+            # Off-campaign: drop any id left by an earlier turn, so a later
+            # ordinary message can never be mistaken for an unanswered card.
+            _PENDING_CARD_QA.pop(open_id, None)
+            return ""
+        _PENDING_CARD_QA[open_id] = turn["qa_id"]
+        # Assembling the blocks is ``_outreach_confirm``'s job, not this module's:
+        # a copy of that logic here silently went out of date the moment the click
+        # instruction was added there, and the tests — which exercise the helper —
+        # could not see it.
+        return str(outreach.literacy_context(state, state_file, open_id, user_text) or "")
+    except Exception as exc:
+        logger.warning("Scenario 3 literacy context unavailable: %r", exc, exc_info=True)
+        return ""
+
+
+def _first_sentence(text: str, limit: int = 120) -> str:
+    """Opening sentence of *text*, for the card's ``summary``.
+
+    Chinese full stops and question marks are the correct characters here — the
+    answers this summarises are written in Chinese.
+    """
+    flat = " ".join(text.split())
+    for stop in ("。", "！", "？", ". ", "! ", "? "):  # noqa: RUF001
+        index = flat.find(stop)
+        if 0 < index <= limit:
+            return flat[: index + len(stop)].strip()
+    return flat[:limit].strip()
+
+
+async def _ensure_confirmation_card(
+    user_workspace: anyio.Path,
+    user_text: str,
+    assistant_text: str,
+) -> None:
+    """Guarantee the 理解确认卡 for a Scenario 3 answer that has just been sent.
+
+    Why this exists. The card used to be mechanically guaranteed: a channel mapper
+    matched the keyword and a ``fire=tool`` trigger sent answer-plus-card with no
+    model involved. That trigger fired on **message arrival**, so it cannot survive
+    a model-written answer — at the moment it ran there was no answer yet. Deleting
+    it left the card resting on the skill's instructions, i.e. on the model
+    remembering, which is not a guarantee.
+
+    This hook restores the guarantee at the only point where it can now live: after
+    the answer is committed (``run_after_turn``), which is also the correct order —
+    the card asks about text the user has already read.
+
+    **Not** time-based. Whether the model already sent a card is decided from state:
+    ``_PENDING_CARD_QA`` holds the ``last_qa.qa_id`` seen when this turn's prompt was
+    built, and a *different* id on disk now means ``outreach_confirm_card`` ran
+    during the turn, so this stays silent. An earlier design in this campaign used a
+    seconds window (``dedup_window_seconds``) for a similar job; that was a guess
+    about timing, not a fact about state.
+
+    No recorded pre-turn id means the prompt builder never grounded this turn, so
+    there is nothing to compare against and the hook stands down rather than guess.
+
+    A **懂了 click owes no card** and is skipped outright: that turn affirms, offers
+    next topics and asks what else is open, claiming nothing new. "No card was sent"
+    is the correct outcome there, not a lapse to repair — treating it as one would
+    ask 「这次讲清楚了吗？」 about a message that taught nothing.
+
+    Silent on every failure: a missing card is a smaller problem than a raised
+    exception in a post-turn hook.
+    """
+    if not user_text.strip() or not assistant_text.strip():
+        return
+    open_id = Path(str(user_workspace)).name
+    if not open_id.startswith("ou_"):
+        return
+    if open_id not in _PENDING_CARD_QA:
+        return
+    before = _PENDING_CARD_QA.pop(open_id)
+    try:
+        outreach = importlib.import_module("_outreach_confirm")
+        state_file = outreach.state_path()
+        state = outreach.read_yaml_mapping(state_file)
+        if not isinstance(state, dict):
+            return
+        turn = outreach.campaign_turn(state, state_file, open_id, user_text)
+        if turn is None:
+            return
+        # 懂了 owes no card: the turn affirms, offers next topics and asks if anything
+        # else is open — it claims nothing new, so there is nothing to confirm. Without
+        # this the guarantee would "restore" a card the design deliberately omits, and
+        # hand the user a 「这次讲清楚了吗？」 about a message that taught nothing.
+        if turn.get("card_answer") == outreach.ANSWER_UNDERSTOOD:
+            return
+        if turn["qa_id"] != before:
+            logger.debug("Scenario 3: the turn sent its own card, hook standing down")
+            return
+
+        card_module = importlib.import_module("outreach_confirm_card")
+        raw = await card_module.outreach_confirm_card(
+            open_id,
+            topic=turn["topic"],
+            keyword=turn["keyword"],
+            summary=_first_sentence(assistant_text),
+            question=user_text,
+        )
+        # Logged as a warning on purpose: every one of these is a turn that ignored
+        # the skill, and the count is the only signal that it is happening.
+        logger.warning(f"Scenario 3: card missing after the answer, sent by after-turn hook — {raw[:200]}")
+    except Exception as exc:
+        logger.warning("Scenario 3 card guarantee failed: %r", exc, exc_info=True)
+
+
 def _build_profile_policy(topic_profile: dict[str, Any]) -> str:
     current_turn = int(topic_profile.get("turns", 0)) + 1
     socratic = "3. **苏格拉底提问**: 本轮必须提问!" if current_turn % 3 == 0 else "3. 本轮不强制提问。"
@@ -1502,6 +1661,8 @@ async def system_prompt_builder(
     except Exception as exc:
         logger.warning("Adaptive profile unavailable: %r", exc, exc_info=True)
 
+    literacy_text = _literacy_context(user_workspace, user_text)
+
     raw_advice = user_message.get("supervisor_advice") if isinstance(user_message, dict) else None
     if isinstance(raw_advice, dict):
         protocol = importlib.import_module("supervisor_protocol")
@@ -1510,7 +1671,7 @@ async def system_prompt_builder(
             advice_text += "\n- 用户当前消息中的直接范围和深度要求优先; 若用户要求不展开, 则抑制破圈, 不得强制扩展。"
     else:
         advice_text = ""
-    injected = "\n".join(part for part in (profile_text, advice_text, policy_text) if part)
+    injected = "\n".join(part for part in (profile_text, advice_text, policy_text, literacy_text) if part)
     if not injected:
         return prompt
     boundary = "<!-- HAITUN_CACHE_BOUNDARY -->"
@@ -1688,6 +1849,10 @@ async def system_after_turn(
     user_text = user_text if isinstance(user_text, str) else ""
     assistant_text = assistant_text if isinstance(assistant_text, str) else ""
     await profile.record_turn(user_text, assistant_text)
+
+    # Scenario 3's card, before the supervisor warmup: the user is waiting for the
+    # card, nobody is waiting for the warmup.
+    await _ensure_confirmation_card(workspace, user_text, assistant_text)
 
     supervisor_module = importlib.import_module("supervisor")
     if supervisor_module.is_learning_question(user_text):

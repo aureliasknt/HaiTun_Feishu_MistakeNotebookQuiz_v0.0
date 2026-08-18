@@ -49,68 +49,97 @@ class AiClient:
 
     async def stream(self, request_body: dict) -> AsyncGenerator[AiDelta]:
         connector, endpoint = self._build_connector_and_endpoint()
-        async with (
-            aiohttp.ClientSession(connector=connector, timeout=aiohttp.ClientTimeout(total=None)) as session,
-            session.post(endpoint, json=request_body) as resp,
-        ):
-            logger.info(f"AI response status: {resp.status}")
-            if resp.status != 200:
-                error_text = await resp.text()
-                logger.error(f"AI error from {self.ai_socket!r}: {error_text[:1000]!r}")
-                yield AiDelta(finish_reason=FINISH_REASON_ERROR, content=f"[AI Error: {resp.status}]")
-                return
+        try:
+            async with (
+                aiohttp.ClientSession(connector=connector, timeout=aiohttp.ClientTimeout(total=None)) as session,
+                session.post(endpoint, json=request_body) as resp,
+            ):
+                async for delta in self._consume(resp):
+                    yield delta
+        except aiohttp.ClientConnectorError as e:
+            # Nothing is listening on ``ai_socket``. aiohttp renders this as
+            # "Cannot connect to host localhost:80", because a named-pipe /
+            # Unix-socket connector still needs a nominal HTTP host — so the raw
+            # message names a port nobody configured and hides the one fact that
+            # matters: *which* backend is down. Rewrite it before it reaches a user.
+            #
+            # Only the connect phase raises this; a mid-stream drop surfaces as
+            # ServerDisconnectedError / ClientPayloadError and is left alone.
+            logger.error(f"AI backend unreachable at {self.ai_socket!r}: {e!r}")
+            yield AiDelta(finish_reason=FINISH_REASON_ERROR, content=self._unreachable_message())
 
-            logger.debug("Starting to consume SSE stream")
-            async for raw_line in resp.content:
-                line = raw_line.decode().strip()
-                data_str = parse_sse_data(line)
-                # Empty payloads are heartbeats on some OpenAI-compatible
-                # servers; skip them silently rather than letting them reach
-                # ``json.loads`` and log a warning per beat.
-                if not data_str or data_str == SSE_DONE:
-                    continue
+    def _unreachable_message(self) -> str:
+        """Operator-facing text for "the AI backend is not running".
 
-                try:
-                    data = json.loads(data_str)
-                except json.JSONDecodeError:
-                    logger.warning(f"Failed to parse SSE data: {data_str[:1000]!r}")
-                    continue
+        Names the socket so the reader can tell *which* backend died, and says what
+        to do about it — the id in the path is the AI id to recreate.
+        """
+        return (
+            f"[AI Error: AI 后端未运行 (socket={self.ai_socket})。"
+            "该 Session 绑定的 AI 实例不存在或已退出 —— "
+            "请在 SPA 重建同名 AI, 或用 POST /ais 以相同 id 重新创建。]"
+        )
 
-                choices_data = data.get("choices", [])
-                if not isinstance(choices_data, list):
-                    logger.warning(f"Expected choices as list, got {type(choices_data).__name__}")
-                    continue
-                if len(choices_data) > 1:
-                    logger.warning(f"Expected 1 choice, got {len(choices_data)}, yielding error")
-                    yield AiDelta(
-                        finish_reason=FINISH_REASON_ERROR,
-                        content=f"[AI Error: expected 1 choice, got {len(choices_data)}]",
-                    )
-                    return
-                if not choices_data:
-                    continue
+    async def _consume(self, resp: aiohttp.ClientResponse) -> AsyncGenerator[AiDelta]:
+        """Parse one AI response: status check, then SSE → ``AiDelta``."""
+        logger.info(f"AI response status: {resp.status}")
+        if resp.status != 200:
+            error_text = await resp.text()
+            logger.error(f"AI error from {self.ai_socket!r}: {error_text[:1000]!r}")
+            yield AiDelta(finish_reason=FINISH_REASON_ERROR, content=f"[AI Error: {resp.status}]")
+            return
 
-                c = choices_data[0]
-                if not isinstance(c, dict):
-                    logger.warning(f"Expected choice as dict, got {type(c).__name__}")
-                    continue
-                delta_data = c.get("delta")
-                if not isinstance(delta_data, dict):
-                    delta_data = {}
-                compaction_signal = data.get("psi_compaction", {})
-                compaction_needed = isinstance(compaction_signal, dict) and compaction_signal.get("needed", False)
+        logger.debug("Starting to consume SSE stream")
+        async for raw_line in resp.content:
+            line = raw_line.decode().strip()
+            data_str = parse_sse_data(line)
+            # Empty payloads are heartbeats on some OpenAI-compatible
+            # servers; skip them silently rather than letting them reach
+            # ``json.loads`` and log a warning per beat.
+            if not data_str or data_str == SSE_DONE:
+                continue
+
+            try:
+                data = json.loads(data_str)
+            except json.JSONDecodeError:
+                logger.warning(f"Failed to parse SSE data: {data_str[:1000]!r}")
+                continue
+
+            choices_data = data.get("choices", [])
+            if not isinstance(choices_data, list):
+                logger.warning(f"Expected choices as list, got {type(choices_data).__name__}")
+                continue
+            if len(choices_data) > 1:
+                logger.warning(f"Expected 1 choice, got {len(choices_data)}, yielding error")
                 yield AiDelta(
-                    content=delta_data.get("content"),
-                    reasoning=delta_data.get("reasoning"),
-                    kind=delta_data.get("kind") if isinstance(delta_data.get("kind"), str) else None,
-                    tool_calls=delta_data.get("tool_calls"),
-                    finish_reason=c.get("finish_reason"),
-                    compaction_needed=compaction_needed,
-                    prompt_tokens=self._as_int(compaction_signal.get("prompt_tokens"))
-                    if isinstance(compaction_signal, dict)
-                    else 0,
-                    compaction_threshold=self._as_int(compaction_signal.get("threshold"))
-                    if isinstance(compaction_signal, dict)
-                    else 0,
+                    finish_reason=FINISH_REASON_ERROR,
+                    content=f"[AI Error: expected 1 choice, got {len(choices_data)}]",
                 )
-            logger.debug("SSE stream consumed successfully")
+                return
+            if not choices_data:
+                continue
+
+            c = choices_data[0]
+            if not isinstance(c, dict):
+                logger.warning(f"Expected choice as dict, got {type(c).__name__}")
+                continue
+            delta_data = c.get("delta")
+            if not isinstance(delta_data, dict):
+                delta_data = {}
+            compaction_signal = data.get("psi_compaction", {})
+            compaction_needed = isinstance(compaction_signal, dict) and compaction_signal.get("needed", False)
+            yield AiDelta(
+                content=delta_data.get("content"),
+                reasoning=delta_data.get("reasoning"),
+                kind=delta_data.get("kind") if isinstance(delta_data.get("kind"), str) else None,
+                tool_calls=delta_data.get("tool_calls"),
+                finish_reason=c.get("finish_reason"),
+                compaction_needed=compaction_needed,
+                prompt_tokens=self._as_int(compaction_signal.get("prompt_tokens"))
+                if isinstance(compaction_signal, dict)
+                else 0,
+                compaction_threshold=self._as_int(compaction_signal.get("threshold"))
+                if isinstance(compaction_signal, dict)
+                else 0,
+            )
+        logger.debug("SSE stream consumed successfully")

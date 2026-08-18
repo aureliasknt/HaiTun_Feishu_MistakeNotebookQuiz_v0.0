@@ -1,0 +1,122 @@
+# Outreach campaign state — Scenario 3 (reactive Q&A + confirmation card) and
+# Scenario 1 (daily outreach). Copy to state.yaml and fill in real open_ids.
+# Schema: outreach/README.md. The producer, the tools and the agent rewrite this
+# file with yaml.safe_dump — comments are NOT preserved.
+cohort: agent-basics
+# Wiki pages are stored flat (wiki/<slug>.md) — the wiki_* tools do not support
+# subfolders. Curriculum pages carry the `agent-basics` tag; hub: wiki/agent-basics.md.
+source_wiki: wiki/
+source_wiki_hub: Agent Basics
+source_wiki_tag: agent-basics
+# Recipient of producer notifications (empty → session default).
+controller_open_id: ''
+
+# Graduation thresholds shared by both scenarios.
+thresholds:
+  familiarity_done: 0.7
+  confident_answers_needed: 3
+
+# Scenario 3 — reactive: the user asks, the agent answers (grounded in the bank,
+# written for the audience below) and then sends a confirmation card. `keywords` is
+# read by the prompt builder, which resolves this file package-relative — no env var
+# is needed; set OUTREACH_STATE_PATH only to point outside the package.
+scenario3:
+  enabled: true
+  # Case-insensitive substring match against the incoming message text.
+  keywords:
+    - agent
+    - 智能体
+    - llm
+    - 大模型
+    - 海豚
+    - haitun
+    - 工具调用
+    - tool calling
+    - prompt
+    - 提示词
+  qa_bank_path: outreach/qna_bank.yaml
+  # Who the answer is written for. The agent writes every answer, and the bank's
+  # wording targets a general reader, so this is what keeps a correct explanation
+  # from landing as engineering prose. Omit `strategy` for the built-in list
+  # (definition first, analogies from law, liability over architecture, audit
+  # trail, no jargon, boundaries stated, numbered points); set it to [] to switch
+  # the block off. A user row's own `role` overrides `role` here.
+  audience:
+    role: 法务专员 (legal officer)
+  followup:
+    # immediate → the callback tool sends the pre-composed follow-up itself.
+    # next_question → no follow-up; the strategy is applied on the user's next question.
+    mode: immediate
+  card:
+    # false → no card after a re-explanation either.
+    ask_after_every_answer: true
+    # Every Nth exchange carries a real probe question, so a claimed "understood"
+    # is not the only evidence. It rides with the answer text, never on the card.
+    probe_question_every: 3
+
+users:
+  - open_id: ou_REPLACE_ME_1
+    name: Target 1
+    # Scenario 3 → optional Scenario 1 → Scenario 2.
+    stage: qna_reactive
+    # active | paused. `paused` stops BOTH scenarios for this person (no grounding,
+    # no cards, no daily push) while keeping every counter, so it is reversible;
+    # deleting the row is not. Set it with outreach_target_pause. Only the literal
+    # `paused` pauses — anything else, including a missing value, is active.
+    status: active
+    last_message_id: ''
+    last_sent_at: ''
+    node: ''
+    last_qa:
+      qa_id: ''
+      question: ''
+      keyword: ''
+      card_message_id: ''
+      sent_at: ''
+    answers: []
+    card_sent_count: 0
+    confident_streak: 0
+    confident_count: 0
+    not_understood_count: 0
+    familiarity_est: 0.0
+    handed_off_to_scenario1: false
+    handed_off_to_scenario2: false
+  - open_id: ou_REPLACE_ME_2
+    name: Target 2
+    stage: qna_reactive
+    status: active
+    last_message_id: ''
+    last_sent_at: ''
+    node: ''
+    last_qa:
+      qa_id: ''
+      question: ''
+      keyword: ''
+      card_message_id: ''
+      sent_at: ''
+    answers: []
+    card_sent_count: 0
+    confident_streak: 0
+    confident_count: 0
+    not_understood_count: 0
+    familiarity_est: 0.0
+    handed_off_to_scenario1: false
+    handed_off_to_scenario2: false
+
+# Scenario 1 — daily outreach. Not active while stage is qna_reactive: leave
+# next_send_at empty so the producer stays idle until handoff.
+daily:
+  send_window:
+    start: '09:00'
+    end: '21:00'
+  poll_every_minutes: 5
+  next_send_at: ''
+  last_daily_at: ''
+  sending: false
+  sending_at: ''
+  # Test mode (optional) — fixed cadence until interval_until, then it reverts to
+  # the daily random cadence automatically. Set poll_every_minutes: 1 so the grid
+  # stays accurate.
+  # interval_minutes: 10
+  # interval_until: '2026-08-11T22:00:00+08:00'
+

@@ -124,6 +124,7 @@ schedules → `{workspace}/schedules/`（归 workspace，非 agent 包 / 非 App
 | `--default-agent` | 新建 Session 的 Agent 包目录；空则软默认：① `cwd/examples/haitun-workspace`（仓库开发）；② cwd 自身含 `tools/`+`skills/`（Inno 安装布局 `{app}` 即能力包）；仍空则 Session `agent=""`（与 workspace 同根兼容）。Windows 安装包 `haitun.exe` **显式**传 `--default-agent {app}` |
 | `--default-workspace` | 新建 Session / `GET /defaults` 的用户工作区；空 → 软默认 `{Desktop}/haitun交付`（**只宣布路径**；目录在 `SessionManager.create` / 开始对话时才 mkdir。`platformdirs.user_desktop_dir`）。安装包 `haitun.exe` **显式**传该路径（运行时解析桌面，不写死用户名） |
 | `--appdata` | AppData 记忆区根；空 → `PSI_APPDATA` → `platformdirs`（**禁止**手写死 `%AppData%`） |
+| `--feishu-ai-id` | 飞书 Session 缺省 AI 实例；空 → `PSI_FEISHU_AI_ID`（`resolve_feishu_ai_id`）；仍空**不再** 400，由 `FeishuManager._resolve_ai` 回落到任一活着的 AI |
 | `--scheduler-ai-id` | 调度 Session 挂载的 AI 实例；空 → 回落 `--feishu-ai-id`；两者都空则有 `schedules/` 的 workspace 只记 warning 不启动调度 |
 | `--auth-endpoint` | 云端账号服务地址。**空 ≠ 关闭**：空则取内置默认（正式账号服务），装了包即能登录。要关掉整套认证（不创建 `AuthManager`、不注册 `/auth/*`、不读写本机凭证）须显式 `PSI_AUTH_ENDPOINT=""`。前缀另由 `PSI_AUTH_PREFIX` 覆盖（默认 `/auth`） |
 
@@ -344,11 +345,22 @@ Gateway：``list_segments`` / ``get_segment`` 只读；``set_segment_label`` 允
 | 私聊 | `p2p` / 缺失 | 发送者 `open_id` | `feishu-<open_id>` | `<root>/<open_id>` | 一人一个，历史/记忆互相隔离 |
 | 群聊 | `group` / `topic` | `chat:<chat_id>` | `feishu-chat-<chat_id>` | `<root>/chat-<chat_id>` | **整群共用一个**，机器人在群里对全体成员有连贯上下文 |
 
+**网页应用子会话（`POST /feishu/app/sessions`）**：工作台里点「新建任务」不再复用机器人那条 Session，而是在**同一个 workspace** 下建一条独立 Session，id 形如 `feishu-<open_id>-web-<hex12>`（`web_session_id()`）。于是：
+
+- **共享的**：workspace 逐字相同，所以 USER.md / llm_wiki / Supervisor / 交付物仍是一个池子
+- **不共享的**：对话历史按 session_id 存（`HistoryManager`），所以机器人私聊里的话不会出现在网页任务里，反之亦然——这正是「一个池子，两条历史」
+
+子会话 id **必须落不进任何路由键的像**，否则 `route()` 第 3 步的 adopt 分支会把它当成机器人会话接管（机器人从此在某个网页任务里说话，而该任务的历史又被当成私聊历史）。这条不变量由 `_WEB_SESSION_RE` 表达并在 `web_session_id()` 返回前自检：私聊 id 只含一个 `-`（`-` 已被转义成 `_`），群聊 id 的 `chat` 段后必然还有 `-`，而正则要求中段 `[A-Za-z0-9._]+`（不含 `-`）后紧跟 `-web-<hex12>`。`is_web_session_id()` 与它共用同一条定义，勿另写一套判定。
+
 群聊按 `chat_id` 而非按发言者聚合，是因为群里的对话本身就是共享的：A 问完 B 追问「那第二点呢」，机器人必须看得见 A 那轮。要区分是谁在说话，靠 `_context_header` 每条消息注入的 `sender_open_id`（见 `channel/AGENTS.md`），不靠拆 session。群与群、群与私聊之间互不串味。
 
 **字段**：
 - `_sm: SessionManager` — 复用其 spawn/查询能力管理 Session 生命周期
-- `_ai_id: str` — 飞书 Session 默认挂载的 AI 实例 id（`create_app(..., feishu_ai_id=...)` 注入，来自 `Gateway.feishu_ai_id`）
+- `_ai_id: str` — 飞书 Session 默认挂载的 AI 实例 id（`create_app(..., feishu_ai_id=...)` 注入，来自 `Gateway.feishu_ai_id`，空则回落 `PSI_FEISHU_AI_ID`）
+
+**挂哪个 AI（`_resolve_ai`）**：显式请求体 `ai_id` > `_ai_id`（且**活着**）> **任一活着的 AI** > 报错（`route` 抛 `ValueError` → 400）。
+
+最后那级回落是刻意加的：装了包的用户两级都为空 —— launcher 从前不传 `--feishu-ai-id`，而 SPA 建 AI 用随机 uuid，谁也猜不到。于是配置里的 id 永远不存在，`_rebind_if_backend_gone` 永远换不到活 AI，那个飞书用户**永久**收到「AI 后端未运行」。挑一个活 AI 不涉及凭证或权限（同进程里的 AI 都是本机主人自己建的），比因为一个用户没设过的 CLI 参数而装死更合理。
 - `_workspace_root: str` — 各会话独立 workspace 的父目录（来自 `Gateway.feishu_workspace_root`；空则以 cwd 为父）
 - `_routes: dict[str, str]` — 路由键 → session_id 映射（内存态）
 - `_lock: anyio.Lock` — 首次路由才走，频率低，可接受串行
@@ -785,7 +797,10 @@ Inno 安装后 `{app}` **就是** haitun-workspace（`tools/` / `skills/` / `sys
 psi-agent.exe gateway --tray --browser --icon haitun.ico --verbose
   --default-agent "{app}"
   --default-workspace "{Desktop}/haitun交付"
+  --feishu-ai-id feishu-default
 ```
+
+`--feishu-ai-id` 必须传且必须是**固定**值（`haitun.c` 的 `FEISHU_AI_ID`，与 `.env.example` / `dev-feishu.ps1` 同值）。飞书 Session 把 `backend_id` 持久化进 `state/latest.json`，所以随机 id 一旦 AI 被重建就永久失配 —— 该用户此后每句话都收到「AI 后端未运行」，重启网关也治不好（坏 id 跟着 Session 一起恢复）。此前 launcher 压根不传这个参数，是那条错误在装了包的用户侧的根因。
 
 `{app}` / 桌面路径在运行时解析（安装目录 + `SHGetFolderPath`），**禁止**写死本机用户路径。`--appdata` 可不传（软默认 `platformdirs`；**刻意为之**不显式传，安装包与 CLI 共用同一解析）。另：Gateway 软默认在 cwd 含 `tools/`+`skills/` 时也会把 cwd 当 agent（兜底直接跑 `psi-agent.exe`）。
 

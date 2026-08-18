@@ -10,6 +10,9 @@ export async function api<T = unknown>(
   const r = await fetch(G() + path, {
     method,
     headers: { 'Content-Type': 'application/json' },
+    // 飞书工作台的身份是一枚 HttpOnly cookie，不显式带上就发不出去。同源请求本来就会
+    // 携带，写出来是为了让这条依赖可读——`/feishu/app/sessions` 没有它就是 401。
+    credentials: 'same-origin',
     body: body !== undefined ? JSON.stringify(body) : undefined,
   })
   if (!r.ok) {
@@ -92,6 +95,26 @@ export async function createSession(
     workspace,
     ...(opts.agent ? { agent: opts.agent } : {}),
     ...(opts.id ? { id: opts.id } : {}),
+  })
+}
+
+/**
+ * 飞书工作台里「新建任务」——在**本人**的 workspace 下开一条独立 Session。
+ *
+ * 为什么不用 `createSession`：那条路由从 body 收 `workspace`，服务端不看身份，对桌面版是
+ * 对的（用户就是自己挑目录的人）。工作台里目录由 `open_id` 决定，所以这里**不传** workspace,
+ * 由 Gateway 从 HttpOnly cookie 推出——页面无从指定，也就无法写进别人的目录。
+ *
+ * 得到的 session_id 与机器人那条不同，于是两边对话历史天然分开；workspace 相同，于是
+ * 用户画像 / llm_wiki / Supervisor / 交付物仍是一个池子。
+ */
+export async function createFeishuAppSession(
+  aiId: string,
+  opts: { agent?: string } = {},
+) {
+  return api<SessionInfo>('POST', '/feishu/app/sessions', {
+    ...(aiId ? { ai_id: aiId } : {}),
+    ...(opts.agent ? { agent: opts.agent } : {}),
   })
 }
 

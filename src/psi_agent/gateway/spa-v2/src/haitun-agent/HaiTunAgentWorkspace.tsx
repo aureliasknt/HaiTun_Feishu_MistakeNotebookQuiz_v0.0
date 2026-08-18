@@ -57,6 +57,7 @@ import {
 
 import { mobileHaptic, prefersReducedMotion } from "./client-feedback";
 import {
+  createFeishuAppSession,
   createSession,
   deleteSession,
   fetchHistory,
@@ -118,6 +119,7 @@ import {
   normalizeWorkspacePath,
   sessionMatchesWorkspace,
 } from "../services/workspaceMatch";
+import { withoutBotSession } from "../services/feishuSessions";
 
 const OVERVIEW_WELCOME: ChatMessage = {
   role: "agent",
@@ -156,6 +158,29 @@ type Props = {
   workspace: string;
   /** Step 2: from GET /defaults.agent — passed to POST /sessions (not tool I/O). */
   defaultAgent?: string;
+  /**
+   * 飞书网页应用模式: 该用户已由 ``open_id`` 认出身份。为真即「工作台模式」——
+   * 不显示切换 workspace / agent 的入口 (飞书用户没有本机路径), 且 ``任务总览`` 等长期
+   * 状态视图打开 (见 ``uiSurface.ts``)。
+   *
+   * 与 ``feishuBotSessionId`` 分开是**刻意的**: 它们此前是同一个 prop, 于是「是不是工作台」
+   * 和「这张卡是不是机器人的」被迫共用一个判断, 新建任务只能复用机器人那条 Session。
+   */
+  feishuMode?: boolean;
+  /**
+   * 机器人那条 Session 的 id (来自 ``/feishu/app/me``)。
+   *
+   * 它与网页任务同在一个 workspace 下, 所以会被 workspace 过滤一并捞出来 —— 必须按这个 id
+   * 把它从任务列表里摘掉: 留着就等于把私聊逐字搬进工作台, 而用户明确要求两边不混。
+   */
+  feishuBotSessionId?: string;
+  /** ``feishu`` = 页面开在飞书客户端里; ``browser`` = 普通浏览器。只用于显示模式徽标。 */
+  feishuClient?: "feishu" | "browser";
+  /**
+   * 飞书资料里的显示名, 给侧栏账户区。可能为空 (飞书不保证给), 那时 UserHub 仍按
+   * 本地昵称 → 「用户」回落。
+   */
+  feishuUserName?: string;
   onChangeWorkspace?: () => void;
   onChangeAgent?: () => void;
 };
@@ -163,6 +188,10 @@ type Props = {
 export default function HaiTunAgentWorkspace({
   workspace,
   defaultAgent = "",
+  feishuMode = false,
+  feishuBotSessionId = "",
+  feishuClient = "browser",
+  feishuUserName = "",
   onChangeWorkspace,
   onChangeAgent,
 }: Props) {
@@ -507,8 +536,11 @@ export default function HaiTunAgentWorkspace({
           listSummaries().catch(() => ({}) as Record<string, string>),
         ]);
         if (cancelled) return;
-        const inWs = sessions.filter((s) =>
-          sessionMatchesWorkspace(s.workspace, workspaceNorm),
+        // 机器人那条会话与网页任务同在一个 workspace 下, 所以 workspace 过滤会把它一并
+        // 捞出来 —— 在这里摘掉, 否则私聊内容会逐字出现在工作台 (用户要求两边不混)。
+        const inWs = withoutBotSession(
+          sessions.filter((s) => sessionMatchesWorkspace(s.workspace, workspaceNorm)),
+          feishuBotSessionId,
         );
         const { preferred, openModels } = await hydrateAiForSessions(readStoredAiId());
         if (cancelled) return;
@@ -524,6 +556,8 @@ export default function HaiTunAgentWorkspace({
         setTasks(mapped);
         historyLoadedRef.current = new Set(["overview"]);
         setMessages({ overview: [OVERVIEW_WELCOME] });
+        // 落在第 0 张卡, 与桌面版一致 —— 工作台不再「自动打开机器人那条会话」(它已被
+        // withoutBotSession 摘掉)。有历史任务时随后的 effect 会把视图切到「新建任务」。
         setCurrentIndex(0);
       } catch (e) {
         if (!cancelled) {
@@ -538,7 +572,7 @@ export default function HaiTunAgentWorkspace({
       cancelled = true;
       for (const controller of Object.values(abortByCardRef.current)) controller.abort();
     };
-  }, [workspaceNorm, showToast]);
+  }, [workspaceNorm, showToast, feishuBotSessionId]);
 
   // Refresh landing: with history tasks open new task/chat directly; with none stay on the empty workspace.
   useEffect(() => {
@@ -1277,6 +1311,10 @@ export default function HaiTunAgentWorkspace({
     }));
     setChatDrafts((current) => ({ ...current, [cardId]: "" }));
     setChatAttachments((current) => ({ ...current, [cardId]: [] }));
+    // 场景 3 (题库直答 + 理解确认卡) 只在**机器人私聊**里出现, 网页任务一律走普通 Agent
+    // turn。理由: 那张卡按 ``open_id`` 存 (``outreach/state.yaml`` 的 ``last_qa``), 一个用户
+    // 只有一张; 若网页任务也能出卡, 同一张卡会在每条会话下重复显示, 且答完谁都说不清是在
+    // 哪条会话里答的。卡留在唯一确定的那个地方 —— 私聊。
     await runChatTurn(cardId, clean, pendingFiles, userVisible);
   };
 
@@ -1478,10 +1516,18 @@ export default function HaiTunAgentWorkspace({
     const title = titleFromPrompt(clean || userVisible);
     let session;
     try {
-      // Step 2: pass Gateway default agent into Session (capability pack root).
-      session = await createSession(resolvedAiId, workspace, {
-        ...(defaultAgent ? { agent: defaultAgent } : {}),
-      });
+      // 工作台模式走专用路由: workspace 由服务端从 cookie 身份推出, 页面**不**传 ——
+      // 于是新任务落在与机器人同一个目录下 (用户画像 / llm_wiki / Supervisor / 交付物共享),
+      // 但拿到一个独立 session_id, 因此对话历史与私聊互不干扰。
+      //
+      // 桌面版仍走 POST /sessions: 那里用户是自己挑目录的人, workspace 本就该由页面给。
+      session = feishuMode
+        ? await createFeishuAppSession(resolvedAiId, {
+            ...(defaultAgent ? { agent: defaultAgent } : {}),
+          })
+        : await createSession(resolvedAiId, workspace, {
+            ...(defaultAgent ? { agent: defaultAgent } : {}),
+          });
     } catch (e) {
       showToast(e instanceof Error ? e.message : "创建任务失败");
       throw e;
@@ -1498,17 +1544,16 @@ export default function HaiTunAgentWorkspace({
     };
     setTasks((current) => [...current, newTask]);
     const storedFiles = pendingFiles.length ? await filesToChatFiles(pendingFiles) : [];
-    setMessages((current) => ({
-      ...current,
-      [newTask.id]: [
-        {
-          role: "user",
-          text: userVisible,
-          files: storedFiles.length ? storedFiles : undefined,
-        },
-        { role: "agent", text: "" },
-      ],
-    }));
+    const turnPair: ChatMessage[] = [
+      {
+        role: "user",
+        text: userVisible,
+        files: storedFiles.length ? storedFiles : undefined,
+      },
+      { role: "agent", text: "" },
+    ];
+    // 每个任务都是新建的 Session, 所以这里直接赋值 —— 不会有既有对话被抹掉。
+    setMessages((current) => ({ ...current, [newTask.id]: turnPair }));
     setToast("新任务已创建，正在请求 Agent…");
     window.setTimeout(() => setToast(null), 2600);
 
@@ -1840,6 +1885,17 @@ export default function HaiTunAgentWorkspace({
                 </button>
               )}
               <AgentMark /><span>{expanded ? "任务海豚工作室" : "关于"} <strong>{unitCard.title}</strong>{!expanded && " 的对话"}</span>
+              {/* 一个 URL 同时是 2B 与 2C, 只有身份 cookie 能区分。所以把当前模式显示出来
+                  —— 身份丢了就该看得见, 而不是默默退回桌面模式让人以为共享数据坏了。 */}
+              {feishuMode ? (
+                <span className="mode-badge feishu" title={`飞书身份已绑定 · ${feishuClient === "feishu" ? "飞书客户端内" : "浏览器"}`}>
+                  飞书工作台{feishuClient === "feishu" ? "" : "（浏览器）"}
+                </span>
+              ) : (
+                <span className="mode-badge local" title="未绑定飞书身份：与机器人共享的数据不可用">
+                  本地工作台
+                </span>
+              )}
             </div>
             {expanded && interactive && cards.length > 0 && (
               <div className="focus-card-pager" role="navigation" aria-label="任务翻页">
@@ -2242,6 +2298,7 @@ export default function HaiTunAgentWorkspace({
         <div className="sidebar-spacer" />
         <div className="sidebar-account">
           <UserHub
+            feishuUserName={feishuUserName}
             selectedAiId={aiId}
             onSelectAi={(id) => {
               setAiId(id);

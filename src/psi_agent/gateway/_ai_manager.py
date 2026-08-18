@@ -152,3 +152,14 @@ class AIManager:
 
     def has(self, ai_id: str) -> bool:
         return ai_id in self._entries
+
+    def first_live_id(self) -> str:
+        """Id of the oldest still-running AI, or ``""`` when none run.
+
+        For callers whose *configured* default AI is absent or dead and who would
+        otherwise have to fail the request. Insertion order rather than an
+        arbitrary pick, so such a caller lands on the same AI on every call —
+        after a restart that order is the ``state/latest.json`` restore order,
+        which is itself stable.
+        """
+        return next(iter(self._entries), "")

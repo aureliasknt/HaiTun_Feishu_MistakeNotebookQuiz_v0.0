@@ -9,9 +9,25 @@ from psi_agent.channel._errors import ChannelError
 from psi_agent.channel._stream import StreamBuffer, iter_sse_events
 
 
-def test_buffer_merges_within_interval():
+def test_buffer_emits_the_first_block_immediately():
+    """The opening block is not delayed — one emit cannot storm a chat API.
+
+    Waiting a full interval for it meant the user watched an empty reply for that
+    long *after* the model had started speaking (a whole second on Feishu), which
+    is the most visible delay in a turn: it straddles "no reply yet" and
+    "answering".
+    """
     b = StreamBuffer(10.0)
     assert b.switch("text") == []
+    assert b.append("a") == [("text", "a")]
+    assert b.flush() == []
+
+
+def test_buffer_merges_within_interval_after_the_first_block():
+    b = StreamBuffer(10.0)
+    assert b.switch("text") == []
+    assert b.append("first") == [("text", "first")]
+    # Throttling resumes from there: these coalesce until the window elapses.
     assert b.append("a") == []
     assert b.append("b") == []
     assert b.flush() == [("text", "ab")]
@@ -28,22 +44,28 @@ def test_buffer_interval_zero_flushes_each_append():
 def test_buffer_type_switch_flushes_previous():
     b = StreamBuffer(10.0)
     b.switch("reasoning")
-    b.append("think")
-    assert b.switch("text") == [("reasoning", "think")]
-    b.append("answer")
-    assert b.flush() == [("text", "answer")]
+    # The opening reasoning block leaves at once, so the switch has nothing left
+    # to flush; ordering across the boundary is what this guards.
+    assert b.append("think") == [("reasoning", "think")]
+    assert b.append("more") == []
+    assert b.switch("text") == [("reasoning", "more")]
+    assert b.append("answer") == [("text", "answer")]
+    assert b.flush() == []
 
 
 def test_buffer_reasoning_kind_switch_does_not_merge():
     """Same reasoning slot, different provenance keys must not coalesce."""
     b = StreamBuffer(10.0)
     assert b.switch("reasoning:thinking") == []
-    assert b.append("plan") == []
-    assert b.switch("reasoning:tool_call") == [("reasoning:thinking", "plan")]
-    assert b.append("call") == []
-    assert b.switch("reasoning:tool_result") == [("reasoning:tool_call", "call")]
-    assert b.append("done") == []
-    assert b.flush() == [("reasoning:tool_result", "done")]
+    # Each kind opens with an immediate block: they render in different places, so
+    # each one's first text is its own "first visible text".
+    assert b.append("plan") == [("reasoning:thinking", "plan")]
+    assert b.append("more") == []
+    assert b.switch("reasoning:tool_call") == [("reasoning:thinking", "more")]
+    assert b.append("call") == [("reasoning:tool_call", "call")]
+    assert b.switch("reasoning:tool_result") == []
+    assert b.append("done") == [("reasoning:tool_result", "done")]
+    assert b.flush() == []
 
 
 def test_buffer_flush_empty_returns_empty():

@@ -116,6 +116,15 @@ class StreamBuffer:
     ``flush``), not exactly at the window edge. This avoids an extra anyio task and
     its cancellation surface; ``flush()`` always drains the tail at stream end. One
     ``StreamBuffer`` is created per ``post()`` call, so state never crosses requests.
+
+    **The first block of each kind is not delayed.** Throttling exists to protect
+    the chat API from a token-by-token edit storm, and one immediate emit cannot
+    storm anything — but waiting a full ``interval`` before it meant the user
+    stared at nothing for ``interval`` seconds *after* the model had already
+    started speaking (a whole second on Feishu, which passes ``interval=1.0``).
+    That delay is the most visible one in the whole turn, because it sits at the
+    boundary between "no reply yet" and "it is answering". So the window opens
+    when the first block leaves, and every block after it is throttled as before.
     """
 
     def __init__(self, interval: float) -> None:
@@ -123,6 +132,9 @@ class StreamBuffer:
         self._buf = ""
         self._kind: str | None = None
         self._timer_target: float | None = None
+        # False until this kind has emitted once, so the opening block goes out
+        # without waiting for a window that has nothing to protect yet.
+        self._emitted_for_kind = False
 
     def _label(self) -> str:
         """Human-readable chunk type for log messages."""
@@ -141,11 +153,15 @@ class StreamBuffer:
         reasoning↔content (so the two stay separate and ordered), else an empty list.
         """
         out: list[tuple[str, str]] = []
-        if self._kind is not None and incoming_kind != self._kind and self._buf:
-            logger.debug(f"type switch → flush {self._label()} ({len(self._buf)} chars)")
-            out.append((self._kind, self._buf))
-            self._buf = ""
-            self._timer_target = None
+        if self._kind is not None and incoming_kind != self._kind:
+            if self._buf:
+                logger.debug(f"type switch → flush {self._label()} ({len(self._buf)} chars)")
+                out.append((self._kind, self._buf))
+                self._buf = ""
+                self._timer_target = None
+            # Reasoning and content render in different places, so the new kind's
+            # opening block is its own "first visible text" and is not delayed.
+            self._emitted_for_kind = False
         self._kind = incoming_kind
         return out
 
@@ -159,11 +175,15 @@ class StreamBuffer:
         self._buf += text
         if self._timer_target is None:
             self._timer_target = time.monotonic() + self._interval
-        if self._kind is not None and time.monotonic() >= self._timer_target:
-            logger.debug(f"timer expired → yield {self._label()} ({len(self._buf)} chars)")
+        # The opening block of a kind goes out at once; the window starts from it.
+        first_block = not self._emitted_for_kind
+        if self._kind is not None and (first_block or time.monotonic() >= self._timer_target):
+            reason = "first block" if first_block else "timer expired"
+            logger.debug(f"{reason} → yield {self._label()} ({len(self._buf)} chars)")
             out: list[tuple[str, str]] = [(self._kind, self._buf)]
             self._buf = ""
             self._timer_target = None
+            self._emitted_for_kind = True
             return out
         return []
 

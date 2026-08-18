@@ -35,6 +35,12 @@ type Props = {
   /** External open-panel request (e.g. first-run guide jumps into model pool). */
   openPanelRequest?: { nonce: number; panel: HubPanel } | null
   /**
+   * 飞书网页应用里当前用户的显示名。工作台模式下用户没有「我的资料」可填 (身份由
+   * open_id 决定), 侧栏若还写死「用户」就等于告诉每个人他们是同一个人。空串 =
+   * 非飞书模式或飞书没给名字, 那时照旧走云端账号 → 本地昵称的回落。
+   */
+  feishuUserName?: string
+  /**
    * 登录软门禁结束（登录成功或用户选择「暂不登录」）。父层据此放行首屏引导。
    * 只在门禁触发的那次开窗后回调；用户平时自己点开登录面板不影响首屏流程。
    */
@@ -57,6 +63,7 @@ export default function UserHub({
   onModelsAutoOpened,
   openPanelRequest,
   onLoginGateDone,
+  feishuUserName = '',
 }: Props) {
   // 头像改成弹菜单(资料 / 登录)后需要这两个: rootRef 判点击是否落在菜单外。
   const rootRef = useRef<HTMLDivElement | null>(null)
@@ -133,11 +140,13 @@ export default function UserHub({
     return () => window.removeEventListener('keydown', onKey)
   }, [freeModelNoticeOpen, panel, menuOpen])
 
-  /* 云端账号优先于本地昵称: 登录后侧栏必须显示账号身份, 否则用户看不出自己
-   * 已登录(原型 D4「侧栏账户区就地更新为已登录」)。未登录时回落本地昵称。 */
+  /* 名字的取用顺序: 飞书身份 → 云端账号 → 本地昵称。
+   * 飞书排最前: 工作台模式下它是唯一由服务端核实过的身份 (open_id 换来的), 而那里
+   * 云端账号/本地昵称往往压根没设过。云端账号又优先于本地昵称: 登录后侧栏必须显示
+   * 账号身份, 否则用户看不出自己已登录(原型 D4「侧栏账户区就地更新为已登录」)。 */
   const loggedIn = Boolean(auth.status?.available && auth.status?.loggedIn)
   const cloudName = auth.user?.displayName?.trim() ?? ''
-  const shownName = (loggedIn && cloudName) || userName.trim()
+  const shownName = feishuUserName.trim() || (loggedIn && cloudName) || userName.trim()
   const initial = shownName.charAt(0).toUpperCase()
   const displayName = shownName || '用户'
 

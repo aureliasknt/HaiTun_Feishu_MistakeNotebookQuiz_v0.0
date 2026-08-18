@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from base64 import b64encode
 from collections.abc import AsyncGenerator
 from contextlib import aclosing, suppress
@@ -11,6 +12,7 @@ import anyio
 from aiohttp import web
 from loguru import logger
 
+from psi_agent.gateway import _feishu_webapp, _outreach_api
 from psi_agent.gateway._ai_manager import AIManager
 from psi_agent.gateway._attention import AttentionHub
 from psi_agent.gateway._auth_manager import AuthManager
@@ -20,7 +22,7 @@ from psi_agent.gateway._defaults import (
     resolve_default_agent,
     resolve_default_workspace,
 )
-from psi_agent.gateway._feishu_manager import FeishuManager
+from psi_agent.gateway._feishu_manager import FeishuManager, web_session_id
 from psi_agent.gateway._history_manager import HistoryManager
 from psi_agent.gateway._oauth_manager import OAuthRelay
 from psi_agent.gateway._openapi import render_openapi
@@ -264,6 +266,16 @@ async def create_app(
     app.router.add_post("/sessions/{session_id}/chat", _handle_chat)
     app.router.add_post("/feishu/route", _feishu_route)
     app.router.add_get("/feishu/routes", _list_feishu_routes)
+    # 工作台里「新建任务」: workspace 只由 cookie 身份决定, 故不能走 POST /sessions。
+    app.router.add_post("/feishu/app/sessions", _create_feishu_app_session)
+    # 飞书网页应用 (工作台): 浏览器侧身份 → 与机器人同一条 /feishu/route, 因此同一个 Session。
+    _feishu_webapp.register(
+        app,
+        app_id=os.environ.get("PSI_FEISHU_APP_ID", ""),
+        app_secret=os.environ.get("PSI_FEISHU_APP_SECRET", ""),
+    )
+    # 场景 3 在工作台里的入口: 复用机器人那条 TRIGGER 与工具, 只是换个提问的地方。
+    _outreach_api.register(app, workspace_root=default_agent or feishu_workspace_root)
     app.router.add_get("/oauth/callback", _oauth_callback)
     app.router.add_get("/oauth/code", _oauth_take_code)
 
@@ -486,6 +498,56 @@ async def _feishu_route(request: web.Request) -> web.Response:
 async def _list_feishu_routes(request: web.Request) -> web.Response:
     fm: FeishuManager = request.app["fm"]
     return _json([asdict(r) for r in fm.list_routes()])
+
+
+async def _create_feishu_app_session(request: web.Request) -> web.Response:
+    """网页应用里「新建任务」—— 在**本人**的 workspace 下开一个独立 Session。
+
+    body: ``{ai_id?, agent?}`` → ``201 <session>`` (与 ``POST /sessions`` 同一形状)。
+
+    为什么不复用 ``POST /sessions``: 那条路由从 body 收 ``workspace`` 且不看身份, 对桌面版
+    是对的 (用户就是自己挑目录的人), 但一旦网页应用也能建 Session, 它就成了「改一行 body
+    就写进别人目录」的入口。这里 ``workspace`` **只**来自 cookie 身份推出的那一个 —— body
+    里给什么都忽略。
+
+    ``fm.route`` 先跑一次: 它是 workspace 的唯一权威 (与机器人同一条幂等路由), 所以
+    子会话的目录必然与机器人那份**逐字相同** —— 用户画像 / llm_wiki / Supervisor / 交付物
+    因此仍是一个池子。而 session_id 不同, 于是两边的**对话历史**天然分开 (history 按
+    session_id 存, 见 ``HistoryManager``)。
+    """
+    open_id = await _feishu_webapp.resolve_request_open_id(request)
+    if not open_id:
+        return _error("未登录飞书网页应用", status=401)
+    fm: FeishuManager = request.app["fm"]
+    sm: SessionManager = request.app["sm"]
+    schedm: SchedulerManager = request.app["schedm"]
+    try:
+        body = await request.json()
+    except Exception:
+        # 这个接口没有必填字段, 所以空 body / 非法 JSON 都当「全用缺省」, 不必 400。
+        body = {}
+    if not isinstance(body, dict):
+        body = {}
+    try:
+        # 先确保机器人那条 Session 存在 —— 它持有本人 workspace 的权威路径。
+        _socket, bot_session = await fm.route(open_id, ai_id=body.get("ai_id"))
+        workspace = sm.get_workspace(bot_session)
+        info = await sm.create(
+            backend_type=body.get("backend_type", "ai"),
+            backend_id=body.get("backend_id", body.get("ai_id", "")) or sm.get_backend_id(bot_session),
+            id=web_session_id(open_id),
+            workspace=workspace,
+            agent=body.get("agent", "") or sm.get_agent(bot_session),
+        )
+        await schedm.ensure(info.workspace, ai_id=info.backend_id, agent=info.agent)
+        return _json(_session_data(info), status=201)
+    except (TypeError, ValueError, KeyError) as e:
+        return _error(str(e), status=400)
+    except LookupError as e:
+        return _error(str(e), status=404)
+    except Exception as e:
+        logger.error(f"Unexpected error creating feishu web session: {e!r}")
+        return _error(str(e), status=500)
 
 
 _OAUTH_DONE_HTML = (
@@ -794,7 +856,11 @@ async def _handle_chat(request: web.Request) -> web.StreamResponse:
     cm: ChatManager = request.app["cm"]
     session_id = request.match_info["session_id"]
     try:
-        channel_socket = sm.get_socket(session_id)
+        # Not just get_socket: a Session whose AI was deleted and recreated from
+        # the SPA still names the old uuid, and its socket path stays well-formed
+        # with nobody listening. Repair the binding here — before the SSE
+        # response is prepared, so a rebind failure can still be a clean 4xx/5xx.
+        channel_socket = await sm.ensure_live_backend(session_id)
     except LookupError:
         return _error(f"Session '{session_id}' not found", status=404)
 

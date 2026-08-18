@@ -105,6 +105,119 @@ async def test_aimanager_has_and_get_socket(tmp_path: str) -> None:
 
 
 @pytest.mark.anyio
+async def test_aimanager_first_live_id(tmp_path: str) -> None:
+    """给「配置的缺省 AI 不存在」的调用方一个能用的后端 (见 FeishuManager._resolve_ai)。"""
+    tg = anyio.create_task_group()
+    await tg.__aenter__()
+    try:
+        mgr = AIManager(_prefix="gw-test", _tg=tg)
+        assert mgr.first_live_id() == ""
+
+        await mgr.create(provider="o", model="m", api_key="k", base_url="b", id="first")
+        # 不同 api_key: 否则会命中 create 的同配置去重, 拿回第一个而非真的建第二个。
+        await mgr.create(provider="o", model="m", api_key="k2", base_url="b", id="second")
+        # 插入序而非任取: 同一个调用方每次都该落到同一个 AI 上。
+        assert mgr.first_live_id() == "first"
+
+        await mgr.delete("first")
+        assert mgr.first_live_id() == "second"
+
+        await mgr.delete("second")
+        assert mgr.first_live_id() == ""
+    finally:
+        await _close(tg)
+
+
+@pytest.mark.anyio
+async def test_sessionmanager_first_live_ai_id_delegates(tmp_path: str) -> None:
+    tg = anyio.create_task_group()
+    await tg.__aenter__()
+    try:
+        mgr = AIManager(_prefix="gw-test", _tg=tg)
+        sm = SessionManager(_aim=mgr, _prefix="gw-test", _tg=tg)
+        assert sm.first_live_ai_id() == ""
+
+        await mgr.create(provider="o", model="m", api_key="k", base_url="b", id="ai1")
+        assert sm.first_live_ai_id() == "ai1"
+    finally:
+        await _close(tg)
+
+
+@pytest.mark.anyio
+async def test_sessionmanager_resolve_restore_backend(tmp_path: str) -> None:
+    """A snapshot naming a dead backend must rebind, not restore a Session that can only fail."""
+    tg = anyio.create_task_group()
+    await tg.__aenter__()
+    try:
+        mgr = AIManager(_prefix="gw-test", _tg=tg)
+        sm = SessionManager(_aim=mgr, _prefix="gw-test", _tg=tg)
+
+        # Nothing live: nothing better to offer, so the pair survives untouched
+        # and restore still succeeds (the Session must reappear in the SPA).
+        assert sm.resolve_restore_backend("ai", "gone") == ("ai", "gone")
+
+        await mgr.create(provider="o", model="m", api_key="k", base_url="b", id="ai1")
+        # Live backend: kept as-is.
+        assert sm.resolve_restore_backend("ai", "ai1") == ("ai", "ai1")
+        # Stale uuid from an older Gateway run: rebound onto the live AI.
+        assert sm.resolve_restore_backend("ai", "eb4e6319") == ("ai", "ai1")
+        # A dead Router rebinds to an AI: guessing a Router's upstreams is wrong.
+        assert sm.resolve_restore_backend("router", "no-such-router") == ("ai", "ai1")
+    finally:
+        await _close(tg)
+
+
+@pytest.mark.anyio
+async def test_sessionmanager_ensure_live_backend_rebinds(tmp_path: str) -> None:
+    """An AI deleted and recreated from the SPA gets a fresh uuid; the Session must follow it."""
+    tg = anyio.create_task_group()
+    await tg.__aenter__()
+    try:
+        am = AIManager(_prefix="gw-test", _tg=tg)
+        sm = SessionManager(_aim=am, _prefix="gw-test", _tg=tg)
+
+        await am.create(provider="o", model="m", api_key="k", base_url="b", id="old-ai")
+        info = await sm.create(ai_id="old-ai", workspace=str(tmp_path), id="s1")
+        # Healthy backend: same socket back, no rebind.
+        assert await sm.ensure_live_backend("s1") == info.channel_socket
+        assert sm.get_backend_id("s1") == "old-ai"
+
+        # SPA deletes the AI and recreates it — different api_key so this is a
+        # genuinely new instance rather than create's same-config dedupe.
+        await am.delete("old-ai")
+        await am.create(provider="o", model="m", api_key="k2", base_url="b", id="new-ai")
+
+        socket = await sm.ensure_live_backend("s1")
+        assert sm.get_backend_id("s1") == "new-ai"
+        # Id / workspace / channel-socket path stay stable so SPA links and
+        # history (keyed by session id) survive the rebind.
+        assert socket == info.channel_socket
+        assert sm.get_workspace("s1") == info.workspace
+        assert len(await sm.list_all()) == 1
+
+        with pytest.raises(LookupError, match="not found"):
+            await sm.ensure_live_backend("no-such-session")
+    finally:
+        await _close(tg)
+
+
+@pytest.mark.anyio
+async def test_sessionmanager_ensure_live_backend_without_any_ai(tmp_path: str) -> None:
+    """No live AI to rebind onto: keep the Session so the stream reports the real error."""
+    tg = anyio.create_task_group()
+    await tg.__aenter__()
+    try:
+        am = AIManager(_prefix="gw-test", _tg=tg)
+        sm = SessionManager(_aim=am, _prefix="gw-test", _tg=tg)
+        info = await sm.create(ai_id="dead-ai", workspace=str(tmp_path), id="s1")
+
+        assert await sm.ensure_live_backend("s1") == info.channel_socket
+        assert sm.get_backend_id("s1") == "dead-ai"
+    finally:
+        await _close(tg)
+
+
+@pytest.mark.anyio
 async def test_aimanager_auto_uuid(tmp_path: str) -> None:
     tg = anyio.create_task_group()
     await tg.__aenter__()

@@ -1,0 +1,11 @@
+name: haitun.outreach.daily
+source: haitun
+kind: synthetic
+description: >
+  Daily send for the outreach campaign (Scenario 1) at a random time inside
+  send_window. The producer reads outreach/state.yaml (OUTREACH_STATE_PATH →
+  WORKSPACE_DIR → idle) and emits when now >= daily.next_send_at, guarded by
+  daily.sending. payload: next_send_at, cohort, open_ids; routing.open_id =
+  controller_open_id (empty → session default). A fixed test cadence is
+  available via daily.interval_minutes + daily.interval_until.
+

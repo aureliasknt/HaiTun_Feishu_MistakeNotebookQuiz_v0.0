@@ -32,6 +32,8 @@ so opening Haitun does not leave an empty Desktop folder. Not AppData.
 
 from __future__ import annotations
 
+import os
+
 import anyio
 import platformdirs
 
@@ -67,10 +69,26 @@ __all__ = [
     "resolve_appdata_root",
     "resolve_default_agent",
     "resolve_default_workspace",
+    "resolve_feishu_ai_id",
     "resolve_history_read_path",
     "resolve_state_read_path",
     "resolve_todo_read_path",
 ]
+
+
+def resolve_feishu_ai_id(explicit: str = "") -> str:
+    """飞书缺省 AI 实例 id。显式 CLI > ``PSI_FEISHU_AI_ID`` > ``""``。
+
+    这个 env 兜底是刻意补的: ``.env.example`` 一直把 ``PSI_FEISHU_AI_ID`` 写成
+    「飞书机器人挂哪个 AI」的答案, 但在此之前**没有任何代码读它** —— 设了也无效,
+    而症状 (飞书里一句「AI 后端未运行」) 离原因很远, 极难自己看出来。
+
+    纯字符串运算, 无 IO, 故同步; 与本模块其他 ``async`` 解析器不同, 是因为它不碰磁盘。
+    """
+    raw = explicit.strip()
+    if raw:
+        return raw
+    return os.environ.get("PSI_FEISHU_AI_ID", "").strip()
 
 
 async def resolve_default_workspace(explicit: str = "") -> str:

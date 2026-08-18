@@ -17,3 +17,25 @@ evals/
 
 # 测试/手工跑 Gateway 落下的状态快照。里面有明文 api_key, 绝不能进仓库。
 state/
+
+# 本地开发凭证 (飞书 app secret、模型 key)。真实值绝不能进仓库 ——
+# 只有 .env.example 里的占位符可以提交。
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# 跑 Feishu channel 时按 open_id 落下的用户运行时工作区
+# (.psi/gateway.url、supervisor metrics、session profile)。
+# 全是运行产物, 而且带真实飞书 open_id。
+examples/haitun-workspace/ou_*/
+
+# outreach 活动的实时状态: 真实 open_id、姓名、message_id。
+# 可提交的是同目录下的 state.example.yaml 模板。
+examples/haitun-workspace/outreach/state.yaml
+
+# 编辑器本地配置, 属于个人环境而非项目产物。
+.vscode/
+
+# 一次性排障脚本, 用完即弃。
+/probe_pipe.py

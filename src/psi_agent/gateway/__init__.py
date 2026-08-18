@@ -16,7 +16,12 @@ from psi_agent._sockets import create_site
 from psi_agent.gateway._ai_manager import AIManager
 from psi_agent.gateway._attention import AttentionHub
 from psi_agent.gateway._auth_manager import AuthManager, resolve_endpoint
-from psi_agent.gateway._defaults import resolve_appdata_root, resolve_default_agent, resolve_default_workspace
+from psi_agent.gateway._defaults import (
+    resolve_appdata_root,
+    resolve_default_agent,
+    resolve_default_workspace,
+    resolve_feishu_ai_id,
+)
 from psi_agent.gateway._router_manager import RouterManager, RouterUpstreamInfo
 from psi_agent.gateway._scheduler_manager import SchedulerManager
 from psi_agent.gateway._session_manager import SessionManager
@@ -65,8 +70,10 @@ class Gateway:
 
     feishu_ai_id: str = ""
     """飞书 Session 默认挂载的 AI 实例 id。飞书 channel 经 ``POST /feishu/route`` 按需为每个
-    飞书用户/群 spawn 独立 Session 时用它作缺省 AI (请求体也可逐次覆盖 ``ai_id``)。空 = 未配,
-    此时若请求也不带 ``ai_id`` 则 ``/feishu/route`` 返回 400。"""
+    飞书用户/群 spawn 独立 Session 时用它作缺省 AI (请求体也可逐次覆盖 ``ai_id``)。
+
+    空 → 读 ``PSI_FEISHU_AI_ID`` (见 ``resolve_feishu_ai_id``)。两者都空**不再**直接 400:
+    ``FeishuManager._resolve_ai`` 会回落到任一活着的 AI。"""
 
     feishu_workspace_root: str = ""
     """飞书各会话独立 workspace 的父目录。私聊每个 open_id 得到 ``<root>/<open_id>`` 子目录,
@@ -135,11 +142,13 @@ class Gateway:
         agent_default = await resolve_default_agent(self.default_agent)
         workspace_default = await resolve_default_workspace(self.default_workspace)
         appdata_root = await resolve_appdata_root(self.appdata)
+        feishu_ai_id = resolve_feishu_ai_id(self.feishu_ai_id)
         # So in-process Session tools (todo, …) see the same root as GET /defaults.
         os.environ["PSI_APPDATA"] = appdata_root
         logger.info(f"Default agent: {agent_default or '(same as workspace)'}")
         logger.info(f"Default workspace: {workspace_default}")
         logger.info(f"AppData root: {appdata_root}")
+        logger.info(f"Feishu AI id: {feishu_ai_id or '(unset — will use any live AI)'}")
 
         state = await GatewayState.from_appdata(appdata_root)
         snapshot = await state.load()
@@ -198,9 +207,16 @@ class Gateway:
 
             for cfg in snapshot.get("sessions", []):
                 try:
+                    # AIs restore first (loop above), so "not live now" here means
+                    # the snapshot names a backend that no longer exists — rebind
+                    # rather than restore a Session that can only fail at message time.
+                    backend_type, backend_id = sm.resolve_restore_backend(
+                        cfg.get("backend_type", "ai"),
+                        cfg.get("backend_id", cfg.get("ai_id", "")),
+                    )
                     await sm.create(
-                        backend_type=cfg.get("backend_type", "ai"),
-                        backend_id=cfg.get("backend_id", cfg.get("ai_id", "")),
+                        backend_type=backend_type,
+                        backend_id=backend_id,
                         workspace=cfg.get("workspace", ""),
                         agent=cfg.get("agent", "") or agent_default,
                         id=cfg.get("id", ""),
@@ -216,7 +232,7 @@ class Gateway:
                 await sum_m.set(row["id"], row["summary"])
 
             attention = AttentionHub()
-            schedm = SchedulerManager(_sm=sm, _ai_id=self.scheduler_ai_id or self.feishu_ai_id)
+            schedm = SchedulerManager(_sm=sm, _ai_id=self.scheduler_ai_id or feishu_ai_id)
             # 认证是**旁挂**的: 不注入 Session 的构造参数, 不写 ContextVar, 不参与
             # _do_persist 的 manager 快照 (凭证不进 state/latest.json —— 那里的
             # api_key 是明文, 登录凭证不再踩这个坑)。地址显式为空则整套不加载。
@@ -235,7 +251,7 @@ class Gateway:
                 favicon_path=self.icon,
                 app_name=self.app_name,
                 attention=attention,
-                feishu_ai_id=self.feishu_ai_id,
+                feishu_ai_id=feishu_ai_id,
                 feishu_workspace_root=self.feishu_workspace_root,
                 default_agent=agent_default,
                 default_workspace=workspace_default,

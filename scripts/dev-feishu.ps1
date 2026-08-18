@@ -1,5 +1,9 @@
 # Canonical local Feishu + Gateway bring-up for haitun-workspace.
-# Do NOT invent ad-hoc POST /ais bodies — this script is the only allowed model id.
+# Do NOT invent ad-hoc POST /ais bodies - this script is the only allowed model id.
+#
+# Keep this file pure ASCII. It ships without a UTF-8 BOM, and Windows PowerShell 5.1
+# decodes a BOM-less file as ANSI: a non-ASCII character inside a quoted string breaks
+# the string terminator and the whole script fails to parse before running anything.
 #
 # Usage (from repo root, credentials already in env or .env loaded by your shell):
 #   powershell -File scripts/dev-feishu.ps1
@@ -32,13 +36,17 @@ if (-not $env:PSI_OAUTH_CALLBACK_BASE) {
 Set-Location $RepoRoot
 
 Write-Host "Starting Gateway on $Listen (agent=$Agent, feishu-ai-id=$AiId, oauth=$($env:PSI_OAUTH_CALLBACK_BASE))..."
+# Paths must be quoted: Start-Process joins -ArgumentList with spaces and does NOT
+# quote the elements, so an unquoted repo path containing spaces arrives at the CLI
+# split into one argument per word ("Unrecognized options: master, of, software...").
+$AgentArg = '"' + $Agent + '"'
 $gwArgs = @(
     'run', 'psi-agent', 'gateway',
     '--listen', $Listen,
     '--browser',
     '--feishu-ai-id', $AiId,
-    '--feishu-workspace-root', $Agent,
-    '--default-agent', $Agent,
+    '--feishu-workspace-root', $AgentArg,
+    '--default-agent', $AgentArg,
     '--verbose'
 )
 $gw = Start-Process -FilePath 'uv' -ArgumentList $gwArgs -PassThru -NoNewWindow `
@@ -83,11 +91,14 @@ if ($existing.Count -eq 0) {
 # --session-socket is required by CLI but only used as fallback when --gateway-url routes fail.
 $FallbackSocket = '\\.\pipe\psi\channels\fallback'
 Write-Host "Starting Feishu channel (--gateway-url $Listen)..."
+# Quoted for the same reason as the Gateway args. The pipe path needs it too: passed
+# bare, its leading backslashes are eaten and the CLI receives '\.\pipe\...', which
+# _sockets.py cannot recognise as a named pipe and rejects as a Unix socket on Windows.
 $chArgs = @(
     'run', 'psi-agent', 'channel', 'feishu',
-    '--session-socket', $FallbackSocket,
+    '--session-socket', ('"' + $FallbackSocket + '"'),
     '--gateway-url', $Listen,
-    '--agent', $Agent,
+    '--agent', $AgentArg,
     '--require-mention',
     '--verbose'
 )
@@ -96,4 +107,4 @@ $ch = Start-Process -FilePath 'uv' -ArgumentList $chArgs -PassThru -NoNewWindow 
 
 Write-Host "Gateway pid=$($gw.Id)  Channel pid=$($ch.Id)"
 Write-Host "Stop with: Stop-Process -Id $($gw.Id),$($ch.Id)"
-Write-Host "Both processes stay attached to this console; Ctrl+C does not kill them — use Stop-Process."
+Write-Host "Both processes stay attached to this console; Ctrl+C does not kill them - use Stop-Process."

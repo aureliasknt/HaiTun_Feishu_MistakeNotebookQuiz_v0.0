@@ -12,9 +12,33 @@ from psi_agent.gateway._defaults import (
     resolve_appdata_root,
     resolve_default_agent,
     resolve_default_workspace,
+    resolve_feishu_ai_id,
     resolve_history_read_path,
 )
 from psi_agent.gateway._session_manager import SessionInfo
+
+
+def test_resolve_feishu_ai_id_explicit_wins(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("PSI_FEISHU_AI_ID", "from-env")
+    assert resolve_feishu_ai_id("from-cli") == "from-cli"
+
+
+def test_resolve_feishu_ai_id_falls_back_to_env(monkeypatch: pytest.MonkeyPatch) -> None:
+    """``.env.example`` 一直宣传这个变量, 在此之前却没有任何代码读它。"""
+    monkeypatch.setenv("PSI_FEISHU_AI_ID", "feishu-default")
+    assert resolve_feishu_ai_id("") == "feishu-default"
+
+
+def test_resolve_feishu_ai_id_blank_when_unset(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delenv("PSI_FEISHU_AI_ID", raising=False)
+    assert resolve_feishu_ai_id("") == ""
+
+
+def test_resolve_feishu_ai_id_strips_whitespace(monkeypatch: pytest.MonkeyPatch) -> None:
+    """id 会变成命名管道路径的一段, 带空格的值必须先修掉。"""
+    monkeypatch.setenv("PSI_FEISHU_AI_ID", "  spaced  ")
+    assert resolve_feishu_ai_id("") == "spaced"
+    assert resolve_feishu_ai_id("  cli  ") == "cli"
 
 
 @pytest.mark.anyio

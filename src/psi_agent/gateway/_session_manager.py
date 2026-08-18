@@ -86,6 +86,9 @@ class SessionManager:
     _rm: RouterManager | None = None
     _entries: dict[str, _SessionEntry] = field(default_factory=dict)
     _lock: anyio.Lock = field(default_factory=anyio.Lock)
+    # Separate from _lock: rebind spans delete + create, each of which takes
+    # _lock itself, so it cannot hold _lock for the whole operation.
+    _rebind_lock: anyio.Lock = field(default_factory=anyio.Lock)
     _persist: Callable[[], Awaitable[None]] = _noop
     # Injected by Gateway.run from --default-agent / --default-workspace / --appdata.
     _default_agent: str = ""
@@ -194,6 +197,131 @@ class SessionManager:
                 raise LookupError("Router manager is not configured")
             return self._rm.get_socket(backend_id)
         raise ValueError("backend_type must be either 'ai' or 'router'")
+
+    def backend_alive_id(self, backend_type: str, backend_id: str) -> bool:
+        """Is *backend_id* of *backend_type* currently running?
+
+        The by-id twin of ``backend_alive``: callers about to (re)create a Session
+        use this to check the backend they are *aiming at*, before committing.
+        """
+        if not backend_id:
+            return False
+        if backend_type == "ai":
+            return self._aim.has(backend_id)
+        if backend_type == "router":
+            return self._rm is not None and self._rm.has(backend_id)
+        return False
+
+    def first_live_ai_id(self) -> str:
+        """Id of some currently running AI, or ``""`` when none run.
+
+        A last-resort fallback for callers that must attach a Session to *an* AI
+        but whose configured default is missing. Only AIs are offered: a Router
+        needs upstreams configured deliberately, so guessing one is wrong.
+        """
+        return self._aim.first_live_id()
+
+    def resolve_restore_backend(self, backend_type: str, backend_id: str) -> tuple[str, str]:
+        """Backend a *restored* Session should actually attach to.
+
+        Returns the pair unchanged when that backend is live. When it is not,
+        falls back to any live AI: a snapshot can name a backend that no longer
+        exists, because AI ids are fresh uuids per Gateway run and a snapshot
+        written while no AI was live still carries the Session's old binding.
+        Restoring such a binding verbatim yields a Session whose socket path is
+        well-formed but has nobody listening, and the breakage only surfaces at
+        message time as "AI 后端未运行" (see ``backend_alive``).
+
+        Restore only. A caller creating a *fresh* Session names its backend
+        deliberately and keeps it even when dead (see
+        ``test_sessionmanager_create_without_ai``). When nothing is live the
+        original pair is returned — there is nothing better to offer, and
+        restore must still succeed so the Session reappears in the SPA.
+        """
+        if self.backend_alive_id(backend_type, backend_id):
+            return backend_type, backend_id
+        fallback = self.first_live_ai_id()
+        if not fallback:
+            return backend_type, backend_id
+        logger.warning(
+            f"Restore: backend {backend_type} {backend_id!r} is not running, rebinding to live AI {fallback!r}"
+        )
+        return "ai", fallback
+
+    async def ensure_live_backend(self, session_id: str) -> str:
+        """Rebind *session_id* onto a live AI when its own backend is gone.
+
+        Returns the channel socket to stream from — the existing one when the
+        backend is healthy (the overwhelmingly common path, one dict lookup).
+
+        ``resolve_restore_backend`` only runs at Gateway startup, but a backend
+        can die *after* that: the AI is deleted and recreated from the SPA, which
+        mints a fresh uuid, and every Session still names the old one. Nothing
+        then repairs the binding until the next restart, so every message fails
+        with "AI 后端未运行" while a perfectly good AI sits unreferenced.
+
+        ``Session`` reads ``ai_socket`` once, when ``SessionAgent.create`` builds
+        its ``AiClient``, so the socket cannot be swapped on a running Session —
+        the rebind has to delete and recreate it under the same id. That keeps
+        the id, workspace, agent, and channel-socket path stable, so SPA links
+        and history (keyed by session id) survive; only the in-flight process is
+        replaced. Conversation history lives in AppData keyed by session id, so
+        it is untouched.
+        """
+        async with self._rebind_lock:
+            if session_id not in self._entries:
+                raise LookupError(f"Session {session_id!r} not found")
+            info = self._entries[session_id].info
+            if self.backend_alive_id(info.backend_type, info.backend_id):
+                return info.channel_socket
+            fallback = self.first_live_ai_id()
+            if not fallback:
+                # Nothing to rebind onto. Leave the Session as-is and let the
+                # stream surface the real "backend not running" error rather
+                # than a rebind failure that hides it.
+                logger.warning(
+                    f"Session {session_id!r} backend {info.backend_id!r} is not running and no live AI exists"
+                )
+                return info.channel_socket
+            logger.warning(
+                f"Session {session_id!r} backend {info.backend_type} {info.backend_id!r} is not running, "
+                f"rebinding to live AI {fallback!r}"
+            )
+            await self.delete(session_id)
+            revived = await self.create(
+                backend_type="ai",
+                backend_id=fallback,
+                workspace=info.workspace,
+                agent=info.agent,
+                id=session_id,
+                active_schedules=info.active_schedules,
+                deactive_schedules=info.deactive_schedules,
+            )
+            return revived.channel_socket
+
+    def backend_alive(self, session_id: str) -> bool:
+        """Is the backend this Session streams from actually running?
+
+        A Session may legitimately outlive its backend: ``AIManager.get_socket``
+        derives the pipe/socket path from the **id**, so a Session created before
+        its AI (restore ordering) or after the AI was deleted still holds a
+        well-formed address — it simply has nobody listening. Creation therefore
+        cannot reject it (see ``test_sessionmanager_create_without_ai``), and the
+        breakage only shows up at message time, deep inside aiohttp.
+
+        This is the cheap check that lets callers notice *before* streaming.
+        Unknown ``backend_type`` counts as dead rather than raising: callers use
+        this to decide whether to rebuild, and a Session with an unroutable
+        backend is exactly what they should rebuild.
+        """
+        if session_id not in self._entries:
+            raise LookupError(f"Session {session_id!r} not found")
+        info = self._entries[session_id].info
+        if info.backend_type == "ai":
+            return self._aim.has(info.backend_id)
+        if info.backend_type == "router":
+            return self._rm is not None and self._rm.has(info.backend_id)
+        return False
 
     async def delete(self, session_id: str) -> None:
         async with self._lock:

@@ -12,6 +12,10 @@
 #define CMD_BUF 4096
 /* Same folder name as Gateway DEFAULT_USER_WORKSPACE_NAME (haitun + 交付). */
 #define DEFAULT_WS_NAME L"haitun\u4ea4\u4ed8"
+/* Stable AI id for the Feishu bot; same value as PSI_FEISHU_AI_ID in .env.example
+ * and $AiId in scripts/dev-feishu.ps1. ASCII only - it becomes a named-pipe path
+ * segment (\\.\pipe\psi\ais\<id>). */
+#define FEISHU_AI_ID L"feishu-default"
 
 static WCHAR g_dir[MAX_PATH];
 static WCHAR g_env[MAX_ENV * 2];  /* double size: wide-char bytes */
@@ -571,6 +575,13 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrev, LPSTR cmdLine, int nShow)
         lstrcatW(cmd, L" --default-agent \"");
         lstrcatW(cmd, g_dir);
         lstrcatW(cmd, L"\"");
+        /* Feishu bot needs a *stable* AI id: the id is persisted with each
+         * Feishu Session, so a random one goes stale as soon as the AI is
+         * recreated and that user permanently gets "AI 后端未运行". Passing a
+         * fixed name keeps the binding valid across restarts. Gateway falls
+         * back to any live AI if this one was never created, so naming an id
+         * that does not exist yet is safe. */
+        lstrcatW(cmd, L" --feishu-ai-id " FEISHU_AI_ID);
 
         if (SUCCEEDED(SHGetFolderPathW(NULL, CSIDL_DESKTOPDIRECTORY, NULL,
                                         SHGFP_TYPE_CURRENT, desktop))) {
